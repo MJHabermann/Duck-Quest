@@ -28,9 +28,11 @@ public class Player : MonoBehaviour
         if(moveInput != Vector2.zero){
             //try to move player in input direction
             bool success = MovePlayer(moveInput);
+            //if there was a collision, then...
             if(!success){
                 //try left/right movement
                 success = MovePlayer(new Vector2(moveInput.x, 0));
+                //otherwise
                 if(!success){
                     //try up/down movement
                     success = MovePlayer(new Vector2(0, moveInput.y));
@@ -48,6 +50,7 @@ public class Player : MonoBehaviour
         if(moveInput != Vector2.zero){
             animator.SetFloat("XInput",moveInput.x);
             animator.SetFloat("YInput",moveInput.y);
+            //change the direction of the sword hitbox to...
             if(moveInput.x > 0){        //right
                 gameObject.BroadcastMessage("PlayerDirection", 2);
             }else if (moveInput.x < 0){ //left
@@ -61,11 +64,14 @@ public class Player : MonoBehaviour
         }
     }
 
+    //Check if player will collide with other objects and return result.
     public bool MovePlayer(Vector2 direction){
+        //Check if there are any collisions in intended directions
         int count = rb.Cast(direction,
                             movementFilter,
                             castCollisions,
                             moveSpeed * Time.fixedDeltaTime + collisionOffset);
+        //if none, update position and return true
         if(count == 0){
             Vector2 moveVector = direction * moveSpeed * Time.fixedDeltaTime;
             rb.MovePosition(rb.position + moveVector);
@@ -76,6 +82,7 @@ public class Player : MonoBehaviour
     }
 
     void OnFire(){
+        gameObject.BroadcastMessage("swordAttack", true);
         animator.SetTrigger("swordAttack");
     }
 }

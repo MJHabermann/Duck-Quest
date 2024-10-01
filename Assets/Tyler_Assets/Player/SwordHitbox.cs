@@ -6,15 +6,17 @@ public class SwordHitbox : MonoBehaviour
 {
     public Collider2D swordCollider;
     public float swordDamage = 1f;
-    public float sowrdKnockback = 5f;
+    public float swordKnockback = 5f;
     public Vector3 faceUp = new Vector3(0, 0.33f, 0);
     public Vector3 faceRight = new Vector3(.25f, 0, 0);
     public Vector3 faceDown = new Vector3(0, -0.45f, 0);
     public Vector3 faceLeft = new Vector3(-.25f, 0, 0);
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         if(swordCollider == null){
             Debug.LogWarning("Sword Collider not set");
         }
@@ -22,8 +24,16 @@ public class SwordHitbox : MonoBehaviour
 
     //check for physics rigidbody and send hit damage to that GameObject
     void OnTriggerEnter2D(Collider2D collider){
-        collider.SendMessage("OnHit", swordDamage);
-        Debug.Log("Hit");
+        IDamageable damageableObject = (IDamageable) collider.GetComponent<IDamageable>();
+        if(damageableObject != null){
+            Vector3 parentPosition = gameObject.GetComponentInParent<Transform>().position;
+            Vector2 direction = (Vector2) (parentPosition - collider.gameObject.transform.position).normalized;
+            Vector2 knockback = direction * swordKnockback;
+            // collider.SendMessage("OnHit", swordDamage);
+            damageableObject.OnHit(swordDamage, knockback);
+        }else{
+            Debug.LogWarning("Collider does not implement IDamageable");
+        }
     }
 
     //direction is clockwise, with the start at up (1)
@@ -42,5 +52,11 @@ public class SwordHitbox : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col){
         Debug.Log("Sword hit");
+    }
+
+    void swordAttack(bool attack){
+        if(attack){
+            animator.SetTrigger("swordAttack");
+        }
     }
 }

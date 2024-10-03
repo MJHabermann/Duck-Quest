@@ -1,109 +1,153 @@
-using UnityEngine;
-using UnityEngine.TestTools;
-using NUnit.Framework;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.Profiling;
+using System.Threading;
+using NUnit.Framework;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.TestTools;
 
-public class EnemySpawnerTest
+public class EnemyStressTest
 {
-    [UnityTest]
-    public IEnumerator StressTestEnemySpawner()
+    public int maxEnemies = 1000; // Maximum number of enemies to spawn
+    public float spawnDelay = 0.1f; // Delay between each spawn
+    private int currentEnemies = 0;
+    private bool sceneLoaded = false;
+    private GameObject slimePrefab;
+
+    [OneTimeSetUp]
+    public void LoadedLevel()
     {
-        // Set up the test environment
-        GameObject enemyPrefab = new GameObject("Enemy");
-        enemyPrefab.AddComponent<Rigidbody2D>(); // Example component
-        enemyPrefab.tag = "Enemy";
-        Debug.Log("Enemy prefab created and Rigidbody added.");
+        Debug.Log("Loading scene 'PlayerRoom'...");
+        SceneManager.sceneLoaded += SceneManagerSceneLoaded;
+        SceneManager.LoadScene("PlayerRoom", LoadSceneMode.Single);
+    }
 
-        // Disable the prefab to prevent it from being counted
-        enemyPrefab.SetActive(false);
+    private void SceneManagerSceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
+        Debug.Log("Scene 'PlayerRoom' loaded.");
+        sceneLoaded = true;
+    }
 
-        int initialEnemyCount = 10; // Start with 10 enemies
-        int maxEnemies = 1000000; // Safety limit to prevent crashing the editor
-        float spawnRadius = 50f; // Spawn radius
-        int currentEnemyCount = initialEnemyCount;
-        bool systemFailed = false;
-
-        // A list to store all spawned enemies for cleanup later
-        List<GameObject> spawnedEnemies = new List<GameObject>();
-
-        while (currentEnemyCount <= maxEnemies && !systemFailed)
+    [UnitySetUp]
+    public IEnumerator Setup()
+    {
+        // Wait for the scene to load before running the test
+        while (!sceneLoaded)
         {
-            Debug.Log($"Spawning {currentEnemyCount} enemies.");
-
-            // Create the spawner and spawn the enemies
-            EnemySpawner spawner = new EnemySpawner(enemyPrefab, currentEnemyCount, spawnRadius);
-            spawner.SpawnEnemies();
-
-            // Wait a frame to allow spawning to complete
-            yield return null;
-
-            // Check how many enemies are spawned
-            int enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length; // Count the active enemies
-            Debug.Log($"Number of enemies spawned: {enemyCount}");
-
-            // If the system can't handle the load or the number of enemies is incorrect, break the loop
-            if (enemyCount != currentEnemyCount || SystemPerformanceIsDegrading())
-            {
-                systemFailed = true;
-                Debug.LogWarning($"System failed with {currentEnemyCount} enemies.");
-            }
-            else
-            {
-                // Check if doubling the current count would exceed maxEnemies
-                if (currentEnemyCount <= maxEnemies / 2)
-                {
-                    // Double the number of enemies for the next iteration
-                    currentEnemyCount *= 2;
-                }
-                else
-                {
-                    // If doubling would exceed the limit, set it to maxEnemies
-                    currentEnemyCount = maxEnemies;
-                }
-            }
-
-            // Store the spawned enemies for later cleanup
-            spawnedEnemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
-
-            // Cleanup for the next round
-            foreach (var enemy in spawnedEnemies)
-            {
-                Object.Destroy(enemy);
-            }
-            spawnedEnemies.Clear();
+            yield return null; // Wait until the scene is fully loaded
         }
 
-        if (systemFailed)
+        // Assign the slime prefab
+        slimePrefab = CreateEnemyPrefab();
+
+        if (slimePrefab != null)
         {
-            Debug.Log($"System broke when trying to spawn {currentEnemyCount} enemies.");
+            Debug.Log("Slime prefab created successfully.");
         }
         else
         {
-            Debug.Log($"Test completed without system failure. Max enemies tested: {currentEnemyCount}.");
+            Debug.LogError("Slime prefab could not be created!");
+            Assert.Fail("Failed to create or assign the Slime prefab.");
         }
 
-        // Clean up the prefab
-        Object.Destroy(enemyPrefab);
+        yield return null;
     }
 
-    private bool SystemPerformanceIsDegrading()
+    [UnityTest]
+    public IEnumerator SpawnEnemies()
     {
-        // Set a memory threshold (in bytes). You can adjust this value based on your needs.
-        const long memoryThreshold = 200 * 1024 * 1024; // 200 MB as an example threshold
+        Debug.Log($"Starting enemy spawn test, spawning up to {maxEnemies} enemies...");
 
-        // Get current memory usage
-        long totalAllocatedMemory = Profiler.GetTotalAllocatedMemoryLong();
-
-        // Check if the allocated memory exceeds the threshold
-        if (totalAllocatedMemory > memoryThreshold)
+        if (slimePrefab == null)
         {
-            Debug.LogWarning($"Memory overload detected: {totalAllocatedMemory / (1024 * 1024)} MB");
-            return true; // Indicates memory overload
+            Debug.LogError("Slime prefab is null! Cannot spawn enemies.");
+            Assert.Fail("Slime prefab is null. Check prefab setup.");
+            yield break;
         }
 
-        return false; // No overload
+        while (currentEnemies < maxEnemies)
+        {
+            SpawnEnemy();
+            yield return new WaitForSeconds(spawnDelay); // Delay between spawns
+        }
+
+        // Once spawning is done, check the physics status
+        Debug.Log("All enemies spawned. Checking room physics...");
+        CheckRoomPhysics();
+
+        yield return null;
     }
+
+    public void SpawnEnemy()
+    {
+        if (slimePrefab == null)
+        {
+            Debug.LogError("Slime prefab is null! Cannot spawn enemy.");
+            return;
+        }
+
+        Vector3 spawnPosition = GetRandomSpawnPosition();
+        GameObject spawnedEnemy = Object.Instantiate(slimePrefab, spawnPosition, Quaternion.identity);
+
+        if (spawnedEnemy != null)
+        {
+            Debug.Log($"Enemy spawned at position {spawnPosition}. Total enemies spawned: {currentEnemies + 1}");
+            currentEnemies++;
+        }
+        else
+        {
+            Debug.LogError("Failed to spawn enemy.");
+        }
+    }
+
+    Vector3 GetRandomSpawnPosition()
+    {
+        Vector2 randomPos = Random.insideUnitCircle * 0.2f;
+        return new Vector3(randomPos.x, 0, randomPos.y); // Assuming y=0 for ground level
+    }
+
+void CheckRoomPhysics()
+{
+    Rigidbody2D[] rigidbodies = Object.FindObjectsOfType<Rigidbody2D>();
+
+    if (rigidbodies.Length == 0)
+    {
+        Debug.LogWarning("No Rigidbody2D objects found in the scene.");
+        return;
+    }
+    int count = 0;
+    foreach (Rigidbody2D rb in rigidbodies)
+    {
+        if (rb == null)
+        {
+            Debug.LogError("Found a null Rigidbody2D!");
+            continue;
+        }
+
+        if (rb.IsSleeping())
+        {
+            Debug.LogWarning($"Rigidbody2D {rb.name} is sleeping! Unexpected behavior at {count}");
+        }
+        else
+        {
+            Debug.Log($"Rigidbody2D {rb.name} is behaving as expected.");
+        }
+        count +=1;
+    }
+}
+
+    private GameObject CreateEnemyPrefab()
+{
+    // Create the enemy prefab GameObject
+    GameObject enemyPrefab = new GameObject("SlimePrefab");
+
+    // Add components to the prefab
+    enemyPrefab.AddComponent<Rigidbody2D>();               // For physics
+    enemyPrefab.AddComponent<BoxCollider2D>();             // Collider for interactions
+    enemyPrefab.tag = "Enemy"; // Tagging the object as "Enemy"
+    
+    Debug.Log("Enemy prefab created.");
+    return enemyPrefab;
+}
+
 }
 

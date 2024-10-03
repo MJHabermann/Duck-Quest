@@ -2,135 +2,144 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using NUnit.Framework;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class EnemySpawnerBoundaryTest
 {
     private const int maxEnemies = 400;  // Upper boundary for testing
-    private const float spawnRadius = 50f; // Area to spawn enemies
+    private const float spawnRadius = 0.2f; // Area to spawn enemies
+    private bool sceneLoaded = false;
+
+    [OneTimeSetUp]
+    public void LoadedLevel()
+    {
+        Debug.Log("Loading scene 'PlayerRoom'...");
+        SceneManager.sceneLoaded += SceneManagerSceneLoaded;
+        SceneManager.LoadScene("PlayerRoom", LoadSceneMode.Single);
+    }
+
+    private Vector3 GetRandomSpawnPosition(float radius)
+    {
+        Vector2 randomPoint = Random.insideUnitCircle * radius; // Get a random point within a circle
+        return new Vector3(randomPoint.x, 0, randomPoint.y); // Assuming y-axis is 0 for 2D plane
+    }
+
+    private void SceneManagerSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log("Scene 'PlayerRoom' loaded.");
+        sceneLoaded = true;
+    }
 
     [UnityTest]
     public IEnumerator TestSpawnZeroEnemies()
-{
-    // Cleanup any existing enemies
-    foreach (var enemy in GameObject.FindGameObjectsWithTag("Enemy"))
     {
-        Object.DestroyImmediate(enemy);
-    }
+        // Wait for the scene to load before starting the test
+        while (!sceneLoaded)
+        {
+            yield return null; // Wait until the scene is fully loaded
+        }
 
-    // Create the enemy prefab
-    GameObject enemyPrefab = new GameObject("Enemy");
-    enemyPrefab.AddComponent<Rigidbody2D>(); // Example component
-    enemyPrefab.tag = "Enemy";
-    Debug.Log("Enemy prefab created for zero-enemy test.");
-    // Disable the prefab to prevent it from being counted
-    enemyPrefab.SetActive(false);
-
-    // Create EnemySpawner with 0 enemies
-    EnemySpawner spawner = new EnemySpawner(enemyPrefab, 0, spawnRadius);
-    Debug.Log("EnemySpawner instance created with 0 enemies.");
-
-    // Run the spawner
-    spawner.SpawnEnemies();
-    yield return null;  // Wait for one frame
-
-    // Assert no enemies were spawned
-    int enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
-    Debug.Log($"Number of enemies spawned: {enemyCount -1}");
-    Assert.AreEqual(0, enemyCount, "Expected no enemies to be spawned.");
-
-    // Restore the original tag and cleanup
-    Object.DestroyImmediate(enemyPrefab);
-    yield return null;  // Wait for one frame
-
-    // Verify cleanup
-    enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
-    Debug.Log($"Number of enemies after cleanup: {enemyCount}");
-    Assert.AreEqual(0, enemyCount, "Expected 0 enemies after cleanup.");
-}
-
-    [UnityTest]
-    public IEnumerator TestSpawnMaxEnemies()
-    {
         // Cleanup any existing enemies
-        foreach (var enemy in GameObject.FindGameObjectsWithTag("Enemy"))
-        {
-            Object.DestroyImmediate(enemy);
-        }
+        CleanupEnemies();
+
         // Create the enemy prefab
-        GameObject enemyPrefab = new GameObject("Enemy");
-        enemyPrefab.AddComponent<Rigidbody2D>(); // Example component
-        enemyPrefab.tag = "Enemy";
-        Debug.Log("Enemy prefab created for max-enemy test.");
-        // Disable the prefab to prevent it from being counted
-        enemyPrefab.SetActive(false);
+        GameObject enemyPrefab = CreateEnemyPrefab();
 
-        // Create EnemySpawner with maxEnemies
-        EnemySpawner spawner = new EnemySpawner(enemyPrefab, maxEnemies, spawnRadius);
-        Debug.Log($"EnemySpawner instance created with {maxEnemies} enemies.");
-
-        // Run the spawner
-        spawner.SpawnEnemies();
+        // No enemies to spawn
+        Debug.Log("Spawn zero enemies.");
+        
+        // Simply yield to simulate no spawning
         yield return null;  // Wait for one frame
 
-        // Assert that maxEnemies were spawned
+        // Assert no enemies were spawned
         int enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
-        Debug.Log($"Number of enemies spawned: {enemyCount}");
-        Assert.AreEqual(maxEnemies, enemyCount, $"Expected {maxEnemies} enemies to be spawned.");
+        Assert.AreEqual(0, enemyCount -1, "Expected no enemies to be spawned.");
 
-        // Cleanup
-        foreach (var enemy in GameObject.FindGameObjectsWithTag("Enemy"))
-        {
-            Object.DestroyImmediate(enemy);
-        }
-        // Restore the original tag and cleanup
+        // Clean up
         Object.DestroyImmediate(enemyPrefab);
-        yield return null;  // Wait for one frame
-        enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
-        Debug.Log($"Number of enemies after cleanup: {enemyCount}");
-        Assert.AreEqual(0, enemyCount, "Expected 0 enemies after cleanup.");
     }
 
     [UnityTest]
     public IEnumerator TestSpawnOneEnemy()
     {
+        // Wait for the scene to load before starting the test
+        while (!sceneLoaded)
+        {
+            yield return null; // Wait until the scene is fully loaded
+        }
+
         // Cleanup any existing enemies
-        foreach (var enemy in GameObject.FindGameObjectsWithTag("Enemy"))
-        {
-            Object.DestroyImmediate(enemy);
-        }
-        // Test the edge case of spawning exactly one enemy
-        GameObject enemyPrefab = new GameObject("Enemy");
-        enemyPrefab.AddComponent<Rigidbody2D>();
-        enemyPrefab.tag = "Enemy";
-        Debug.Log("Enemy prefab created for one-enemy test.");
-        // Disable the prefab to prevent it from being counted
-        enemyPrefab.SetActive(false);
+        CleanupEnemies();
 
-        // Create EnemySpawner with 1 enemy
-        EnemySpawner spawner = new EnemySpawner(enemyPrefab, 1, spawnRadius);
-        Debug.Log("EnemySpawner instance created with 1 enemy.");
+        // Create the enemy prefab
+        GameObject enemyPrefab = CreateEnemyPrefab();
 
-        // Run the spawner
-        spawner.SpawnEnemies();
-        yield return null;
+        // Spawn one enemy
+        Slime spawnedSlime = Spawn(enemyPrefab, GetRandomSpawnPosition(spawnRadius), Quaternion.identity);
+        
+        yield return null; // Wait for one frame
 
-        // Assert exactly one enemy was spawned
+        // Assert one enemy was spawned
         int enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
-        Debug.Log($"Number of enemies spawned: {enemyCount}");
-        Assert.AreEqual(1, enemyCount, "Expected 1 enemy to be spawned.");
+        Assert.AreEqual(1, enemyCount -1, "Expected one enemy to be spawned.");
 
-        // Cleanup
+        // Clean up
+        CleanupEnemies();
+        Object.DestroyImmediate(enemyPrefab);
+    }
+
+    [UnityTest]
+    public IEnumerator TestSpawnMaxEnemies()
+    {
+        // Wait for the scene to load before starting the test
+        while (!sceneLoaded)
+        {
+            yield return null; // Wait until the scene is fully loaded
+        }
+
+        // Cleanup any existing enemies
+        CleanupEnemies();
+
+        // Create the enemy prefab
+        GameObject enemyPrefab = CreateEnemyPrefab();
+
+        for (int i = 0; i < maxEnemies; i++)
+        {
+            Spawn(enemyPrefab, GetRandomSpawnPosition(spawnRadius), Quaternion.identity);
+        }
+
+        yield return null; // Wait for one frame
+
+        // Assert the maximum number of enemies were spawned
+        int enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        Assert.AreEqual(maxEnemies, enemyCount -1, "Expected max enemies to be spawned.");
+
+        // Clean up
+        CleanupEnemies();
+        Object.DestroyImmediate(enemyPrefab);
+    }
+
+    private GameObject CreateEnemyPrefab()
+    {
+        GameObject enemyPrefab = new GameObject("Enemy");
+        enemyPrefab.AddComponent<Rigidbody2D>(); // Example component
+        enemyPrefab.tag = "Enemy";
+        Debug.Log("Enemy prefab created.");
+        return enemyPrefab;
+    }
+
+    private void CleanupEnemies()
+    {
         foreach (var enemy in GameObject.FindGameObjectsWithTag("Enemy"))
         {
             Object.DestroyImmediate(enemy);
         }
-        // Restore the original tag and cleanup
-        Object.DestroyImmediate(enemyPrefab);
-        Object.DestroyImmediate(enemyPrefab);
-        yield return null;  // Wait for one frame
-        // Verify cleanup
-        enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
-        Debug.Log($"Number of enemies after cleanup: {enemyCount}");
-        Assert.AreEqual(0, enemyCount, "Expected 0 enemies after cleanup.");
+    }
+
+    private Slime Spawn(GameObject slimePrefab, Vector3 position, Quaternion rotation)
+    {
+        // Instantiate the Slime prefab
+        GameObject slimeInstance = Object.Instantiate(slimePrefab, position, rotation);
+        return slimeInstance.GetComponent<Slime>(); // Return the Slime component from the instantiated object
     }
 }

@@ -1,9 +1,24 @@
 {
     "name": "Tests",
-    "optionalUnityReferences": [
-        "TestAssemblies"
+    "rootNamespace": "Assets.Mikayla_Assets.Mikayla_Scripts",
+    "references": [
+        "GUID:27619889b8ba8c24980f49ee34dbb44a",
+        "GUID:0acc523941302664db1f4e527237feb3",
+        "GUID:9a6b6ad0e05884b74951f40fa6c63a11"
     ],
     "includePlatforms": [
         "Editor"
-    ]
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

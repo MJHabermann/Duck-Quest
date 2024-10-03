@@ -2666,11 +2666,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5aa1e94ae9cfc24e9e3d6e6146d3811, type: 3}
---- !u!4 &503919891 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7709979130396147231, guid: b5aa1e94ae9cfc24e9e3d6e6146d3811, type: 3}
-  m_PrefabInstance: {fileID: 503919890}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -3700,10 +3695,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 821712811977125283, guid: 82c302f200ce34920a532a8b52914e97, type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 503919891}
     - target: {fileID: 6495264325223229878, guid: 82c302f200ce34920a532a8b52914e97, type: 3}
       propertyPath: m_Name
       value: Overworld_Enemy
@@ -3711,10 +3702,6 @@ PrefabInstance:
     - target: {fileID: 6495264325223229878, guid: 82c302f200ce34920a532a8b52914e97, type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7052150900476332492, guid: 82c302f200ce34920a532a8b52914e97, type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

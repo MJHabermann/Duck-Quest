@@ -92,6 +92,7 @@ public class SlimePlayModeTests
     [UnityTest]
     public IEnumerator SlimeDoesNotMoveOutsideChaseRadius()
     {
+        yield return new WaitWhile(() => sceneLoaded == false);
         // Ensure the objects are not null
         Assert.NotNull(player, "Player object should not be null.");
         Assert.NotNull(slimeObject, "Slime object should not be null.");

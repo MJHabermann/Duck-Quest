@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,6 +15,8 @@ public class Player : MonoBehaviour
     private Animator animator;
     public GameObject swordHitbox;
     Collider2D swordCollider;
+    
+    public AudioSource playerStep;
     
     // Start is called before the first frame update
     private void Start()
@@ -39,8 +42,20 @@ public class Player : MonoBehaviour
                 }
             }
             animator.SetBool("isMoving", success);
+            //if player is moving and step sound is not
+            if(success && !playerStep.isPlaying)
+            {
+                //then play step sound
+                playerStep.Play();
+            }
         }else{
             animator.SetBool("isMoving", false);
+            //if player stops moving
+            if(playerStep.isPlaying)
+            {
+                //stop sound
+                playerStep.Stop();
+            }
         }
     }
 
@@ -85,4 +100,5 @@ public class Player : MonoBehaviour
         gameObject.BroadcastMessage("swordAttack", true);
         animator.SetTrigger("swordAttack");
     }
+
 }

@@ -6,7 +6,6 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] float health;
     [SerializeField] string enemyName;
-    [SerializeField] int baseAttack;
 
     private bool isFacingRight = false; // Keep track of current facing direction
 
@@ -49,7 +48,6 @@ public class Enemy : MonoBehaviour
         animator.SetBool("isDead", true);
         float deathAnimationLength = animator.GetCurrentAnimatorStateInfo(0).length;
         Destroy(gameObject, deathAnimationLength + .2f);
-        //Destroy(gameObject);
     }
 
     public virtual void Flip(Vector3 direction){
@@ -69,5 +67,10 @@ public class Enemy : MonoBehaviour
             transform.localScale = localScale;
             
         }
-}
+    }
+    public virtual void Attack(bool attack){
+        if(attack){
+            animator.SetBool("isAttacking", true);
+        }
+    }
 }

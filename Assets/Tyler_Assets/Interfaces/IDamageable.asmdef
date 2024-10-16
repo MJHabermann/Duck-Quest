@@ -1,9 +1,7 @@
 {
-    "name": "Slime",
+    "name": "IDamageable",
     "rootNamespace": "",
-    "references": [
-        "GUID:1058838e9cd92411c96d94096ea87b40"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

@@ -24,13 +24,16 @@ public class SwordHitbox : MonoBehaviour
 
     //check for physics rigidbody and send hit damage to that GameObject
     void OnTriggerEnter2D(Collider2D collider){
-        IDamageable damageableObject = (IDamageable) collider.GetComponent<IDamageable>();
-        if(damageableObject != null){
+        Enemy enemy = collider.gameObject.GetComponent<Enemy>();
+        // IDamageable damageableObject = (IDamageable) collider.GetComponent<IDamageable>();
+        //if(damageableObject != null){
+        if(enemy != null){
             Vector3 parentPosition = gameObject.GetComponentInParent<Transform>().position;
             Vector2 direction = (Vector2) (parentPosition - collider.gameObject.transform.position).normalized;
             Vector2 knockback = direction * swordKnockback;
             // collider.SendMessage("OnHit", swordDamage);
-            damageableObject.OnHit(swordDamage, knockback);
+            //damageableObject.OnHit(swordDamage, knockback);
+            enemy.TakeDamage(swordDamage);
         }else{
             Debug.LogWarning("Collider does not implement IDamageable");
         }

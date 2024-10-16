@@ -2565,6 +2565,11 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!95 &310748509 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7844063670160701075, guid: 82c302f200ce34920a532a8b52914e97, type: 3}
+  m_PrefabInstance: {fileID: 3000931502467951766}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &503919890
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3780,13 +3785,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 550727851318833739, guid: 82c302f200ce34920a532a8b52914e97, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1593057310, guid: abaefa300f1344371aa4a7862b7508cf, type: 3}
     - target: {fileID: 652912573615707181, guid: 82c302f200ce34920a532a8b52914e97, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.52
+      value: -3.49
       objectReference: {fileID: 0}
     - target: {fileID: 652912573615707181, guid: 82c302f200ce34920a532a8b52914e97, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.48
+      value: -1.1
       objectReference: {fileID: 0}
     - target: {fileID: 652912573615707181, guid: 82c302f200ce34920a532a8b52914e97, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3824,6 +3833,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 503919891}
+    - target: {fileID: 821712811977125283, guid: 82c302f200ce34920a532a8b52914e97, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 310748509}
     - target: {fileID: 6495264325223229878, guid: 82c302f200ce34920a532a8b52914e97, type: 3}
       propertyPath: m_Name
       value: Overworld_Enemy
@@ -3836,7 +3849,12 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7844063670160701075, guid: 82c302f200ce34920a532a8b52914e97, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: ceb76163023cd4746bf8286bf63b37e5, type: 2}
+    m_RemovedComponents:
+    - {fileID: 7052150900476332492, guid: 82c302f200ce34920a532a8b52914e97, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

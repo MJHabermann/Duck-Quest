@@ -15,24 +15,18 @@ public class Slime : Enemy
         target = GameObject.FindWithTag("Player").transform;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        animator.SetFloat("Speed", speed);
         CheckDistance();
     }
     void CheckDistance(){
-        if(Vector3.Distance(target.position, transform.position) <= chaseRadius
-        && Vector3.Distance(target.position, transform.position) > attackRadius){
-            transform.position = Vector3.MoveTowards(
-                transform.position, target.position, speed * Time.deltaTime);
+        float distance = Vector3.Distance(target.position, transform.position);
+        if (distance <= chaseRadius && distance > attackRadius){
+            Vector3 direction = (target.position - transform.position).normalized;
+            transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+            // Flip the sprite depending on direction
+            Flip(direction);
         }
-    }
-
-        // Spawn method to create a new Slime instance
-    public Slime Spawn(GameObject slimePrefab, Vector3 position, Quaternion rotation)
-    {
-        // Instantiate the Slime prefab
-        GameObject slimeInstance = Instantiate(slimePrefab, position, rotation);
-        return slimeInstance.GetComponent<Slime>(); // Return the Slime component from the instantiated object
     }
 }

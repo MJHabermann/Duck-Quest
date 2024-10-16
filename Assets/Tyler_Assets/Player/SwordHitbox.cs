@@ -13,6 +13,9 @@ public class SwordHitbox : MonoBehaviour
     public Vector3 faceLeft = new Vector3(-.25f, 0, 0);
     private Animator animator;
 
+    public AudioSource swordSound;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,8 +61,13 @@ public class SwordHitbox : MonoBehaviour
     }
 
     void swordAttack(bool attack){
+
         if(attack){
             animator.SetTrigger("swordAttack");
+            swordSound.Play();
         }
+        
     }
+
+    
 }

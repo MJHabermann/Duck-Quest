@@ -9,6 +9,7 @@ public class InventoryManager : MonoBehaviour
     public GameObject InventoryMenu;
     private bool menuActivated;
 
+    public MonoBehaviour[] scriptsToToggle;
     [SerializeField] private Slider musicSlider;
 
 
@@ -35,14 +36,30 @@ public class InventoryManager : MonoBehaviour
             InventoryMenu.SetActive(false);
             menuActivated = false;
             Debug.Log("Game is resumed");
+            EnableScripts();
         }
         //paused
         else if(Input.GetButtonDown("Inventory") && !menuActivated)
         {
+            DisableScripts();
             Time.timeScale = 0;
             InventoryMenu.SetActive(true);
             menuActivated = true;
             Debug.Log("Game is paused");
+        }
+    }
+
+     // Call this method from the Event Trigger to disable scripts
+    public void DisableScripts() {
+        foreach (MonoBehaviour script in scriptsToToggle) {
+            script.enabled = false;
+        }
+    }
+
+    // Call this method from the Event Trigger to enable scripts
+    public void EnableScripts() {
+        foreach (MonoBehaviour script in scriptsToToggle) {
+            script.enabled = true;
         }
     }
 }

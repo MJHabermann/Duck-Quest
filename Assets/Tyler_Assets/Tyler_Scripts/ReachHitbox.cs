@@ -7,10 +7,10 @@ public class ReachHitbox : MonoBehaviour
     public Collider2D reachCollider;
     public float swordDamage = 1f;
     public float swordKnockback = 5f;
-    public Vector3 faceUp = new Vector3(0, 0.33f, 0);
-    public Vector3 faceRight = new Vector3(.25f, 0, 0);
+    public Vector3 faceUp = new Vector3(0, 0.15f, 0);
+    public Vector3 faceRight = new Vector3(.25f, -.15f, 0);
     public Vector3 faceDown = new Vector3(0, -0.45f, 0);
-    public Vector3 faceLeft = new Vector3(-.25f, 0, 0);
+    public Vector3 faceLeft = new Vector3(-.25f, -.15f, 0);
     private Animator animator;
 
     public AudioSource swordSound;

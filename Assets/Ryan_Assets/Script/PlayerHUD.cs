@@ -1,0 +1,84 @@
+using UnityEngine;
+using UnityEngine.UI;
+
+public class PlayerHUD : MonoBehaviour
+{
+    public Text moneyText;  // Assign in Inspector
+    public Image[] heartImages;  // Assign in Inspector
+
+    private int playerMoney;
+    private int maxHealth;
+    private int currentPlayerHealth;
+
+    void Start()
+    {
+        // Debugging for missing assignments
+        if (moneyText == null)
+        {
+            Debug.LogError("Money Text is not assigned in the Inspector!");
+        }
+
+        if (heartImages == null || heartImages.Length == 0)
+        {
+            Debug.LogError("Heart images not set in the Inspector!");
+        }
+
+        // Initialize health and money
+        maxHealth = 3;
+        currentPlayerHealth = 3;
+        playerMoney = 0;
+
+        // Update the UI at the start
+        UpdateHealthUI();
+        UpdateMoneyUI();
+    }
+
+    public void TakeDamage()
+    {
+        if (currentPlayerHealth > 0)
+        {
+            currentPlayerHealth--;
+            UpdateHealthUI();
+        }
+    }
+    
+    public void UpdateHealthUI()
+    {
+        for (int i = 0; i < heartImages.Length; i++)
+        {
+            if (i < currentPlayerHealth)
+            {
+                heartImages[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                heartImages[i].gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public void Heal()
+    {
+        currentPlayerHealth = maxHealth;
+        UpdateHealthUI();
+    }
+
+    public void AddMoney(int amount)
+    {
+        playerMoney += amount;
+        Debug.Log("Money increased by " + amount + ". Total money: " + playerMoney);
+        UpdateMoneyUI();
+    }
+
+    private void UpdateMoneyUI()
+    {
+        if (moneyText != null)
+        {
+            moneyText.text = "Money: " + playerMoney.ToString();
+        }
+        else
+        {
+            Debug.LogError("Money Text is missing! Cannot update UI.");
+        }
+    }
+}

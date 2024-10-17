@@ -25,7 +25,14 @@ public class BoundaryTestScripts
     [UnityTest]
     public IEnumerator ExitObjectInScene()
     {
-        GameObject groundObject = GameObject.FindWithTag("Exit");
+        GameObject exitObject = GameObject.FindWithTag("Exit");
+        Assert.IsNotNull(exitObject);
+        yield return null;
+    }
+    [UnityTest]
+    public IEnumerator GroundInScene()
+    {
+        GameObject groundObject = GameObject.FindWithTag("Ground");
         Assert.IsNotNull(groundObject);
         yield return null;
     }

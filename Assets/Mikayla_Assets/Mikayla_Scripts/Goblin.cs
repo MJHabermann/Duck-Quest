@@ -103,7 +103,7 @@ public class Goblin : Enemy
         }
     }
 
-    void Attack()
+    public override void Attack()
     {
         // Check if the player implements IDamageable
         IDamageable damageableObject = target.GetComponent<IDamageable>();

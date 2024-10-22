@@ -12,17 +12,6 @@ public class Enemy : MonoBehaviour
     public Animator animator;
 
     public float speed;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public T Spawn<T>(GameObject enemyPrefab, Vector3 position, Quaternion rotation) where T : Enemy
     {
@@ -33,7 +22,7 @@ public class Enemy : MonoBehaviour
         return enemyInstance.GetComponent<T>();
     }
 
-    public virtual void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
         Debug.Log("Enemy hit");
@@ -50,7 +39,7 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject, deathAnimationLength + .2f);
     }
 
-    public virtual void Flip(Vector3 direction){
+    public void Flip(Vector3 direction){
         if (direction.x > 0 && !isFacingRight)
         {
             isFacingRight = !isFacingRight;
@@ -68,9 +57,7 @@ public class Enemy : MonoBehaviour
             
         }
     }
-    public virtual void Attack(bool attack){
-        if(attack){
-            animator.SetBool("isAttacking", true);
-        }
+    public virtual void Attack(){
+        animator.SetBool("isAttacking", true);
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,10 @@ public class PlayerHUD : MonoBehaviour
     private int playerMoney;
     private int maxHealth;
     private int currentPlayerHealth;
+
+    public float invincibilityDuration;
+
+    private bool isInvincible = false;
 
     void Start()
     {
@@ -33,15 +38,41 @@ public class PlayerHUD : MonoBehaviour
         UpdateMoneyUI();
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.CompareTag("Enemy") && !isInvincible)
+        {
+            TakeDamage();
+        }
+    }
     public void TakeDamage()
     {
         if (currentPlayerHealth > 0)
         {
             currentPlayerHealth--;
             UpdateHealthUI();
+            StartCoroutine(BecomeInvincible());
+        }
+        else if(currentPlayerHealth <= 0)
+        {
+            StopAllCoroutines();
+            PlayerDies();
         }
     }
     
+    IEnumerator BecomeInvincible()
+    {
+        isInvincible = true;
+        Debug.Log("Player currently invincible");
+        yield return new WaitForSeconds(invincibilityDuration);
+        isInvincible = false;
+        Debug.Log("Player is no longer invincible.");
+    }
+
+    void PlayerDies()
+    {
+        Debug.Log("Player is dead.");
+    }
     public void UpdateHealthUI()
     {
         for (int i = 0; i < heartImages.Length; i++)
@@ -74,7 +105,7 @@ public class PlayerHUD : MonoBehaviour
     {
         if (moneyText != null)
         {
-            moneyText.text = "Money: " + playerMoney.ToString();
+            moneyText.text = playerMoney.ToString();
         }
         else
         {

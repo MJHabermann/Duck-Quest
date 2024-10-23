@@ -1,28 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
+using Codice.Client.BaseCommands;
 using UnityEngine;
 
-public class InventoryItem
+public class InventoryItem: MonoBehaviour
 {
-    public string itemName;
-    public int quanity;
+    [SerializeField]
+    private string itemName;
 
-    public InventoryItem(string name, int qty)
+    [SerializeField]
+    private int quantity;
+    [SerializeField]
+    private Sprite sprite;
+
+    private InventoryManager inventoryManager;
+
+    void Start()
     {
-        itemName = name;
-        quanity = qty;
+        inventoryManager = GameObject.Find("Inventory").GetComponent<InventoryManager>();
+        if (inventoryManager == null)
+        {
+            Debug.LogError("InventoryManager not found. Make sure there is a GameObject named 'Inventory' with the InventoryManager script attached.");
+        }
+
     }
-    
-    public void useItem()
+    private void OnTriggerEnter2D(Collider2D other)
+{
+    if (other.CompareTag("Player"))
     {
-        if(quanity > 0)
-        {
-            quanity--;
-        }
-        else
-        {
-            //trigger dialogue box stating item cannot be used
-        }
+        Debug.Log("Player collided with " + itemName);
+        inventoryManager.AddItem(itemName, quantity, sprite);
+        Destroy(gameObject);  // Remove the key after pickup
     }
+}
+
+
+
 
 }

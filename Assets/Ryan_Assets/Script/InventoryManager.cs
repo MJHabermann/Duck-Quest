@@ -66,37 +66,8 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void AddKey()
+    public void AddItem(string itemName, int quanity, Sprite itemSprite)
     {
-        InventoryItem keyItem = items.Find(item => item.itemName == "Key");
-        if(keyItem != null)
-        {
-            keyItem.quanity++;
-        }
-        else
-        {
-            items.Add(new InventoryItem("Key", 1));
-        }
-        Debug.Log("Key added to inventory");
-    }
-
-    public bool HasKey()
-    {
-        InventoryItem keyItem = items.Find(item => item.itemName == "Key");
-        return keyItem != null && keyItem.quanity > 0;
-    }
-
-    public void UseKey()
-    {
-        InventoryItem keyItem = items.Find(item => item.itemName == "Key");
-        if(keyItem != null && keyItem.quanity > 0)
-        {
-            keyItem.useItem();
-            Debug.Log("Key used");
-        }
-        else
-        {
-            Debug.Log("No key available to be used.");
-        }
+       Debug.Log("Item = " + itemName + "quantity = " + quanity + "itemSprite = " + itemName);
     }
 }

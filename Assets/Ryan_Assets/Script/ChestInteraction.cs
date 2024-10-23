@@ -13,18 +13,12 @@ public class ChestInteraction : MonoBehaviour {
 
     void Update() {
         if (isPlayerNearby && Input.GetKeyDown(KeyCode.E) && !chestHasBeenOpened) {  // Check if player presses "E"
-            if(isLocked)
-            {
-                TryUnlockChest();
-            }
-            else
-            {
-                CollectMoneyFromChest();
-            }
+            CollectMoneyFromChest();
             
         }
     }
 
+    /*
     void TryUnlockChest()
     {
         if (playerInventory.HasKey())
@@ -39,6 +33,7 @@ public class ChestInteraction : MonoBehaviour {
             //you need a key to unlock the chest
         }
     }
+    */
     void CollectMoneyFromChest() 
     {
         Debug.Log("Collect Money from chest called");

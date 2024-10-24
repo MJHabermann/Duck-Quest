@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
- 
+using Codice.CM.WorkspaceServer.Lock;
+
 public class InventoryManager : MonoBehaviour
 {
     public GameObject InventoryMenu;
@@ -11,6 +12,10 @@ public class InventoryManager : MonoBehaviour
 
     public MonoBehaviour[] scriptsToToggle;
     [SerializeField] private Slider musicSlider;
+
+    public ItemSlot[] itemSlot;
+
+
 
 
     // Start is called before the first frame update
@@ -62,4 +67,22 @@ public class InventoryManager : MonoBehaviour
             script.enabled = true;
         }
     }
+
+    public void AddItem(string itemName, int quantity, Sprite itemSprite)
+    {
+        Debug.Log("Trying to add item: " + itemName + ", quantity: " + quantity);
+
+        for (int i = 0; i < itemSlot.Length; i++)
+        {
+            if (!itemSlot[i].isFull)
+            {
+                itemSlot[i].AddItem(itemName, quantity, itemSprite);
+                Debug.Log("Item added to slot " + i);
+                return;
+            }
+        }
+
+        Debug.Log("No empty slots available for item: " + itemName);
+    }
+
 }

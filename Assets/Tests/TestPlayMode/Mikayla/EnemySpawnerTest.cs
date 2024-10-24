@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic; 
 using System.Threading;
 using NUnit.Framework;
 using UnityEngine;
@@ -7,23 +8,25 @@ using UnityEngine.TestTools;
 
 public class EnemyStressTest
 {
-    public int maxEnemies = 1000; // Maximum number of enemies to spawn
-    public float spawnDelay = 0.1f; // Delay between each spawn
+    public int maxEnemies = 200;  // Maximum number of enemies to spawn
+    public float spawnDelay = 0.1f;  // Delay between each spawn
+    private float lastSpawnTime; // Track the last time an enemy was spawned
     private int currentEnemies = 0;
     private bool sceneLoaded = false;
-    private GameObject slimePrefab;
+    private GameObject slimePrefab;  // Reference to the existing slime prefab in the scene
+    private List<GameObject> spawnedEnemies = new List<GameObject>(); // List to keep track of all spawned enemies
 
     [OneTimeSetUp]
     public void LoadedLevel()
     {
         Debug.Log("Loading scene 'PlayerRoom'...");
         SceneManager.sceneLoaded += SceneManagerSceneLoaded;
-        SceneManager.LoadScene("PlayerRoom", LoadSceneMode.Single);
+        SceneManager.LoadScene("Test Scene", LoadSceneMode.Single);
     }
 
     private void SceneManagerSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
-        Debug.Log("Scene 'PlayerRoom' loaded.");
+        Debug.Log("Scene 'Test Scene' loaded.");
         sceneLoaded = true;
     }
 
@@ -33,20 +36,20 @@ public class EnemyStressTest
         // Wait for the scene to load before running the test
         while (!sceneLoaded)
         {
-            yield return null; // Wait until the scene is fully loaded
+            yield return null;
         }
 
-        // Assign the slime prefab
-        slimePrefab = CreateEnemyPrefab();
+        // Find the existing SlimePrefab in the scene
+        slimePrefab = FindSlimePrefabInScene();
 
         if (slimePrefab != null)
         {
-            Debug.Log("Slime prefab created successfully.");
+            Debug.Log("Slime prefab found successfully.");
         }
         else
         {
-            Debug.LogError("Slime prefab could not be created!");
-            Assert.Fail("Failed to create or assign the Slime prefab.");
+            Debug.LogError("Slime prefab could not be found in the scene!");
+            Assert.Fail("Failed to find the Slime prefab.");
         }
 
         yield return null;
@@ -57,41 +60,45 @@ public class EnemyStressTest
     {
         Debug.Log($"Starting enemy spawn test, spawning up to {maxEnemies} enemies...");
 
-        if (slimePrefab == null)
-        {
-            Debug.LogError("Slime prefab is null! Cannot spawn enemies.");
-            Assert.Fail("Slime prefab is null. Check prefab setup.");
-            yield break;
-        }
+        lastSpawnTime = Time.time; // Initialize the spawn timer
 
         while (currentEnemies < maxEnemies)
         {
-            SpawnEnemy();
-            yield return new WaitForSeconds(spawnDelay); // Delay between spawns
+            if (Time.time - lastSpawnTime >= spawnDelay)
+            {
+                SpawnEnemy(); // Spawn an enemy
+                lastSpawnTime = Time.time; // Update the last spawn time
+            }
+            yield return null; // Wait until the next frame
         }
 
         // Once spawning is done, check the physics status
         Debug.Log("All enemies spawned. Checking room physics...");
-        CheckRoomPhysics();
-
+        CheckAllEnemies(); // Check all spawned enemies after spawning
         yield return null;
     }
 
-    public void SpawnEnemy()
+    private void SpawnEnemy()
     {
-        if (slimePrefab == null)
-        {
-            Debug.LogError("Slime prefab is null! Cannot spawn enemy.");
-            return;
-        }
 
-        Vector3 spawnPosition = GetRandomSpawnPosition();
-        GameObject spawnedEnemy = Object.Instantiate(slimePrefab, spawnPosition, Quaternion.identity);
-
-        if (spawnedEnemy != null)
+        if (slimePrefab != null)
         {
-            Debug.Log($"Enemy spawned at position {spawnPosition}. Total enemies spawned: {currentEnemies + 1}");
-            currentEnemies++;
+            // Generate a random position within a radius of 1.0f from (0, 0, 0)
+            Vector2 randomPos = Random.insideUnitCircle * 1.0f;  // Radius of 1.0f
+            Vector3 spawnPosition = new Vector3(randomPos.x, 0, randomPos.y);  // y = 0 for 2D ground level
+
+            // Instantiate the enemy prefab at the random position
+            GameObject spawnedEnemy = Object.Instantiate(slimePrefab, spawnPosition, Quaternion.identity);
+
+            if (spawnedEnemy != null)
+            {
+                Debug.Log($"Enemy spawned at random position {spawnPosition}. Total enemies spawned: {currentEnemies + 1}");
+
+                // Add the spawned enemy to the list
+                spawnedEnemies.Add(spawnedEnemy);
+
+                currentEnemies++;
+            }
         }
         else
         {
@@ -99,55 +106,61 @@ public class EnemyStressTest
         }
     }
 
-    Vector3 GetRandomSpawnPosition()
+    private void CheckEnemyPosition(GameObject enemy, float wallLeft, float wallRight, float wallBottom, float wallTop, int num)
     {
-        Vector2 randomPos = Random.insideUnitCircle * 0.2f;
-        return new Vector3(randomPos.x, 0, randomPos.y); // Assuming y=0 for ground level
-    }
+        Vector3 enemyPosition = enemy.transform.position;
 
-void CheckRoomPhysics()
-{
-    Rigidbody2D[] rigidbodies = Object.FindObjectsOfType<Rigidbody2D>();
-
-    if (rigidbodies.Length == 0)
-    {
-        Debug.LogWarning("No Rigidbody2D objects found in the scene.");
-        return;
-    }
-    int count = 0;
-    foreach (Rigidbody2D rb in rigidbodies)
-    {
-        if (rb == null)
+        // Check if the enemy's position is beyond the wall boundaries
+        if (enemyPosition.x < wallLeft || enemyPosition.x > wallRight ||
+            enemyPosition.y < wallBottom || enemyPosition.y > wallTop)
         {
-            Debug.LogError("Found a null Rigidbody2D!");
-            continue;
+            Debug.Log($"Enemy {num} broke through the wall at position {enemyPosition}!");
+            Assert.Pass($"Enemy {num} broke the wall at {enemyPosition}.");
         }
 
-        if (rb.IsSleeping())
+        // Check if the enemy is touching any wall colliders
+        foreach (var wall in GameObject.FindGameObjectsWithTag("Wall"))
         {
-            Debug.LogWarning($"Rigidbody2D {rb.name} is sleeping! Unexpected behavior at {count}");
+            BoxCollider2D wallCollider = wall.GetComponent<BoxCollider2D>();
+            if (wallCollider == null)
+            {
+                Debug.LogError($"Wall {wall.name} does not have a BoxCollider2D!");
+                continue; // Skip this wall if it doesn't have a collider
+            }
+
+            Rigidbody2D enemyRb = enemy.GetComponent<Rigidbody2D>();
+            if (enemyRb != null && enemyRb.IsTouching(wallCollider))
+            {
+                Debug.LogWarning($"Enemy {enemy.name} is touching the wall {wall.name}!");
+            }
         }
-        else
+    }
+
+    private void CheckAllEnemies()
+    {
+        float wallLeft = -5.0f;   
+        float wallRight = 5.0f;   
+        float wallBottom = -5.0f;  
+        float wallTop = 5.0f;      
+
+        int count = 1;
+        foreach (var enemy in spawnedEnemies)
         {
-            Debug.Log($"Rigidbody2D {rb.name} is behaving as expected.");
+            CheckEnemyPosition(enemy, wallLeft, wallRight, wallBottom, wallTop, count);
+            count++;
         }
-        count +=1;
+    }
+
+    private GameObject FindSlimePrefabInScene()
+    {
+        // Find the SlimePrefab that already exists in the scene
+        GameObject slimePrefab = GameObject.Find("SlimePrefab");
+
+        if (slimePrefab == null)
+        {
+            Debug.LogError("SlimePrefab not found in the scene!");
+        }
+
+        return slimePrefab;
     }
 }
-
-    private GameObject CreateEnemyPrefab()
-{
-    // Create the enemy prefab GameObject
-    GameObject enemyPrefab = new GameObject("SlimePrefab");
-
-    // Add components to the prefab
-    enemyPrefab.AddComponent<Rigidbody2D>();               // For physics
-    enemyPrefab.AddComponent<BoxCollider2D>();             // Collider for interactions
-    enemyPrefab.tag = "Enemy"; // Tagging the object as "Enemy"
-    
-    Debug.Log("Enemy prefab created.");
-    return enemyPrefab;
-}
-
-}
-

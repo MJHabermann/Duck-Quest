@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Ground
   - Exit
+  - Chest
+  - Wall
   layers:
   - Default
   - TransparentFX

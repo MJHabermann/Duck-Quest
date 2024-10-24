@@ -55,8 +55,6 @@ public class EnemySpawnerBoundaryTest
         int enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
         Assert.AreEqual(0, enemyCount -1, "Expected no enemies to be spawned.");
 
-        // Clean up
-        Object.DestroyImmediate(enemyPrefab);
     }
 
     [UnityTest]

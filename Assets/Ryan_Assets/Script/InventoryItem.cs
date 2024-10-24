@@ -17,7 +17,7 @@ public class InventoryItem: MonoBehaviour
 
     void Start()
     {
-        inventoryManager = GameObject.Find("Inventory").GetComponent<InventoryManager>();
+        inventoryManager = GameObject.Find("Inventory 1").GetComponent<InventoryManager>();
         if (inventoryManager == null)
         {
             Debug.LogError("InventoryManager not found. Make sure there is a GameObject named 'Inventory' with the InventoryManager script attached.");

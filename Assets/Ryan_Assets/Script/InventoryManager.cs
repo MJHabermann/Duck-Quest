@@ -85,4 +85,13 @@ public class InventoryManager : MonoBehaviour
         Debug.Log("No empty slots available for item: " + itemName);
     }
 
+    public void DeselectAllSlots()
+    {
+        for(int i = 0; i < itemSlot.Length; i++)
+        {
+            itemSlot[i].selectedShader.SetActive(false);
+            itemSlot[i].thisItemSelected = false;
+        }
+    }
+
 }

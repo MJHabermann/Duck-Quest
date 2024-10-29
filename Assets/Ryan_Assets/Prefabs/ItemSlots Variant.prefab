@@ -92,6 +92,10 @@ PrefabInstance:
       propertyPath: emptySprite
       value: 
       objectReference: {fileID: 21300000, guid: cb79a33e8cb8d4fe0a58a07817c9a070, type: 3}
+    - target: {fileID: 6679634507243273433, guid: 0fbfa6de83879418cbf24e0029ef8505, type: 3}
+      propertyPath: maxNumberofItems
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 7120748107398233039, guid: 0fbfa6de83879418cbf24e0029ef8505, type: 3}
       propertyPath: m_Name
       value: ItemSlots Variant

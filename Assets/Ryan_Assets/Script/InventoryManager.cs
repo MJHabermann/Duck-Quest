@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using UnityEditor.Build;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -67,21 +68,26 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void AddItem(string itemName, int quantity, Sprite itemSprite, string itemDescription)
+    public int AddItem(string itemName, int quantity, Sprite itemSprite, string itemDescription)
     {
         Debug.Log("Trying to add item: " + itemName + ", quantity: " + quantity);
 
         for (int i = 0; i < itemSlot.Length; i++)
         {
-            if (!itemSlot[i].isFull)
+            if (!itemSlot[i].isFull && itemSlot[i].itemName == itemName || itemSlot[i].quantity == 0)
             {
-                itemSlot[i].AddItem(itemName, quantity, itemSprite, itemDescription);
+                int leftOverItems = itemSlot[i].AddItem(itemName, quantity, itemSprite, itemDescription);
                 Debug.Log("Item added to slot " + i);
-                return;
+                if (leftOverItems > 0)
+                {
+                    leftOverItems = AddItem(itemName, leftOverItems, itemSprite, itemDescription); 
+                }
+                return leftOverItems;
+                
             }
         }
+        return quantity;
 
-        Debug.Log("No empty slots available for item: " + itemName);
     }
 
     public void DeselectAllSlots()

@@ -33,7 +33,15 @@ public class InventoryItem: MonoBehaviour
     if (other.CompareTag("Player"))
     {
         Debug.Log("Player collided with " + itemName);
-        inventoryManager.AddItem(itemName, quantity, sprite, itemDescription);
+         int leftOverItems = inventoryManager.AddItem(itemName, quantity, sprite, itemDescription);
+         if(leftOverItems <= 0)
+         {
+            Destroy(gameObject);
+         }
+         else
+         {
+            quantity = leftOverItems;
+         }
         Destroy(gameObject);  // Remove the key after pickup
     }
 }

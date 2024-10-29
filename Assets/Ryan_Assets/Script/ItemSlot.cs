@@ -16,6 +16,9 @@ public class ItemSlot: MonoBehaviour, IPointerClickHandler
     public string itemDescription;
     public Sprite emptySprite;
 
+    [SerializeField]
+    private int maxNumberofItems;
+
     //Item Slot
     [SerializeField]
     private TMP_Text quantityText;
@@ -38,19 +41,41 @@ public class ItemSlot: MonoBehaviour, IPointerClickHandler
     {
         inventoryManager = GameObject.Find("Inventory 1").GetComponent<InventoryManager>();
     }
-    public void AddItem(string itemName, int quantity, Sprite itemSprite, string itemDescription)
+    public int AddItem(string itemName, int quantity, Sprite itemSprite, string itemDescription)
     {
-        this.itemName = itemName;
-        this.quantity = quantity;
-        this.itemSprite = itemSprite;
-        this.itemDescription = itemDescription; 
-        isFull = true;
+        //Check to see if slot is already full
+        if(isFull)
+            return quantity;
 
-        quantityText.text = quantity.ToString();
-        quantityText.enabled = true;
+        //update name
+        this.itemName = itemName;
+        
+        //update Image
+        this.itemSprite = itemSprite;
         itemImage.sprite = itemSprite;
 
-        Debug.Log("Item added to slot: " + itemName + ", quantity: " + quantity + "itemsprite: " + itemSprite);
+        //update description
+        this.itemDescription = itemDescription; 
+
+        //update quantity
+        this.quantity += quantity;
+        if(this.quantity >= maxNumberofItems)
+        {
+            quantityText.text = maxNumberofItems.ToString();
+            quantityText.enabled = true;
+            isFull = true;
+        
+
+            //RETURN THE LEFTOVERS
+            int extraItems = this.quantity - maxNumberofItems;
+            this.quantity = maxNumberofItems;
+            return extraItems;
+        }
+        //Update Quantity Text
+        quantityText.text = this.quantity.ToString();
+        quantityText.enabled = true;
+
+        return 0;
     }
 
     public void OnPointerClick(PointerEventData eventData)

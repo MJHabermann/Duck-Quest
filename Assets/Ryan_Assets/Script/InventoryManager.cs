@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
-using Codice.CM.WorkspaceServer.Lock;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -68,7 +67,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void AddItem(string itemName, int quantity, Sprite itemSprite)
+    public void AddItem(string itemName, int quantity, Sprite itemSprite, string itemDescription)
     {
         Debug.Log("Trying to add item: " + itemName + ", quantity: " + quantity);
 
@@ -76,7 +75,7 @@ public class InventoryManager : MonoBehaviour
         {
             if (!itemSlot[i].isFull)
             {
-                itemSlot[i].AddItem(itemName, quantity, itemSprite);
+                itemSlot[i].AddItem(itemName, quantity, itemSprite, itemDescription);
                 Debug.Log("Item added to slot " + i);
                 return;
             }

@@ -14,7 +14,6 @@ public class Goblin : Enemy
 
     private int currentWaypointIndex = 0;
     private bool isChasing = false;
-    private Rigidbody2D rb;
     private Vector2 targetPosition;
     public float attackDamage = 1f;
     private Rigidbody2D playerRb;
@@ -79,13 +78,6 @@ public class Goblin : Enemy
         MoveTowards(targetPosition, chaseSpeed);
     }
 
-    void MoveTowards(Vector2 target, float speed)
-    {
-        Vector2 direction = (target - (Vector2)transform.position).normalized;
-        Flip(direction);
-        rb.velocity = direction * speed;
-    }
-
     void OnDrawGizmosSelected()
     {
         // Visualize the detection range in the editor
@@ -110,7 +102,7 @@ public class Goblin : Enemy
 
         if (damageableObject != null)
         {
-            animator.SetBool("isAttacking", true);
+            animator.SetBool("IsAttacking", true);
             // Inflict damage
             damageableObject.OnHit(attackDamage);
             Debug.Log("Goblin attacked the player!");
@@ -127,7 +119,7 @@ public class Goblin : Enemy
         Vector2 knockbackDirection = (target.position - transform.position).normalized;
         // Apply force to the player's Rigidbody2D in the opposite direction
         playerRb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
-        StartCoroutine(StopPlayerMovementTemporarily());
+        // StartCoroutine(StopPlayerMovementTemporarily());
 
     }
     IEnumerator StopPlayerMovementTemporarily()

@@ -114,8 +114,8 @@ public class EnemyStressTest
         if (enemyPosition.x < wallLeft || enemyPosition.x > wallRight ||
             enemyPosition.y < wallBottom || enemyPosition.y > wallTop)
         {
-            Debug.Log($"Enemy {num} broke through the wall at position {enemyPosition}!");
-            Assert.Pass($"Enemy {num} broke the wall at {enemyPosition}.");
+            Debug.Log($"Enemy {200-num} broke through the wall at position {enemyPosition}!");
+            Assert.Pass($"Enemy {200-num} broke the wall at {enemyPosition}.");
         }
 
         // Check if the enemy is touching any wall colliders

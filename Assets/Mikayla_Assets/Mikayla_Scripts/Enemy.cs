@@ -5,13 +5,14 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] float health;
-    [SerializeField] string enemyName;
+    [SerializeField] public string enemyName;
 
     private bool isFacingRight = false; // Keep track of current facing direction
 
     public Animator animator;
 
     public float speed;
+    protected Rigidbody2D rb;
 
     public T Spawn<T>(GameObject enemyPrefab, Vector3 position, Quaternion rotation) where T : Enemy
     {
@@ -22,7 +23,7 @@ public class Enemy : MonoBehaviour
         return enemyInstance.GetComponent<T>();
     }
 
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
         health -= damage;
         Debug.Log("Enemy hit");
@@ -58,6 +59,12 @@ public class Enemy : MonoBehaviour
         }
     }
     public virtual void Attack(){
-        animator.SetBool("isAttacking", true);
+        animator.SetBool("IsAttacking", true);
+    }
+    public void MoveTowards(Vector2 target, float speed)
+    {
+        Vector2 direction = (target - (Vector2)transform.position).normalized;
+        Flip(direction);
+        rb.velocity = direction * speed;
     }
 }

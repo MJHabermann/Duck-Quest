@@ -12,13 +12,24 @@ public class ItemSO : ScriptableObject
     public AttributesToChange attributesToChange = new AttributesToChange();
     public int intAmountToChangeAttribute;
 
-    public void UseItem()
+
+    public bool UseItem()
     {
         if(statToChange == StatToChange.health)
         {
-           // GameObject.Find(" // GameObjectHealthmanager").GetComponent< // scriptPlayerHealth>().ChangeHealth(intAmountToChangeStat);
+            //PlayerHealth playerHealth = // GameObject.Find(" // GameObjectHealthmanager").GetComponent< // scriptPlayerHealth>().ChangeHealth(intAmountToChangeStat);
+            //if playerHealth.health == playerHealth.maxHealth)
+            //return false
+            //else
+           //playerHealth.RestoreHealth(amountToChangeStat);
+           //return true
+
+           //return false;
         }
+        return true;
+
     }
+    
 
     public enum StatToChange
     {

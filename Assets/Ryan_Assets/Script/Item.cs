@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryItem: MonoBehaviour
+public class Item: MonoBehaviour
 {
     [SerializeField]
-    private string itemName;
+    public string itemName;
 
     [SerializeField]
-    private int quantity;
+    public int quantity;
     [SerializeField]
-    private Sprite sprite;
+    public Sprite sprite;
 
     [TextArea]
     [SerializeField]
-    private string itemDescription;
+    public string itemDescription;
 
     private InventoryManager inventoryManager;
 

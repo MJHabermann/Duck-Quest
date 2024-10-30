@@ -4,13 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 using UnityEditor.Build;
+using UnityEngine.EventSystems;
 
 public class InventoryManager : MonoBehaviour
 {
     public GameObject InventoryMenu;
     private bool menuActivated;
-
-    public MonoBehaviour[] scriptsToToggle;
     [SerializeField] private Slider musicSlider;
 
     public ItemSlot[] itemSlot;
@@ -43,33 +42,19 @@ public class InventoryManager : MonoBehaviour
             InventoryMenu.SetActive(false);
             menuActivated = false;
             Debug.Log("Game is resumed");
-            EnableScripts();
+            //EnableScripts();
         }
         //paused
         else if(Input.GetButtonDown("Inventory") && !menuActivated)
         {
-            DisableScripts();
+            //DisableScripts();
             Time.timeScale = 0;
             InventoryMenu.SetActive(true);
             menuActivated = true;
             Debug.Log("Game is paused");
         }
     }
-
-     // Call this method from the Event Trigger to disable scripts
-    public void DisableScripts() {
-        foreach (MonoBehaviour script in scriptsToToggle) {
-            script.enabled = false;
-        }
-    }
-
-    // Call this method from the Event Trigger to enable scripts
-    public void EnableScripts() {
-        foreach (MonoBehaviour script in scriptsToToggle) {
-            script.enabled = true;
-        }
-    }
-
+  
     public bool UseItem(string itemName)
     {
         for(int i = 0; i < itemSOs.Length; i++)

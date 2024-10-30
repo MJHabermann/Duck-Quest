@@ -141,13 +141,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1759215040780773904}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc2e078b1f9ce4a4daa2a2b2b0a76671, type: 3}
+  m_Script: {fileID: 11500000, guid: d772e07d6100444fc8e0a1654ddf5aa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Key
   quantity: 1
   sprite: {fileID: 21300000, guid: 705496f3e9a6041d0a998d33fc0c953e, type: 3}
-  itemDescription: A shiny gold key. It can be used to open doors or chests.
+  itemDescription: A shiny gold key. Can be used to open doors and chests.
 --- !u!95 &3496843980215193782
 Animator:
   serializedVersion: 5

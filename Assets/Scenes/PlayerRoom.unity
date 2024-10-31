@@ -4563,7 +4563,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6495264325223229878, guid: 82c302f200ce34920a532a8b52914e97, type: 3}
       propertyPath: m_Name
-      value: Overworld_Enemy
+      value: Slime
       objectReference: {fileID: 0}
     - target: {fileID: 6495264325223229878, guid: 82c302f200ce34920a532a8b52914e97, type: 3}
       propertyPath: m_IsActive

@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4705989070040348311}
   - component: {fileID: 3942422045189991437}
   - component: {fileID: 8034669004459173642}
+  - component: {fileID: 2512925914612833097}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -360,6 +361,38 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2512925914612833097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6140373099134245732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31075d50098394db8838bd77e9c01b24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementJoystick: {fileID: 0}
+  moveSpeed: 4
+  collisionOffset: 0.1
+  movementFilter:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 1
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  reach: {fileID: 6830956040653288963}
+  reachCollider: {fileID: 3735211731236313488}
+  rotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &6830956040653288963
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,7 +409,7 @@ GameObject:
   - component: {fileID: 6813071737494970217}
   m_Layer: 0
   m_Name: Reach
-  m_TagString: Untagged
+  m_TagString: Sword
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -403,7 +436,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6830956040653288963}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:

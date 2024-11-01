@@ -10,18 +10,28 @@ public class Player : MonoBehaviour
     public ContactFilter2D movementFilter;
     public float moveSpeed = 4f;
     public GameObject reach;
+    public GameObject bomb;
+    public GameObject arrow;
     public Collider2D reachCollider;
     public AudioSource playerStep;
+    public Quaternion rotation;
     private List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
     private Vector2 moveInput;
     private Rigidbody2D rb;
     private Animator animator;
+    private Sword sword = new Sword();
+    private int bombCount;
+    private int arrowCount;
+    private Vector3 playerDirection;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        reachCollider=reach.GetComponent<Collider2D>();
+        reachCollider = reach.GetComponent<Collider2D>();
+        bombCount = 10;
+        arrowCount = 10;
+        playerDirection = new Vector3(0, 0, 0);
     }
 
     void FixedUpdate(){
@@ -75,11 +85,32 @@ public class Player : MonoBehaviour
     }
 
     void OnBomb(){
-        Debug.Log("Used Bomb");
+        if(GameObject.Find("Bomb(Clone)") == null){
+            if(bombCount > 0){
+            Instantiate(bomb, transform.position, transform.rotation);
+            bombCount--;
+            Debug.Log("Bombs left: " + bombCount);
+        }else{
+            Debug.Log("No bombs");
+        }
+        }else{
+            Debug.Log("Please wait, there is already a bomb!");
+        }
     }
 
     void OnBow(){
-        Debug.Log("Used Bow");
+        if(arrowCount > 0){
+            Debug.Log(rotation);
+            rotation = Quaternion.Euler(playerDirection);
+            Debug.Log(rotation);
+            //spawn arrow, at player location, in same direction as player
+            Instantiate(arrow, transform.position, rotation);
+            arrowCount--;
+            //Debug.Log("Arrows left: " + arrowCount);
+        }else{
+            Debug.Log("No arrows");
+        }
+        
     }
 
     void OnInteract(){
@@ -100,13 +131,17 @@ public class Player : MonoBehaviour
             //change the direction of the reach hitbox to...
             if(moveInput.x > 0){        //right
                 gameObject.BroadcastMessage("PlayerDirection", 2);
+                playerDirection = new Vector3(0, 0, 0);
             }else if (moveInput.x < 0){ //left
                 gameObject.BroadcastMessage("PlayerDirection", 4);
+                playerDirection = new Vector3(0, 0, 180);
             }
             if(moveInput.y > 0){        //up
                 gameObject.BroadcastMessage("PlayerDirection", 1);
+                playerDirection = new Vector3(0, 0, 90);
             }else if (moveInput.y < 0){ //down
                 gameObject.BroadcastMessage("PlayerDirection", 3);
+                playerDirection = new Vector3(0, 0, 270);
             }
         }
     }
@@ -120,14 +155,6 @@ public class Player : MonoBehaviour
         gameObject.BroadcastMessage("swordAttack", true);
         //tell the animator that a sword attack is happening
         animator.SetTrigger("swordAttack");
+        sword.Attack();
     }
 }
-    
-
-
-
-
-
-
-
-

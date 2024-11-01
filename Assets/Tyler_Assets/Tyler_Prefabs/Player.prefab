@@ -99,8 +99,11 @@ MonoBehaviour:
     maxNormalAngle: 0
   moveSpeed: 4
   reach: {fileID: 6830956040653288963}
+  bomb: {fileID: 282796838400133636, guid: ab73ba7f6e864124e9456c311e799106, type: 3}
+  arrow: {fileID: 2507203957755380854, guid: 972789a4723bacd4da34494386cdeb87, type: 3}
   reachCollider: {fileID: 3735211731236313488}
   playerStep: {fileID: 8034669004459173642}
+  rotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!50 &1723619687128083433
 Rigidbody2D:
   serializedVersion: 4

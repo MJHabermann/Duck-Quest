@@ -40,7 +40,7 @@ public class ReachHitbox : MonoBehaviour
                 //damageableObject.OnHit(swordDamage, knockback);
                 enemy.TakeDamage(swordDamage);
             }else{
-                Debug.LogWarning("Collider does not implement IDamageable");
+                Debug.Log("Collider does not implement IDamageable");
             }
         }else if (triggerCode == "Interact"){
             Chest chest = collider.gameObject.GetComponent<Chest>();

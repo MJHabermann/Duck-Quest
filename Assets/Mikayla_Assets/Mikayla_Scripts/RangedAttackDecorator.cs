@@ -8,7 +8,7 @@ public class RangedAttackDecorator : EnemyDecorator
     public Transform firePoint;          // The point from which the projectile will be fired
     public float projectileSpeed = 10f;  // Speed of the projectile
     public float attackRange = 10f;      // Range within which the enemy can perform a ranged attack
-    public float cooldownTime = 2f;      // Cooldown time between ranged attacks
+    public float cooldownTime = 5f;      // Cooldown time between ranged attacks
     private float lastAttackTime;
     public Transform target;
 

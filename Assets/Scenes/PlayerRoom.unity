@@ -3834,6 +3834,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d487fe200114752b6ba9ecf3cac168, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1883791417 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8861219098749721023, guid: 54e5ff90eabc51f48ac70159e4df61e8, type: 3}
+  m_PrefabInstance: {fileID: 46415805}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2006259413
 GameObject:
   m_ObjectHideFlags: 0
@@ -4579,9 +4584,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 550727851318833739, guid: 82c302f200ce34920a532a8b52914e97, type: 3}
+      propertyPath: m_Size.x
+      value: 0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 550727851318833739, guid: 82c302f200ce34920a532a8b52914e97, type: 3}
+      propertyPath: m_Size.y
+      value: 0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 550727851318833739, guid: 82c302f200ce34920a532a8b52914e97, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -1593057310, guid: abaefa300f1344371aa4a7862b7508cf, type: 3}
+    - target: {fileID: 550727851318833739, guid: 82c302f200ce34920a532a8b52914e97, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 652912573615707181, guid: 82c302f200ce34920a532a8b52914e97, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.49
@@ -4625,7 +4642,7 @@ PrefabInstance:
     - target: {fileID: 821712811977125283, guid: 82c302f200ce34920a532a8b52914e97, type: 3}
       propertyPath: target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1883791417}
     - target: {fileID: 821712811977125283, guid: 82c302f200ce34920a532a8b52914e97, type: 3}
       propertyPath: animator
       value: 

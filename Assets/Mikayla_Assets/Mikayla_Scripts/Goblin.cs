@@ -105,7 +105,7 @@ public class Goblin : Enemy
             animator.SetBool("IsAttacking", true);
             // Inflict damage
             damageableObject.OnHit(attackDamage);
-            Debug.Log("Goblin attacked the player!");
+            Debug.Log("Enemy attacked the player!");
             ApplyKnockback();
         }
         else
@@ -119,21 +119,7 @@ public class Goblin : Enemy
         Vector2 knockbackDirection = (target.position - transform.position).normalized;
         // Apply force to the player's Rigidbody2D in the opposite direction
         playerRb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
-        // StartCoroutine(StopPlayerMovementTemporarily());
 
-    }
-    IEnumerator StopPlayerMovementTemporarily()
-    {
-        // Save the current velocity of the player
-        Vector2 originalVelocity = playerRb.velocity;
-
-        // Temporarily disable movement
-        playerRb.velocity = Vector2.zero;
-
-        // Wait for the knockback duration
-        yield return new WaitForSeconds(knockbackDuration);
-
-        // Restore the player's velocity (or you could allow the player to regain control here)
-        playerRb.velocity = originalVelocity;
     }
 }
+

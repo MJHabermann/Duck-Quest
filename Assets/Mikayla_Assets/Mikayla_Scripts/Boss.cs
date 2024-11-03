@@ -56,7 +56,6 @@ public class Boss : Enemy
         // Add a ranged attack behavior to the Boss dynamically using the RangedAttackDecorator
         Enemy bossWithRangedAttack = new RangedAttackDecorator(this, projectilePrefab, firePoint);
 
-        // You could further chain more decorators here for additional behavior
     }
 }
 

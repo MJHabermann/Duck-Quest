@@ -9,11 +9,17 @@ public class Slime : Enemy
     public float chaseRadius;
     public float attackRadius;
     public Transform homePosition;
+    public float attackDamage = 1f;
+    private Rigidbody2D playerRb;
+    public float knockbackForce = 5f;   
+    public float attackCooldown = 2f; 
+    private float lastAttackTime;
 
     void Start()
     {
         animator.SetFloat("Speed", 0);
         rb = GetComponent<Rigidbody2D>();
+        playerRb = target.GetComponent<Rigidbody2D>(); 
         target = GameObject.FindWithTag("Player").transform;
     }
 
@@ -34,11 +40,46 @@ public class Slime : Enemy
         else if (distance <= attackRadius)
         {
             rb.velocity = Vector2.zero;  // Stop the enemy from moving
-            Attack();  // Trigger attack when in range
+            TryAttackPlayer();  // Trigger attack when in range
         }
         else
         {
             rb.velocity = Vector2.zero;  // Stop movement when out of range
         }
         }
+    void ApplyKnockback()
+    {
+        // Calculate the direction from the enemy to the player
+        Vector2 knockbackDirection = (target.position - transform.position).normalized;
+        // Apply force to the player's Rigidbody2D in the opposite direction
+        playerRb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
+
+    }
+    void TryAttackPlayer()
+    {
+        // If it's time to attack again
+        if (Time.time - lastAttackTime >= attackCooldown)
+        {
+            lastAttackTime = Time.time;  // Reset the attack cooldown
+            Attack();
+        }
+    }
+    public override void Attack()
+    {
+        // Check if the player implements IDamageable
+        IDamageable damageableObject = target.GetComponent<IDamageable>();
+
+        if (damageableObject != null)
+        {
+            animator.SetBool("IsAttacking", true);
+            // Inflict damage
+            damageableObject.OnHit(attackDamage);
+            Debug.Log("Enemy attacked the player!");
+            ApplyKnockback();
+        }
+        else
+        {
+            Debug.LogWarning("Player does not implement IDamageable!");
+        }
+    }
 }

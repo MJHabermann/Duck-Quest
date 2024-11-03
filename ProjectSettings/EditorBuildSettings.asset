@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Mikayla_Assets/Mikayla's Scenes/Test Scene.unity
     guid: 4b738bb97f9b44ff6a5fe9132d5d7a7a
+  - enabled: 1
+    path: Assets/Scenes/Dungeon.unity
+    guid: c1ea9dcf3befba949a04caabfb3a81ee
   m_configObjects: {}

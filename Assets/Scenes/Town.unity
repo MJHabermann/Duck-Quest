@@ -42711,7 +42711,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4087148941960634610, guid: 6bfc66da62ca64f55a689802e9ab0e0e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.34
+      value: -2.65
       objectReference: {fileID: 0}
     - target: {fileID: 4087148941960634610, guid: 6bfc66da62ca64f55a689802e9ab0e0e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -43745,6 +43745,10 @@ PrefabInstance:
     - target: {fileID: 4280343148059224841, guid: 0472e98e2392d9a458612d03fcc6566e, type: 3}
       propertyPath: m_Name
       value: GrassBlock (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6351956235502030484, guid: 0472e98e2392d9a458612d03fcc6566e, type: 3}
+      propertyPath: drops
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -61214,6 +61218,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GrassBlock
       objectReference: {fileID: 0}
+    - target: {fileID: 6351956235502030484, guid: 0472e98e2392d9a458612d03fcc6566e, type: 3}
+      propertyPath: drops
+      value: 
+      objectReference: {fileID: 3356578431204961542, guid: 91c0d82a346983d47ae6c943619dd43d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

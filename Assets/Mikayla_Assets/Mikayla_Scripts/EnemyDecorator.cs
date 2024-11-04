@@ -6,26 +6,40 @@ public abstract class EnemyDecorator : Enemy
 {
     protected Enemy enemy;
 
-    public EnemyDecorator(Enemy enemy)
+    // No constructor since we can't pass parameters to MonoBehaviour
+    protected virtual void Awake()
     {
-        this.enemy = enemy;
+        // Find the Enemy component attached to the same GameObject
+        enemy = GetComponent<Enemy>();
+        if (enemy == null)
+        {
+            Debug.LogError("EnemyDecorator requires an Enemy component on the same GameObject.");
+        }
     }
 
     public override void TakeDamage(float damage)
     {
-        enemy.TakeDamage(damage);
+        if (enemy != null)
+        {
+            enemy.TakeDamage(damage);
+        }
     }
 
     public override void Die()
     {
-        enemy.Die();
+        if (enemy != null)
+        {
+            enemy.Die();
+        }
     }
 
     public override void Attack()
     {
-        enemy.Attack();
+        if (enemy != null)
+        {
+            enemy.Attack();
+        }
     }
 
     // Decorators can override other methods as needed
 }
-

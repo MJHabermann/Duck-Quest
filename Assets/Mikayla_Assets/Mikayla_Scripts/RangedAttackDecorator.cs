@@ -7,40 +7,64 @@ public class RangedAttackDecorator : EnemyDecorator
     public GameObject projectilePrefab;  // Prefab for the projectile
     public Transform firePoint;          // The point from which the projectile will be fired
     public float projectileSpeed = 10f;  // Speed of the projectile
-    public float attackRange = 10f;      // Range within which the enemy can perform a ranged attack
     public float cooldownTime = 5f;      // Cooldown time between ranged attacks
     private float lastAttackTime;
     public Transform target;
 
-    public RangedAttackDecorator(Enemy enemy, GameObject projectilePrefab, Transform firePoint) : base(enemy)
+
+    private Rigidbody2D bossRb;
+
+    public void SetBossRigidbody(Rigidbody2D rb)
     {
-        this.projectilePrefab = projectilePrefab;
-        this.firePoint = firePoint;
+        bossRb = rb;
     }
 
     public override void Attack()
     {
         if (Time.time - lastAttackTime >= cooldownTime)
         {
-            lastAttackTime = Time.time;  // Reset the attack cooldown
-            base.Attack();  // Call the base attack (can be melee or another decorator)
+            animator.SetBool("IsAttacking", true);
+            lastAttackTime = Time.time;
 
             // Perform the ranged attack
             FireProjectile();
+        }
+        else
+        {
+            animator.SetBool("IsAttacking", false); // Ensure animator is not null
         }
     }
 
     private void FireProjectile()
     {
-        Debug.Log($"{enemyName} fired a ranged attack!");
+        if (firePoint != null && projectilePrefab != null && target != null)
+        {
+            Debug.Log($"{enemyName} fired a ranged attack!");
 
-        // Instantiate the projectile at the fire point
-        GameObject projectileInstance = GameObject.Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+            // Instantiate the projectile at the fire point with the correct rotation
+            GameObject projectileInstance = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
 
-        // Set the velocity of the projectile to move towards the player
-        Rigidbody2D rb = projectileInstance.GetComponent<Rigidbody2D>();
-        Vector2 direction = (target.position - firePoint.position).normalized;  // Direction towards the target
-        rb.velocity = direction * projectileSpeed;
+            // Get the Rigidbody2D component of the instantiated projectile
+            Rigidbody2D projectileRb = projectileInstance.GetComponent<Rigidbody2D>();
+            if (projectileRb != null)
+            {
+                // Calculate the direction to the target and set the projectile's velocity
+                Vector2 direction = (target.position - firePoint.position).normalized;
+                projectileRb.velocity = direction * projectileSpeed;
+
+                // Optionally, set the projectile's rotation to face the target direction
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                projectileInstance.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            }
+            else
+            {
+                Debug.LogError("Projectile Rigidbody2D is null!");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Projectile prefab, fire point, or target is missing!");
+        }
     }
-}
 
+}

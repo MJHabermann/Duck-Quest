@@ -4,58 +4,112 @@ using UnityEngine;
 
 public class Boss : Enemy
 {
-    public GameObject projectilePrefab;  // Prefab for the projectile
-    public Transform firePoint;          // Point from which projectiles will be fired
-    public float bossAttackCooldown = 1.5f; // Cooldown between attacks
-    public float chaseSpeed = 4f;        // Boss chase speed
-    public float bossAttackRange = 15f;  // Range for ranged attack
-
-    private bool isChasing = false;
-    private Transform target;
+    public GameObject projectilePrefab;
+    public float chaseRadius = 10f;
+    public Transform firePoint;
+    public float bossAttackCooldown = 5f;
+    public float chaseSpeed = 4f;
+    public float bossAttackRange = 9f;
+    public Transform target;
+    private Rigidbody2D playerRb;
+    bool facingRight = true;
+    private RangedAttackDecorator rangedAttack; // Reference to the decorator
 
     void Start()
     {
-        // Find the player as the target
+        rb = GetComponent<Rigidbody2D>();
         target = GameObject.FindWithTag("Player").transform;
+        playerRb = target.GetComponent<Rigidbody2D>(); 
 
-        // Apply the ranged attack behavior dynamically using the decorator
+        // Check if target is assigned
+        if (target == null)
+        {
+            Debug.LogError("Player target not found!");
+            return;
+        }
+
+        // Dynamically add ranged attack behavior
         ChangeBehavior();
     }
 
     void Update()
     {
+        Vector3 direction = (target.position - transform.position).normalized;
+        Flip(direction);
         float distanceToPlayer = Vector2.Distance(transform.position, target.position);
-
         if (distanceToPlayer <= bossAttackRange)
         {
-            // Boss within attack range, attempt to attack
             Attack();
         }
         else
         {
-            // Start chasing the player
             ChasePlayer();
         }
     }
 
     void ChasePlayer()
     {
-        // Chase the player towards the target position
-        MoveTowards(target.position, chaseSpeed);
+        if (target != null)
+        {
+            Vector2 targetPosition = target.position;
+            MoveTowards(targetPosition, chaseSpeed);
+        }
     }
 
     public override void Attack()
     {
-        // Use the decorated ranged attack behavior
-        base.Attack();
-        Debug.Log("Boss is attacking with a ranged attack!");
+        if (rangedAttack != null)
+        {
+            // Use the decorated ranged attack behavior
+            rangedAttack.Attack();
+        }
+        else
+        {
+            Debug.LogWarning("Ranged attack behavior not initialized.");
+        }
     }
 
     void ChangeBehavior()
     {
-        // Add a ranged attack behavior to the Boss dynamically using the RangedAttackDecorator
-        Enemy bossWithRangedAttack = new RangedAttackDecorator(this, projectilePrefab, firePoint);
+        if (rangedAttack == null)
+        {
+            // Add the RangedAttackDecorator component and assign necessary fields
+            rangedAttack = gameObject.AddComponent<RangedAttackDecorator>();
+            rangedAttack.projectilePrefab = projectilePrefab;
+            rangedAttack.firePoint = firePoint;
+            rangedAttack.target = target;
+            rangedAttack.SetBossRigidbody(rb);
+            rangedAttack.animator = animator;
+        }
+    }
 
+    public override void MoveTowards(Vector2 targetPosition, float speed)
+    {
+        float minDistance = 6.0f; // Minimum distance to maintain from the player
+        float distanceToPlayer = Vector2.Distance(transform.position, targetPosition);
+
+        if (distanceToPlayer > minDistance) { 
+            // Move towards the player if further than the minimum distance
+            Vector2 direction = (targetPosition - (Vector2)transform.position).normalized; 
+            rb.velocity = direction * speed;
+        }
+        else
+        {
+            rb.velocity = Vector2.zero; // Ensure no movement if the target is null
+        }
+    }
+    public override void Flip(Vector3 direction) { 
+        if (direction.x > 0 && !facingRight) { 
+            facingRight = true; 
+            Vector3 localScale = transform.localScale; 
+            localScale.x *= -1; transform.localScale = localScale; 
+        } 
+        else if (direction.x < 0 && facingRight) 
+        { 
+            facingRight = false;
+            Vector3 localScale = transform.localScale; 
+            localScale.x *= -1; 
+            transform.localScale = localScale; 
+        } 
     }
 }
-

@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] float health;
     [SerializeField] public string enemyName;
 
-    private bool isFacingRight = false; // Keep track of current facing direction
+    protected bool isFacingRight = false; // Keep track of current facing direction
 
     public Animator animator;
 
@@ -40,7 +40,7 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject, deathAnimationLength + .2f);
     }
 
-    public void Flip(Vector3 direction){
+    public virtual void Flip(Vector3 direction){
         if (direction.x > 0 && !isFacingRight)
         {
             isFacingRight = !isFacingRight;
@@ -61,7 +61,7 @@ public class Enemy : MonoBehaviour
     public virtual void Attack(){
         animator.SetBool("IsAttacking", true);
     }
-    public void MoveTowards(Vector2 target, float speed)
+    public virtual void MoveTowards(Vector2 target, float speed)
     {
         Vector2 direction = (target - (Vector2)transform.position).normalized;
         Flip(direction);

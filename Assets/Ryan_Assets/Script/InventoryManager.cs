@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 public class InventoryManager : MonoBehaviour
 {
     public GameObject InventoryMenu;
-    private bool menuActivated;
+    public bool menuActivated; 
     [SerializeField] private Slider musicSlider;
 
     public ItemSlot[] itemSlot;
@@ -17,7 +17,8 @@ public class InventoryManager : MonoBehaviour
     public ItemSO[] itemSOs;
 
     private int totalItemCount;
-
+    
+    public bool isActive;
     // Start is called before the first frame update
     void Start()
     {

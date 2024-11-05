@@ -41,6 +41,7 @@ public class Dialogue : MonoBehaviour
     {
         index = 0;
         ShowLine();
+
     }
 
     void ShowLine()

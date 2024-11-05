@@ -8,6 +8,8 @@ public class NPC : MonoBehaviour
     private bool playerInRange = false; // Tracks if player is nearby to trigger dialogue
     private bool hasStartedDialogue = false; // Prevents multiple dialogue triggers
 
+    public bool dialogueActive;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,12 +43,14 @@ public class NPC : MonoBehaviour
             playerInRange = false;
             hasStartedDialogue = false; // Reset this flag when player leaves range
             dialogue.gameObject.SetActive(false); // Hide dialogue when player exits collision
+            dialogueActive = false;
         }
     }
 
     void StartDialogue()
     {
         dialogue.gameObject.SetActive(true);
+        dialogueActive = true;
         dialogue.StartDialogue();
     }
 }

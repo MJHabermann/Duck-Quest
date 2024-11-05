@@ -5,17 +5,18 @@ using System.Collections;
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEditor.Experimental.Rendering;
+using System.Runtime.CompilerServices;
 
-public class Stress_Exits : MonoBehaviour
+public class Stress_GrassGrids : MonoBehaviour
 {
-    public int maxGridSize = 100;
+    public int maxGridSize = 1000;
     public float spacing = 1.0f;
-    public float spawnDelay = 0.1f;
+    public float spawnDelay = 0.25f;
     private float lastSpawnTime;
     private bool sceneLoaded = false;
     private GameObject grassPrefab;
     private List<GameObject> grassObjects = new List<GameObject>();
-
+    GameObject drops;
     [OneTimeSetUp]
     public void LoadedLevel()
     {
@@ -39,7 +40,7 @@ public class Stress_Exits : MonoBehaviour
         }
 
         grassPrefab = FindGrassPrefabInScene();
-
+        drops = GameObject.Find("Heart");
         if (grassPrefab != null)
         {
             Debug.Log("Grass prefab found successfully.");

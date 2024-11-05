@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Duck_Quest.sln"
+    "dotnet.defaultSolution": "Duck-Quest.sln"
 }

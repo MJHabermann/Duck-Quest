@@ -16,7 +16,7 @@ public class InventoryManager : MonoBehaviour
 
     public ItemSO[] itemSOs;
 
-
+    private int totalItemCount;
 
     // Start is called before the first frame update
     void Start()
@@ -76,7 +76,10 @@ public class InventoryManager : MonoBehaviour
             if (!itemSlot[i].isFull && itemSlot[i].itemName == itemName || itemSlot[i].quantity == 0)
             {
                 int leftOverItems = itemSlot[i].AddItem(itemName, quantity, itemSprite, itemDescription);
+                int itemsAdded = quantity - leftOverItems; // Calculate how many items were successfully added
+                UpdateItemCount(itemsAdded); // Update the total item count
                 Debug.Log("Item added to slot " + i);
+
                 if (leftOverItems > 0)
                 {
                     leftOverItems = AddItem(itemName, leftOverItems, itemSprite, itemDescription); 
@@ -97,5 +100,19 @@ public class InventoryManager : MonoBehaviour
             itemSlot[i].thisItemSelected = false;
         }
     }
+
+     private void UpdateItemCount(int change)
+    {
+        totalItemCount += change;
+        Debug.Log("Total item count is now: " + totalItemCount);
+    }
+
+    public int GetItemCount()
+    {
+        Debug.Log("total item count" + totalItemCount);
+        return totalItemCount;
+        
+    }
+
 
 }

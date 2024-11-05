@@ -17,13 +17,13 @@ public class ItemSlot: MonoBehaviour, IPointerClickHandler
     public Sprite emptySprite;
 
     [SerializeField]
-    private int maxNumberofItems;
+    public int maxNumberofItems;
 
     //Item Slot
     [SerializeField]
-    private TMP_Text quantityText;
+    public TMP_Text quantityText;
     [SerializeField]
-    private Image itemImage;
+    public Image itemImage;
 
     //ITEM DESCRIPTION//
 
@@ -34,7 +34,7 @@ public class ItemSlot: MonoBehaviour, IPointerClickHandler
     public GameObject selectedShader;
     public bool thisItemSelected;
 
-    private InventoryManager inventoryManager;
+    public InventoryManager inventoryManager;
 
     // Start is called before the first frame update
     private void Start()

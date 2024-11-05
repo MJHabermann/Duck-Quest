@@ -1,15 +1,15 @@
 using UnityEngine;
 
 public class ChestInteraction : MonoBehaviour {
-    public PlayerHUD playerHUD;  // Reference to your PlayerHUD script
+    public PlayerHUD playerHUD;  // Reference to PlayerHUD script
 
     public InventoryManager playerInventory; //reference to inventory manager script
-    private int moneyAmount = 1000;  // Amount of money to add when chest is opened
-    private bool isPlayerNearby = false;  // Check if player is in range
+    public int moneyAmount = 1000;  // Amount of money to add when chest is opened
+    public bool isPlayerNearby = false;  // Check if player is in range
 
-    private bool isLocked = true; //check if the chest is locked
+    public bool isLocked = true; //check if the chest is locked
 
-    private bool chestHasBeenOpened = false;
+    public bool chestHasBeenOpened = false;
 
     void Update() {
         if (isPlayerNearby && Input.GetKeyDown(KeyCode.E) && !chestHasBeenOpened) {  // Check if player presses "E"
@@ -34,7 +34,7 @@ public class ChestInteraction : MonoBehaviour {
         }
     }
     */
-    void CollectMoneyFromChest() 
+    public void CollectMoneyFromChest() 
     {
         Debug.Log("Collect Money from chest called");
         playerHUD.AddMoney(moneyAmount);

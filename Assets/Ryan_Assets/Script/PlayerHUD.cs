@@ -112,4 +112,8 @@ public class PlayerHUD : MonoBehaviour
             Debug.LogError("Money Text is missing! Cannot update UI.");
         }
     }
+    public int GetMoney()
+    {
+        return playerMoney;
+    }
 }

@@ -4,7 +4,7 @@ using NUnit.Framework;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class SlimePlayModeTests
+public class SlimeTests
 {
     private GameObject player;
     private GameObject slimeObject;
@@ -46,6 +46,16 @@ public class SlimePlayModeTests
 
         // Assert player object exists
         Assert.IsTrue(player);
+    }
+
+    [Test]
+    public void EnemyTypeIsSlime(){
+        GameObject enemy = GameObject.FindWithTag("Enemy");
+
+        // Get the Player component attached to the player object
+        Enemy slime = enemy.GetComponent<Enemy>();
+
+        Assert.IsTrue(slime.EnemyName=="Slime");
     }
     
     [Test]

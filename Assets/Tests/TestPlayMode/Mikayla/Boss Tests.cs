@@ -6,20 +6,20 @@ using UnityEngine.TestTools;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GoblinTests
+public class BossTests
 {
     bool sceneLoaded;
     [OneTimeSetUp]
     public void LoadedLevel()
     {
-        Debug.Log("Loading scene 'Town'...");
+        Debug.Log("Loading scene 'dungeon'...");
         SceneManager.sceneLoaded += SceneManagerSceneLoaded;
-        SceneManager.LoadScene("Town", LoadSceneMode.Single);
+        SceneManager.LoadScene("dungeon", LoadSceneMode.Single);
     }
 
     private void SceneManagerSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
-        Debug.Log("Scene 'Town' loaded.");
+        Debug.Log("Scene 'dungeon' loaded.");
         sceneLoaded = true;
     }
 
@@ -44,19 +44,9 @@ public class GoblinTests
         // Assert player object exists
         Assert.IsTrue(player);
     }
-
-    [Test]
-    public void EnemyTypeIsGoblin(){
-        GameObject enemy = GameObject.FindWithTag("Enemy");
-
-        // Get the Player component attached to the player object
-        Enemy goblin = enemy.GetComponent<Enemy>();
-
-        Assert.IsTrue(goblin.EnemyName=="Goblin");
-    }
     
     [Test]
-    public void doesGoblinExist()
+    public void BossExists()
     {
         // Find the player object in the scene
         GameObject enemy = GameObject.FindWithTag("Enemy");
@@ -64,7 +54,15 @@ public class GoblinTests
         // Assert that the enemy object exists
         Assert.IsNotNull(enemy);
     }
+    [Test]
+    public void EnemyTypeIsBoss(){
+        GameObject enemy = GameObject.FindWithTag("Enemy");
 
+        // Get the Player component attached to the player object
+        Enemy boss = enemy.GetComponent<Enemy>();
+
+        Assert.IsTrue(boss.EnemyName=="Boss");
+    }
     [Test]
     public void IsHealthSet()
     {
@@ -73,25 +71,16 @@ public class GoblinTests
         // Get the Player component attached to the player object
         Enemy goblin = enemy.GetComponent<Enemy>();
 
-        Assert.IsTrue(goblin.Health==5);
+        Assert.IsTrue(goblin.Health==20);
     }
     [Test]
-    public void DoesEnemyHaveHealth()
+    public void DoesBossHaveHealth()
     {
         GameObject enemy = GameObject.FindWithTag("Enemy");
 
         // Get the Player component attached to the player object
-        Enemy goblin = enemy.GetComponent<Enemy>();
+        Enemy boss = enemy.GetComponent<Enemy>();
 
-        Assert.IsTrue(goblin.Health>0);
-    }
-
-    [UnityTest]
-    public IEnumerator GoblinIsPatrolling()
-    {
-        yield return new WaitForSeconds(1f);
-        GameObject enemyObject = GameObject.FindWithTag("Enemy");
-        Rigidbody2D enemy = enemyObject.GetComponent<Rigidbody2D>();
-        Assert.IsTrue(enemy.velocity.x != 0);
+        Assert.IsTrue(boss.Health>0);
     }
 }

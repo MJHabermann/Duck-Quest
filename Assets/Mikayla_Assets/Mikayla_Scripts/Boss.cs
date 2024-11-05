@@ -17,6 +17,11 @@ public class Boss : Enemy
 
     void Start()
     {
+        //Set attributes
+        Health = 20f;               // Set goblin's health
+        EnemyName = "Boss";        // Set the name of the enemy
+        Speed = 2f;                 // Set goblin's movement speed
+
         rb = GetComponent<Rigidbody2D>();
         target = GameObject.FindWithTag("Player").transform;
         playerRb = target.GetComponent<Rigidbody2D>(); 

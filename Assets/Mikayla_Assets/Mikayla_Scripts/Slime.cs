@@ -17,6 +17,11 @@ public class Slime : Enemy
 
     void Start()
     {
+        //Set attributes
+        Health = 3f;               // Set slime's health
+        EnemyName = "Slime";        // Set the name of the enemy
+        Speed = 1.5f;                 // Set slime's movement speed
+
         animator.SetFloat("Speed", 0);
         rb = GetComponent<Rigidbody2D>();
         playerRb = target.GetComponent<Rigidbody2D>(); 
@@ -34,7 +39,7 @@ public class Slime : Enemy
         if (distance <= chaseRadius && distance > attackRadius){
             Vector3 direction = (target.position - transform.position).normalized;
             //transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-            rb.velocity = direction * speed; 
+            rb.velocity = direction * Speed; 
             Flip(direction);
         }
         else if (distance <= attackRadius)

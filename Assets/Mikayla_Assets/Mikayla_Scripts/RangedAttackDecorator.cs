@@ -39,7 +39,7 @@ public class RangedAttackDecorator : EnemyDecorator
     {
         if (firePoint != null && projectilePrefab != null && target != null)
         {
-            Debug.Log($"{enemyName} fired a ranged attack!");
+            Debug.Log($"{EnemyName} fired a ranged attack!");
 
             // Instantiate the projectile at the fire point with the correct rotation
             GameObject projectileInstance = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);

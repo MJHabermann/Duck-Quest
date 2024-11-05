@@ -22,6 +22,11 @@ public class Goblin : Enemy
     // Start is called before the first frame update
     void Start()
     {
+        //Set attributes
+        Health = 5f;               // Set goblin's health
+        EnemyName = "Goblin";        // Set the name of the enemy
+        Speed = 1.5f;                 // Set goblin's movement speed
+
         target = GameObject.FindWithTag("Player").transform;
         playerRb = target.GetComponent<Rigidbody2D>(); 
         rb = GetComponent<Rigidbody2D>();
@@ -69,7 +74,7 @@ public class Goblin : Enemy
         }
 
         targetPosition = waypoints[currentWaypointIndex].position;
-        MoveTowards(targetPosition, speed);
+        MoveTowards(targetPosition, Speed);
     }
 
     void ChasePlayer()

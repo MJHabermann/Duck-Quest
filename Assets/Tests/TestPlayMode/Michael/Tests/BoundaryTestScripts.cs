@@ -8,7 +8,7 @@ using UnityEngine.TestTools;
 public class BoundaryTestScripts
 {
     // A Test behaves as an ordinary method
-    private bool sceneLoaded = false;
+    //private bool sceneLoaded = false;
     [OneTimeSetUp]
     public void LoadedLevel()
     {
@@ -19,7 +19,7 @@ public class BoundaryTestScripts
     private void SceneManagerSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log("Scene 'PlayerRoom' loaded.");
-        sceneLoaded = true;
+        //sceneLoaded = true;
     }
 
     [UnityTest]
@@ -34,6 +34,13 @@ public class BoundaryTestScripts
     {
         GameObject groundObject = GameObject.FindWithTag("Ground");
         Assert.IsNotNull(groundObject);
+        yield return null;
+    }
+    [UnityTest]
+    public IEnumerator WallIsLoaded()
+    {
+        GameObject collisionObject = GameObject.FindWithTag("Wall");
+        Assert.IsNotNull(collisionObject);
         yield return null;
     }
 }

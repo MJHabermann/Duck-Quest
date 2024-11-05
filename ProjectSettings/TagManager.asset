@@ -11,6 +11,7 @@ TagManager:
   - Wall
   - Ceiling
   - Sword
+  - Grass
   layers:
   - Default
   - TransparentFX

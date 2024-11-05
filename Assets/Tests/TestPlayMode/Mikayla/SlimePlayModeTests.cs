@@ -33,91 +33,93 @@ public class SlimePlayModeTests
         {
             yield return null;
         }
-
-        // Create a player GameObject
-        player = new GameObject("Player");
-        player.tag = "Player";
-        player.transform.position = Vector3.zero;
-
-        // Create a Slime GameObject
-        slimeObject = new GameObject("Slime");
-        slime = slimeObject.AddComponent<Slime>();
-        slime.target = player.transform;
-        slime.chaseRadius = 5f;
-        slime.attackRadius = 1.0f;
-        slime.homePosition = slimeObject.transform;
-
-        Debug.Log("SetUp complete: Player position is " + player.transform.position + 
-                   " and Slime position is " + slime.transform.position);
-
-        // Ensure the objects are not null
-        Assert.NotNull(player, "Player object should not be null after setup.");
-        Assert.NotNull(slimeObject, "Slime object should not be null after setup.");
-        Assert.NotNull(slime, "Slime component should not be null after setup.");
-
-        // Wait for a frame to ensure everything is set up correctly
+                // Wait for a frame to ensure everything is set up correctly
         yield return null;
     }
 
-    [UnityTearDown]
-    public IEnumerator TearDown()
+    [UnityTest]
+    public IEnumerator PlayerExists()
     {
-        Debug.Log("TearDown: Destroying player and slime objects.");
+        // wait for scene to call start()
+        yield return new WaitForSeconds(1f);
+        GameObject player = GameObject.Find("Player");
 
-        // Ensure that objects exist before destroying them
-        if (player != null)
-        {
-            Object.DestroyImmediate(player);
-            Debug.Log("Player object destroyed.");
-        }
-        else
-        {
-            Debug.LogWarning("Player object was already null.");
-        }
+        // Assert player object exists
+        Assert.IsTrue(player);
+    }
+    
+    [Test]
+    public void SlimeExists()
+    {
+        // Find the player object in the scene
+        GameObject enemy = GameObject.FindWithTag("Enemy");
 
-        if (slimeObject != null)
-        {
-            Object.DestroyImmediate(slimeObject);
-            Debug.Log("Slime object destroyed.");
-        }
-        else
-        {
-            Debug.LogWarning("Slime object was already null.");
-        }
-        
-        // Wait a frame to ensure destruction completes
-        yield return null;
+        // Assert that the enemy object exists
+        Assert.IsNotNull(enemy);
+    }
+
+    [Test]
+    public void IsHealthSet()
+    {
+        GameObject enemy = GameObject.FindWithTag("Enemy");
+
+        // Get the Player component attached to the player object
+        Enemy slime = enemy.GetComponent<Enemy>();
+
+        Assert.IsTrue(slime.Health==3);
+    }
+        [Test]
+    public void DoesEnemyHaveHealth()
+    {
+        GameObject enemy = GameObject.FindWithTag("Enemy");
+
+        // Get the Player component attached to the player object
+        Enemy slime = enemy.GetComponent<Enemy>();
+
+        Assert.IsTrue(slime.Health>0);
+    }
+
+    [UnityTest]
+    public IEnumerator SlimeIsIdle()
+    {
+        yield return new WaitForSeconds(1f);
+        GameObject enemyObject = GameObject.FindWithTag("Enemy");
+        Rigidbody2D enemy = enemyObject.GetComponent<Rigidbody2D>();
+        Assert.IsTrue(enemy.velocity.x == 0);
+    }
+
+    [UnityTest]
+    public IEnumerator SlimeMovesInsideChaseRadius()
+    {
+        yield return new WaitWhile(() => sceneLoaded == false);
+        GameObject slime = GameObject.FindWithTag("Enemy");
+        GameObject player = GameObject.FindWithTag("Player");
+        // Ensure the objects are not null
+        Assert.NotNull(player, "Player object should not be null.");
+        Assert.NotNull(slime, "Slime component should not be null.");
+
+        Vector3 initial_pos = slime.transform.position;
+        // Move the player outside the chase radius
+        player.transform.position = new Vector3(-1.0f, -1, 0);
+        Debug.Log("Moving player to: " + player.transform.position);
+
+        // Wait for a frame to let the Slime update
+        yield return new WaitForSeconds(0.5f); // Simulate time for Slime behavior
+
+        // Check that the Slime has not moved
+        Debug.Log("Checking Slime position after attempting to chase: " + slime.transform.position);
+        Assert.AreNotEqual(initial_pos, slime.transform.position);
     }
 
     [UnityTest]
     public IEnumerator SlimeDoesNotMoveOutsideChaseRadius()
     {
-        yield return new WaitWhile(() => sceneLoaded == false);
+        GameObject slime = GameObject.FindWithTag("Enemy");
+        GameObject player = GameObject.FindWithTag("Player");
         // Ensure the objects are not null
         Assert.NotNull(player, "Player object should not be null.");
-        Assert.NotNull(slimeObject, "Slime object should not be null.");
         Assert.NotNull(slime, "Slime component should not be null.");
-
-        // Move the player outside the chase radius
-        player.transform.position = new Vector3(6.0f, 0, 0);
-        Debug.Log("Moving player to: " + player.transform.position);
-
-        // Wait for a frame to let the Slime update
-        yield return new WaitForSeconds(0.1f); // Simulate time for Slime behavior
-
-        // Check that the Slime has not moved
-        Debug.Log("Checking Slime position after attempting to chase: " + slime.transform.position);
-        Assert.AreEqual(Vector3.zero, slime.transform.position);
-    }
-
-    [UnityTest]
-    public IEnumerator SlimeStaysOutsideAttackRadius()
-    {
-        // Ensure the objects are not null
-        Assert.NotNull(player, "Player object should not be null.");
-        Assert.NotNull(slimeObject, "Slime object should not be null.");
-        Assert.NotNull(slime, "Slime component should not be null.");
-
+        Vector3 initial_pos = slime.transform.position;
         // Move the player within the attack radius
         player.transform.position = new Vector3(0.5f, 0, 0);
         Debug.Log("Moving player to: " + player.transform.position);
@@ -127,7 +129,7 @@ public class SlimePlayModeTests
 
         // Check that the Slime has not moved
         Debug.Log("Checking Slime position after being too close: " + slime.transform.position);
-        Assert.AreEqual(Vector3.zero, slime.transform.position);
+        Assert.AreEqual(initial_pos, slime.transform.position);
     }
 }
 

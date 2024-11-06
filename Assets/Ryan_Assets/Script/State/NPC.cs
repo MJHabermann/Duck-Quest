@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
 public class NPC : MonoBehaviour
 {
     public Dialogue dialogue;
@@ -52,5 +52,60 @@ public class NPC : MonoBehaviour
         dialogue.gameObject.SetActive(true);
         dialogueActive = true;
         dialogue.StartDialogue();
+    }
+
+}
+*/
+
+public class NPC : MonoBehaviour
+{
+    private INPCState currentState;
+
+    public Dialogue dialogue;
+    public bool dialogueActive;
+
+    void Start()
+    {
+        TransitionToState(new NPCIdleState()); // Start in Idle state
+    }
+
+    public void Update()
+    {
+        currentState.UpdateState(this);
+    }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            currentState.OnPlayerEnter(this);
+        }
+    }
+
+    public void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            currentState.OnPlayerExit(this);
+        }
+    }
+
+    public void TransitionToState(INPCState newState)
+    {
+        currentState = newState;
+        currentState.EnterState(this);
+    }
+
+    public void StartDialogue()
+    {
+        dialogue.gameObject.SetActive(true);
+        dialogueActive = true;
+        dialogue.StartDialogue();
+    }
+
+    public void EndDialogue()
+    {
+        dialogue.gameObject.SetActive(false);
+        dialogueActive = false;
     }
 }

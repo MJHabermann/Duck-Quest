@@ -43813,7 +43813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Key
-  quantity: 100
+  quantity: 1
   sprite: {fileID: 21300000, guid: 705496f3e9a6041d0a998d33fc0c953e, type: 3}
   itemDescription: A shiny gold key. It can be used to open doors and chests.
 --- !u!1001 &1268125037
@@ -43942,33 +43942,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2277181550901880947, guid: 1d995f1cd182b400aaf48cade9154d8c, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -193
-      objectReference: {fileID: 0}
-    - target: {fileID: 2277181550901880947, guid: 1d995f1cd182b400aaf48cade9154d8c, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 918
-      objectReference: {fileID: 0}
     - target: {fileID: 5110460055139725599, guid: 1d995f1cd182b400aaf48cade9154d8c, type: 3}
       propertyPath: m_Name
       value: PlayerHUD
-      objectReference: {fileID: 0}
-    - target: {fileID: 6232621569085847460, guid: 1d995f1cd182b400aaf48cade9154d8c, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 328
-      objectReference: {fileID: 0}
-    - target: {fileID: 6232621569085847460, guid: 1d995f1cd182b400aaf48cade9154d8c, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 917
-      objectReference: {fileID: 0}
-    - target: {fileID: 8307684949589193774, guid: 1d995f1cd182b400aaf48cade9154d8c, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 69
-      objectReference: {fileID: 0}
-    - target: {fileID: 8307684949589193774, guid: 1d995f1cd182b400aaf48cade9154d8c, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 918
       objectReference: {fileID: 0}
     - target: {fileID: 8439633003121967653, guid: 1d995f1cd182b400aaf48cade9154d8c, type: 3}
       propertyPath: m_Pivot.x
@@ -61592,6 +61568,14 @@ PrefabInstance:
     - target: {fileID: 631507107088517979, guid: 4f2fefee615fc4fae8fc4c20872ee103, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1814244929223603779, guid: 4f2fefee615fc4fae8fc4c20872ee103, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016929602588916962, guid: 4f2fefee615fc4fae8fc4c20872ee103, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5631719064836805269, guid: 4f2fefee615fc4fae8fc4c20872ee103, type: 3}
       propertyPath: m_Name

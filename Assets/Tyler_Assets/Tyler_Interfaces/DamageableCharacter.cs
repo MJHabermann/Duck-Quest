@@ -19,6 +19,7 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
 
             if (_health <= 0){
                 animator.SetBool("isAlive", false);
+                disableSimulation = true;
                 Targetable = false;
             }
         }
@@ -27,15 +28,19 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
         }
     }
 
-    public bool Targetable {get {return _targetable;}
-    set{
-        _targetable = value;
-        if(disableSimulation){
-            rb.simulated = false;
+    public bool Targetable {
+        get{
+            return _targetable;
         }
-        
-        physicsCollider.enabled = value;
-    }}
+        set{
+            _targetable = value;
+            if(disableSimulation){
+                rb.simulated = false;
+            }
+            
+            physicsCollider.enabled = value;
+        }
+    }
     public float _health = 3;
     public bool _targetable = true;
     // Start is called before the first frame update

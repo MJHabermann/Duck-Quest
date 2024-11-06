@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
     public Collider2D reachCollider;
     public AudioSource playerStep;
     public Quaternion rotation;
+    public float actionCooldown = .5f;
+    private float actionCooldownStart = 0f;
     private List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
     private Vector2 moveInput;
     private Rigidbody2D rb;
@@ -100,9 +102,7 @@ public class Player : MonoBehaviour
 
     void OnBow(){
         if(arrowCount > 0){
-            Debug.Log(rotation);
             rotation = Quaternion.Euler(playerDirection);
-            Debug.Log(rotation);
             //spawn arrow, at player location, in same direction as player
             Instantiate(arrow, transform.position, rotation);
             arrowCount--;

@@ -738,7 +738,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d487fe200114752b6ba9ecf3cac168, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryMenu: {fileID: 3351326191276518278}
+  inventoryMenu: {fileID: 3351326191276518278}
+  menuActivated: 0
   musicSlider: {fileID: 957469297745052920}
   itemSlot:
   - {fileID: 4634954300833102859}
@@ -753,6 +754,7 @@ MonoBehaviour:
   - {fileID: 2337526170187763711}
   itemSOs:
   - {fileID: 11400000, guid: a1bf126f8f5634059a262426510c44fc, type: 2}
+  isActive: 0
 --- !u!114 &9111583421497731890
 MonoBehaviour:
   m_ObjectHideFlags: 0

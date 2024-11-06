@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class Dialogue : MonoBehaviour
 {
@@ -8,69 +9,94 @@ public class Dialogue : MonoBehaviour
     public string[] lines;
     public float textSpeed;
 
-    public int index;
+    private int index;
     private Coroutine typingCoroutine;
+    private bool canAdvance = true; // Flag to allow advancing
 
-    public void Start()
+    private InputAction clickAction; // InputAction for UI click
+
+    private void Awake()
     {
-        textComponent.text = string.Empty;
-        StartDialogue();
+        // Initialize the InputAction to detect a click
+        clickAction = new InputAction(type: InputActionType.Button, binding: "<Pointer>/press");
+        clickAction.performed += OnAdvanceDialogue;
     }
 
-    public void Update()
+    private void OnEnable()
     {
-        if (Input.GetMouseButtonDown(0))
+        // Enable the action when the script is active
+        clickAction.Enable();
+    }
+
+    private void OnDisable()
+    {
+        // Disable the action when the script is not active
+        clickAction.Disable();
+    }
+
+    private void OnAdvanceDialogue(InputAction.CallbackContext context)
+    {
+        if (canAdvance)
         {
-            if (textComponent.text == lines[index])
-            {
-                NextLine();
-            }
-            else
-            {
-                // Stop coroutine if it's still running to complete the line immediately
-                if (typingCoroutine != null)
-                {
-                    StopCoroutine(typingCoroutine);
-                }
-                textComponent.text = lines[index];
-            }
+            AdvanceDialogue();
+            canAdvance = false; // Temporarily block advancement until the line is complete
+            StartCoroutine(ResetCanAdvance());
         }
+    }
+
+    private IEnumerator ResetCanAdvance()
+    {
+        yield return new WaitForSeconds(0.2f); // Short delay to prevent rapid input
+        canAdvance = true;
     }
 
     public void StartDialogue()
     {
         index = 0;
         ShowLine();
-
     }
 
-    public void ShowLine()
+    private void ShowLine()
     {
-        // Clear the text before typing to prevent duplication
         textComponent.text = string.Empty;
 
-        // Only start the coroutine once per line
         if (typingCoroutine != null)
         {
             StopCoroutine(typingCoroutine);
         }
+
         typingCoroutine = StartCoroutine(TypeLine());
     }
 
-    IEnumerator TypeLine()
+    private IEnumerator TypeLine()
     {
-        // Debug log to check if this coroutine starts multiple times
-        Debug.Log("Starting typing for line: " + lines[index]);
-
-        // Iterate over each character in the line
         foreach (char c in lines[index])
         {
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);
         }
+
+        canAdvance = true;
     }
 
-    public void NextLine()
+    private void AdvanceDialogue()
+    {
+        if (textComponent.text == lines[index])
+        {
+            NextLine();
+        }
+        else
+        {
+            if (typingCoroutine != null)
+            {
+                StopCoroutine(typingCoroutine);
+            }
+            textComponent.text = lines[index];
+            canAdvance = true;
+        }
+    }
+
+    private void NextLine()
     {
         if (index < lines.Length - 1)
         {
@@ -79,7 +105,12 @@ public class Dialogue : MonoBehaviour
         }
         else
         {
-            gameObject.SetActive(false); // Close dialogue
+            EndDialogue();
         }
+    }
+
+    private void EndDialogue()
+    {
+        gameObject.SetActive(false); // Close the dialogue UI
     }
 }

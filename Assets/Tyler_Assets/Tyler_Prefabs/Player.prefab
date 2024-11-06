@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4705989070040348311}
   - component: {fileID: 3942422045189991437}
   - component: {fileID: 8034669004459173642}
-  - component: {fileID: 2512925914612833097}
+  - component: {fileID: 678273913331332497}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -105,6 +105,7 @@ MonoBehaviour:
   reachCollider: {fileID: 3735211731236313488}
   playerStep: {fileID: 8034669004459173642}
   rotation: {x: 0, y: 0, z: 0, w: 0}
+  actionCooldown: 0.5
 --- !u!50 &1723619687128083433
 Rigidbody2D:
   serializedVersion: 4
@@ -361,7 +362,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2512925914612833097
+--- !u!114 &678273913331332497
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -374,7 +375,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementJoystick: {fileID: 0}
-  moveSpeed: 4
+  moveSpeed: 3
   collisionOffset: 0.1
   movementFilter:
     useTriggers: 0
@@ -385,7 +386,7 @@ MonoBehaviour:
     useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
-      m_Bits: 1
+      m_Bits: 0
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0

@@ -87,8 +87,7 @@ GameObject:
   - component: {fileID: 4005665898325706372}
   - component: {fileID: 2955834995265546922}
   - component: {fileID: 8876981480938429403}
-  - component: {fileID: 7595810753642915807}
-  - component: {fileID: 2793946013856776344}
+  - component: {fileID: 2019637796475475121}
   m_Layer: 5
   m_Name: Floating Joystick
   m_TagString: Untagged
@@ -113,7 +112,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 119, y: 132}
+  m_AnchoredPosition: {x: 331, y: 185}
   m_SizeDelta: {x: 960, y: 645}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &2955834995265546922
@@ -154,26 +153,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7595810753642915807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2016929602588916962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a47f546fc70ec8428172694e78e4288, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  handleRange: 1
-  deadZone: 0
-  axisOptions: 0
-  snapX: 0
-  snapY: 0
-  background: {fileID: 830223849958904921}
-  handle: {fileID: 4889331226950823634}
---- !u!114 &2793946013856776344
+--- !u!114 &2019637796475475121
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -192,6 +172,7 @@ MonoBehaviour:
   snapY: 0
   background: {fileID: 830223849958904921}
   handle: {fileID: 4889331226950823634}
+  input: {x: 0, y: 0}
 --- !u!1 &5631719064836805269
 GameObject:
   m_ObjectHideFlags: 0

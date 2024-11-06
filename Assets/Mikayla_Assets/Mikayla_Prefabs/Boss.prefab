@@ -80,6 +80,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   speed: 0
   projectilePrefab: {fileID: 8522138926694928871, guid: 099831c921ff04f40be263e17bb36237, type: 3}
+  chaseRadius: 10
   firePoint: {fileID: 0}
   bossAttackCooldown: 1.5
   chaseSpeed: 4

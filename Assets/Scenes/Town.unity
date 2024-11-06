@@ -42803,6 +42803,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue: {fileID: 1414457531}
+  dialogueActive: 0
 --- !u!61 &402649962
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -61496,9 +61497,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7675238543310422642, guid: 95f1f62f0026b44b490316a348d0e4d5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8149931039925962362, guid: 95f1f62f0026b44b490316a348d0e4d5, type: 3}
+      propertyPath: lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9013529804005169710, guid: 95f1f62f0026b44b490316a348d0e4d5, type: 3}
       propertyPath: m_Name
       value: Dialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 9013529804005169710, guid: 95f1f62f0026b44b490316a348d0e4d5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -61697,6 +61710,6 @@ SceneRoots:
   - {fileID: 1343566389}
   - {fileID: 1845431530}
   - {fileID: 1644554895}
+  - {fileID: 402649960}
   - {fileID: 578899325}
   - {fileID: 218288216554352225}
-  - {fileID: 402649960}

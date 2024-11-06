@@ -8,16 +8,16 @@ public class Dialogue : MonoBehaviour
     public string[] lines;
     public float textSpeed;
 
-    private int index;
+    public int index;
     private Coroutine typingCoroutine;
 
-    void Start()
+    public void Start()
     {
         textComponent.text = string.Empty;
         StartDialogue();
     }
 
-    void Update()
+    public void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -44,7 +44,7 @@ public class Dialogue : MonoBehaviour
 
     }
 
-    void ShowLine()
+    public void ShowLine()
     {
         // Clear the text before typing to prevent duplication
         textComponent.text = string.Empty;
@@ -70,7 +70,7 @@ public class Dialogue : MonoBehaviour
         }
     }
 
-    void NextLine()
+    public void NextLine()
     {
         if (index < lines.Length - 1)
         {

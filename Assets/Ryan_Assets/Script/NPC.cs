@@ -11,13 +11,13 @@ public class NPC : MonoBehaviour
     public bool dialogueActive;
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
-        dialogue.gameObject.SetActive(false);
+        //dialogue.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         if (playerInRange && !hasStartedDialogue)
         {
@@ -26,7 +26,7 @@ public class NPC : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    public void OnTriggerEnter2D(Collider2D other)
     {
 
         if (other.gameObject.CompareTag("Player"))
@@ -36,7 +36,7 @@ public class NPC : MonoBehaviour
         }
     }
 
-    void OnTriggerExit2D(Collider2D other)
+    public void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
@@ -47,7 +47,7 @@ public class NPC : MonoBehaviour
         }
     }
 
-    void StartDialogue()
+    public void StartDialogue()
     {
         dialogue.gameObject.SetActive(true);
         dialogueActive = true;

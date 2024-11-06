@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using NUnit.Framework;
 public class InventoryTest
 {
-    private bool sceneLoaded = false;
+     private bool sceneLoaded = false;
     private const float loadTimeout = 5f; // Timeout for scene loading
 
     private InventoryManager inventoryComponent;
@@ -31,7 +31,7 @@ public class InventoryTest
         }
     }
 
-    [UnitySetUp]
+    [OneTimeSetUp]
     public IEnumerator SetUp()
     {
         float timer = 0f;
@@ -55,7 +55,7 @@ public class InventoryTest
 
         // Wait one additional frame to ensure everything is set up correctly
         yield return null;
-            Debug.Log("Tests starting");
+            Debug.Log("Starting AddInventoryItems stress test...");
 
         // Wait a frame to make sure the setup is complete
         yield return null;
@@ -65,7 +65,7 @@ public class InventoryTest
         Assert.IsNotNull(inventoryObject, "Inventory GameObject not found in the scene.");
 
         // Get the InventoryManager component
-        inventoryComponent = inventoryObject.GetComponent<InventoryManager>();
+        var inventoryComponent = inventoryObject.GetComponent<InventoryManager>();
         Assert.IsNotNull(inventoryComponent, "InventoryManager component not found on the Inventory GameObject.");
     }
 
@@ -411,6 +411,7 @@ public class InventoryTest
 
     // Similarly, you'll need to implement RemoveItem and possibly other methods in your InventoryManager and ItemSlot classes.
 }
+
 
 
 

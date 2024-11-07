@@ -358,6 +358,7 @@ MonoBehaviour:
   bomb: {fileID: 282796838400133636, guid: ab73ba7f6e864124e9456c311e799106, type: 3}
   arrow: {fileID: 2507203957755380854, guid: 972789a4723bacd4da34494386cdeb87, type: 3}
   hook: {fileID: 1442773341557066484, guid: 475b33d7ba980544eb3a6bf9a7b273bb, type: 3}
+  magic: {fileID: 5693183286396863492, guid: f97a335199c5906409b1e1cee88aa076, type: 3}
   reachCollider: {fileID: 3735211731236313488}
   playerStep: {fileID: 8034669004459173642}
   rotation: {x: 0, y: 0, z: 0, w: 0}

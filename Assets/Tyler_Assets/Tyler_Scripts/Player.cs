@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     public GameObject bomb;
     public GameObject arrow;
     public GameObject hook;
+    public GameObject magic;
     public Collider2D reachCollider;
     public AudioSource playerStep;
     public Quaternion rotation;
@@ -214,7 +215,7 @@ public class Player : MonoBehaviour
         rotation = Quaternion.Euler(playerDirection);
 
         //spawn arrow, at player location, in same direction as player
-        Instantiate(arrow, transform.position, rotation);
+        Instantiate(magic, transform.position, rotation);
     }
 
     void HookReturn(){

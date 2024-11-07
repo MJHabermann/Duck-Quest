@@ -9,8 +9,7 @@ public class RangedAttackDecorator : EnemyDecorator
     public float projectileSpeed = 10f;  // Speed of the projectile
     public float projectileDamage = 1f;  // Damage dealt by the projectile
     public float cooldownTime = 5f;      // Cooldown time between ranged attacks
-    private float lastAttackTime;
-    public Transform target;             // Target of the ranged attack
+    private float lastAttackTime;    
 
     private Rigidbody2D bossRb;
 

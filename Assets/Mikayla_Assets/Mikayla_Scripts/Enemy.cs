@@ -6,6 +6,10 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private float health;       // Use private access with SerializeField to keep it visible in the Inspector
     [SerializeField] private string enemyName;
+     [SerializeField] private float damage;
+    protected Rigidbody2D playerRb;
+    public float knockbackForce = 5f;   
+     public Transform target;
 
     private bool isFacingRight = false;          // Keep track of current facing direction
 
@@ -36,6 +40,12 @@ public class Enemy : MonoBehaviour
     public float Speed
     {
         get { return speed; }
+        set { speed = Mathf.Max(0, value); }   // Ensure speed is non-negative
+    }
+
+        public float Damage
+    {
+        get { return damage; }
         set { speed = Mathf.Max(0, value); }   // Ensure speed is non-negative
     }
 
@@ -84,10 +94,33 @@ public class Enemy : MonoBehaviour
             transform.localScale = localScale;
         }
     }
-
-    public virtual void Attack()
+    void ApplyKnockback()
     {
-        animator.SetBool("IsAttacking", true);
+        // Calculate the direction from the enemy to the player
+        Vector2 knockbackDirection = (target.position - transform.position).normalized;
+        // Apply force to the player's Rigidbody2D in the opposite direction
+        playerRb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
+
+    }
+
+    //public void Attack()
+    public virtual void Attack()
+        {
+        // Check if the player implements IDamageable
+        IDamageable damageableObject = target.GetComponent<IDamageable>();
+
+        if (damageableObject != null)
+        {
+            animator.SetBool("IsAttacking", true);
+            // Inflict damage
+            damageableObject.OnHit(Damage);
+            Debug.Log("Enemy attacked the player!");
+            ApplyKnockback();
+        }
+        else
+        {
+            Debug.LogWarning("Player does not implement IDamageable!");
+        }
     }
 
     public virtual void MoveTowards(Vector2 target, float speed)

@@ -6,8 +6,7 @@ public class Goblin : Enemy
 {
     public Transform[] waypoints;  // Points the Goblin will patrol betweens
     public float detectionRange = 5f; // How close the player needs to be for the Goblin to detect them
-    public Transform target; // Reference to the player
-    public float chaseSpeed = 3.5f; // Speed when chasing the player
+    public float chaseSpeed = 2f; // Speed when chasing the player
     public float attackRange = 1f;
     public float attackCooldown = 2f; 
     private float lastAttackTime;
@@ -15,9 +14,6 @@ public class Goblin : Enemy
     private int currentWaypointIndex = 0;
     private bool isChasing = false;
     private Vector2 targetPosition;
-    public float attackDamage = 1f;
-    private Rigidbody2D playerRb;
-    public float knockbackForce = 5f;    // Force applied to the player during knockback
     public float knockbackDuration = 0.2f; 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +22,7 @@ public class Goblin : Enemy
         Health = 5f;               // Set goblin's health
         EnemyName = "Goblin";        // Set the name of the enemy
         Speed = 1.5f;                 // Set goblin's movement speed
+        Damage = 1f;
 
         target = GameObject.FindWithTag("Player").transform;
         playerRb = target.GetComponent<Rigidbody2D>(); 
@@ -98,33 +95,6 @@ public class Goblin : Enemy
             lastAttackTime = Time.time;  // Reset the attack cooldown
             Attack();
         }
-    }
-
-    public override void Attack()
-    {
-        // Check if the player implements IDamageable
-        IDamageable damageableObject = target.GetComponent<IDamageable>();
-
-        if (damageableObject != null)
-        {
-            animator.SetBool("IsAttacking", true);
-            // Inflict damage
-            damageableObject.OnHit(attackDamage);
-            Debug.Log("Enemy attacked the player!");
-            ApplyKnockback();
-        }
-        else
-        {
-            Debug.LogWarning("Player does not implement IDamageable!");
-        }
-    }
-    void ApplyKnockback()
-    {
-        // Calculate the direction from the enemy to the player
-        Vector2 knockbackDirection = (target.position - transform.position).normalized;
-        // Apply force to the player's Rigidbody2D in the opposite direction
-        playerRb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
-
     }
 }
 

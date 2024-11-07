@@ -10,10 +10,9 @@ public class Boss : Enemy
     public float bossAttackCooldown = 5f;
     public float chaseSpeed = 4f;
     public float bossAttackRange = 9f;
-    public Transform target;
-    private Rigidbody2D playerRb;
     bool facingRight = true;
     private RangedAttackDecorator rangedAttack; // Reference to the decorator
+    private Boss boss;
 
     void Start()
     {
@@ -21,6 +20,7 @@ public class Boss : Enemy
         Health = 20f;               // Set goblin's health
         EnemyName = "Boss";        // Set the name of the enemy
         Speed = 2f;                 // Set goblin's movement speed
+        Damage = 1.5f;
 
         rb = GetComponent<Rigidbody2D>();
         target = GameObject.FindWithTag("Player").transform;

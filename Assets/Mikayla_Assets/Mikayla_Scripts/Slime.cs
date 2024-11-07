@@ -5,13 +5,9 @@ using UnityEngine;
 
 public class Slime : Enemy
 {
-    public Transform target;
     public float chaseRadius;
     public float attackRadius;
     public Transform homePosition;
-    public float attackDamage = 1f;
-    private Rigidbody2D playerRb;
-    public float knockbackForce = 5f;   
     public float attackCooldown = 2f; 
     private float lastAttackTime;
 
@@ -21,6 +17,7 @@ public class Slime : Enemy
         Health = 3f;               // Set slime's health
         EnemyName = "Slime";        // Set the name of the enemy
         Speed = 1.5f;                 // Set slime's movement speed
+        Damage = 1f;
 
         animator.SetFloat("Speed", 0);
         rb = GetComponent<Rigidbody2D>();
@@ -78,7 +75,7 @@ public class Slime : Enemy
         {
             animator.SetBool("IsAttacking", true);
             // Inflict damage
-            damageableObject.OnHit(attackDamage);
+            damageableObject.OnHit(Damage);
             Debug.Log("Enemy attacked the player!");
             ApplyKnockback();
         }

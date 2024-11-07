@@ -74,7 +74,7 @@ public class Hook : MonoBehaviour
     // this function changes the direction of travel for the hook
     // and updates the halfway time
     void ReturnToSender(){
-        Debug.Log("Changing direction");
+        // Debug.Log("Changing direction");
         moveSpeed = moveSpeed * -1;
         halfwayTime = timeSinceSpawned;
     }

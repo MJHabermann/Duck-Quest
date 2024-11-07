@@ -219,7 +219,7 @@ public class Player : MonoBehaviour
     }
 
     void HookReturn(){
-        Debug.Log("Hook returned");
+        // Debug.Log("Hook returned");
         isOccupied = false;
     }
 

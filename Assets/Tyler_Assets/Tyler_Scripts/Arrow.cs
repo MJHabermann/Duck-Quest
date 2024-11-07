@@ -26,7 +26,7 @@ public class Arrow : MonoBehaviour
         //check what arrow collides with
         string tag = collider.gameObject.tag;
         if(tag == "Enemy"){
-            gameObject.BroadcastMessage("ArrowHit");
+            // gameObject.BroadcastMessage("ArrowHit");
             Enemy enemy = collider.gameObject.GetComponent<Enemy>();
             Vector3 parentPosition = gameObject.GetComponentInParent<Transform>().position;
             Vector3 direction = (Vector2) (parentPosition - collider.gameObject.transform.position).normalized;
@@ -34,7 +34,7 @@ public class Arrow : MonoBehaviour
             enemy.TakeDamage(arrowDamage);
             Destroy(gameObject);
         }else if(tag != null && tag != "Player" && tag != "Sword" && tag != "PlayerItem"){
-            gameObject.BroadcastMessage("ArrowHit");
+            // gameObject.BroadcastMessage("ArrowHit");
             Destroy(gameObject);
         }
     }

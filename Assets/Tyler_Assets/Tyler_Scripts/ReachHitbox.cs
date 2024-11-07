@@ -75,7 +75,7 @@ public class ReachHitbox : MonoBehaviour
         Debug.Log("Reach hit");
     }
 
-    void swordAttack(bool attack){
+    public void swordAttack(bool attack){
         if(attack){
             triggerCode = "Attack";
             animator.SetTrigger("swordAttack");

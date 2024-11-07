@@ -43,4 +43,18 @@ public class BoundaryTestScripts
         Assert.IsNotNull(collisionObject);
         yield return null;
     }
+    [UnityTest]
+    public IEnumerator LoadScenesWithDelay()
+    {
+        int sceneCount = SceneManager.sceneCountInBuildSettings;
+        for (int i = 0; i < sceneCount; i++)
+        {
+            string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
+            string sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
+            SceneManager.LoadScene(sceneName);
+            yield return null;
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
 }

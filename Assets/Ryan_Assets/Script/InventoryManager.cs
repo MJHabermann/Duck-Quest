@@ -1,73 +1,66 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Audio;
-using UnityEditor.Build;
-using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class InventoryManager : MonoBehaviour
 {
-    public GameObject InventoryMenu;
-    public bool menuActivated; 
+    public GameObject inventoryMenu;
+    public bool menuActivated;
     [SerializeField] private Slider musicSlider;
 
     public ItemSlot[] itemSlot;
-
     public ItemSO[] itemSOs;
 
     private int totalItemCount;
-    
-    public bool isActive;
-    // Start is called before the first frame update
-    void Start()
+    private bool isActive;
+
+    private InputAction toggleInventoryAction; // Standalone action for Escape key
+
+    private void Awake()
     {
-        
+        // Initialize the Escape key input action
+        toggleInventoryAction = new InputAction(type: InputActionType.Button, binding: "<Keyboard>/escape");
+        toggleInventoryAction.performed += ToggleInventory;
+    }
+
+    private void OnEnable()
+    {
+        // Enable the action when the script is active
+        toggleInventoryAction.Enable();
+    }
+
+    private void OnDisable()
+    {
+        // Disable the action when the script is not active
+        toggleInventoryAction.Disable();
+    }
+
+    private void ToggleInventory(InputAction.CallbackContext context)
+    {
+        // Toggle the inventory menu
+        menuActivated = !menuActivated;
+        inventoryMenu.SetActive(menuActivated);
+        Time.timeScale = menuActivated ? 0 : 1; // Pause/unpause the game
+        Debug.Log(menuActivated ? "Inventory opened" : "Inventory closed");
     }
 
     public void changeVolume()
     {
         AudioListener.volume = musicSlider.value;
-
     }
 
-
-    // Update is called once per frame
-    void Update()
-    {
-        //unpaused
-        if (Input.GetButtonDown("Inventory") && menuActivated)
-        {
-            Time.timeScale = 1;
-            InventoryMenu.SetActive(false);
-            menuActivated = false;
-            Debug.Log("Game is resumed");
-            //EnableScripts();
-        }
-        //paused
-        else if(Input.GetButtonDown("Inventory") && !menuActivated)
-        {
-            //DisableScripts();
-            Time.timeScale = 0;
-            InventoryMenu.SetActive(true);
-            menuActivated = true;
-            Debug.Log("Game is paused");
-        }
-    }
-  
     public bool UseItem(string itemName)
     {
-        for(int i = 0; i < itemSOs.Length; i++)
+        for (int i = 0; i < itemSOs.Length; i++)
         {
-            if(itemSOs[i].itemName == itemName)
+            if (itemSOs[i].itemName == itemName)
             {
-                bool usable = itemSOs[i].UseItem();
-                return usable;
+                return itemSOs[i].UseItem();
             }
         }
         return false;
-
     }
+
     public int AddItem(string itemName, int quantity, Sprite itemSprite, string itemDescription)
     {
         Debug.Log("Trying to add item: " + itemName + ", quantity: " + quantity);
@@ -77,32 +70,29 @@ public class InventoryManager : MonoBehaviour
             if (!itemSlot[i].isFull && itemSlot[i].itemName == itemName || itemSlot[i].quantity == 0)
             {
                 int leftOverItems = itemSlot[i].AddItem(itemName, quantity, itemSprite, itemDescription);
-                int itemsAdded = quantity - leftOverItems; // Calculate how many items were successfully added
-                UpdateItemCount(itemsAdded); // Update the total item count
-                Debug.Log("Item added to slot " + i);
+                int itemsAdded = quantity - leftOverItems;
+                UpdateItemCount(itemsAdded);
 
                 if (leftOverItems > 0)
                 {
-                    leftOverItems = AddItem(itemName, leftOverItems, itemSprite, itemDescription); 
+                    leftOverItems = AddItem(itemName, leftOverItems, itemSprite, itemDescription);
                 }
                 return leftOverItems;
-                
             }
         }
         return quantity;
-
     }
 
     public void DeselectAllSlots()
     {
-        for(int i = 0; i < itemSlot.Length; i++)
+        foreach (var slot in itemSlot)
         {
-            itemSlot[i].selectedShader.SetActive(false);
-            itemSlot[i].thisItemSelected = false;
+            slot.selectedShader.SetActive(false);
+            slot.thisItemSelected = false;
         }
     }
 
-     private void UpdateItemCount(int change)
+    private void UpdateItemCount(int change)
     {
         totalItemCount += change;
         Debug.Log("Total item count is now: " + totalItemCount);
@@ -110,10 +100,7 @@ public class InventoryManager : MonoBehaviour
 
     public int GetItemCount()
     {
-        Debug.Log("total item count" + totalItemCount);
+        Debug.Log("Total item count: " + totalItemCount);
         return totalItemCount;
-        
     }
-
-
 }

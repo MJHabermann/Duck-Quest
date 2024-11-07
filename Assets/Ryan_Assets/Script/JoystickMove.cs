@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class JoystickMove : MonoBehaviour
 {
+
+    public GameObject joystick;
     public Joystick movementJoystick;
     public float moveSpeed = 4f;
     private Rigidbody2D rb;
@@ -29,6 +32,7 @@ public class JoystickMove : MonoBehaviour
         animator = GetComponent<Animator>();
         reachCollider = reach.GetComponent<Collider2D>();
         playerDirection = new Vector3(0, 0, 0);
+        joystick.SetActive(true);
     }
     // Update is called once per frame
     private void FixedUpdate()

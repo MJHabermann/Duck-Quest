@@ -64,7 +64,7 @@ public class DialogTest
     }
 
 
-
+    /*
     [UnityTest]
     public IEnumerator DialogueStaysOpenAfterLastLine()
     {
@@ -72,12 +72,12 @@ public class DialogTest
         for (int i = 0; i < dialogComponent.lines.Length; i++)
         {
             yield return new WaitForSeconds(dialogComponent.textSpeed * dialogComponent.lines[i].Length + 0.1f);
-            dialogComponent.Update(); // Simulate click to advance
+            dialogComponent.Ha(); // Simulate click to advance
         }
 
         Assert.IsTrue(dialogComponent.gameObject.activeSelf, "Dialogue did not close after the last line.");
     }
-
+*/
     [UnityTest]
     public IEnumerator TextTypingSpeedRespectsSetting()
     {

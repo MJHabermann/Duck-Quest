@@ -1,10 +1,11 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerHUD : MonoBehaviour
 {
-    public Text moneyText;  // Assign in Inspector
+    public TMP_Text moneyText;  // Assign in Inspector
     public Image[] heartImages;  // Assign in Inspector
 
     private int playerMoney;

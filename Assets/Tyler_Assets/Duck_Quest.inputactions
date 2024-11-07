@@ -1,5 +1,5 @@
 {
-    "name": "Duck Quest",
+    "name": "Duck_Quest",
     "maps": [
         {
             "name": "Player",
@@ -72,6 +72,15 @@
                     "name": "Bow",
                     "type": "Button",
                     "id": "0863972e-6ba8-4f4f-b1e8-6b21118bcbb1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Hook",
+                    "type": "Button",
+                    "id": "feabeb00-376c-4e4d-aa31-413d58cc9fe4",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -353,6 +362,17 @@
                     "action": "Bow",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7b1a28c4-9d0b-44f2-8f18-7c56c187ad62",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Hook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -446,6 +466,15 @@
                     "type": "PassThrough",
                     "id": "799c15b8-80d8-459f-8cb5-ac198688bebc",
                     "expectedControlType": "Quaternion",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Inventory",
+                    "type": "Button",
+                    "id": "f4f86efd-4e21-466b-b71f-609be1bb6bb6",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -867,6 +896,17 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "TrackedDeviceOrientation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "400521bd-ac9f-44cf-93bd-c578195479e7",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Inventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

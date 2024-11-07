@@ -11,9 +11,8 @@ public class ReachHitbox : MonoBehaviour
     public Vector3 faceRight = new Vector3(.25f, -.15f, 0);
     public Vector3 faceDown = new Vector3(0, -0.45f, 0);
     public Vector3 faceLeft = new Vector3(-.25f, -.15f, 0);
-    private Animator animator;
-
     public AudioSource swordSound;
+    private Animator animator;
     private string triggerCode;
 
 
@@ -29,23 +28,30 @@ public class ReachHitbox : MonoBehaviour
     //check for physics rigidbody and send hit damage to that GameObject
     void OnTriggerEnter2D(Collider2D collider){
         if(triggerCode == "Attack"){
-            Enemy enemy = collider.gameObject.GetComponent<Enemy>();
-            // IDamageable damageableObject = (IDamageable) collider.GetComponent<IDamageable>();
-            //if(damageableObject != null){
-            if(enemy != null){
-                Vector3 parentPosition = gameObject.GetComponentInParent<Transform>().position;
-                Vector2 direction = (Vector2) (parentPosition - collider.gameObject.transform.position).normalized;
-                Vector2 knockback = direction * swordKnockback;
-                // collider.SendMessage("OnHit", swordDamage);
-                //damageableObject.OnHit(swordDamage, knockback);
-                enemy.TakeDamage(swordDamage);
-            }else{
-                Debug.Log("Collider does not implement IDamageable");
+            string tag = collider.gameObject.tag;
+            if(tag == "Enemy"){
+                Enemy enemy = collider.gameObject.GetComponent<Enemy>();
+                if(enemy != null){
+                    Vector3 parentPosition = gameObject.GetComponentInParent<Transform>().position;
+                    Vector2 direction = (Vector2) (parentPosition - collider.gameObject.transform.position).normalized;
+                    Vector2 knockback = direction * swordKnockback;
+                    // collider.SendMessage("OnHit", swordDamage);
+                    enemy.TakeDamage(swordDamage);
+                }
             }
+
         }else if (triggerCode == "Interact"){
-            Chest chest = collider.gameObject.GetComponent<Chest>();
-            if(chest != null){
-                chest.Open();
+            string tag = collider.gameObject.tag;
+            if(tag == "Chest"){
+                Debug.Log("Attempted to open");
+                Chest chest = collider.gameObject.GetComponent<Chest>();
+                if(chest != null){
+                    chest.Open();
+                }
+            }else if(tag == "Talkable"){
+                Debug.Log("Attempted to talk with");
+            }else if(tag == "Interactive"){
+                Debug.Log("Attempted to interact with");
             }
         }
         
@@ -69,7 +75,7 @@ public class ReachHitbox : MonoBehaviour
         Debug.Log("Reach hit");
     }
 
-    void swordAttack(bool attack){
+    public void swordAttack(bool attack){
         if(attack){
             triggerCode = "Attack";
             animator.SetTrigger("swordAttack");

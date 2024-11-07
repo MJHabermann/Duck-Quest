@@ -10,14 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 8861219098749721023}
   - component: {fileID: 3733519083659684662}
-  - component: {fileID: 7465466103887964979}
   - component: {fileID: 1723619687128083433}
   - component: {fileID: 1820900150407539874}
   - component: {fileID: 5181602041342077037}
   - component: {fileID: 4705989070040348311}
   - component: {fileID: 3942422045189991437}
   - component: {fileID: 8034669004459173642}
-  - component: {fileID: 2512925914612833097}
+  - component: {fileID: 8202051964002852030}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -71,40 +70,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &7465466103887964979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6140373099134245732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd41d0dbeb0c9fd44829b2560943aff1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collisionOffset: 0.1
-  movementFilter:
-    useTriggers: 0
-    useLayerMask: 0
-    useDepth: 0
-    useOutsideDepth: 0
-    useNormalAngle: 0
-    useOutsideNormalAngle: 0
-    layerMask:
-      serializedVersion: 2
-      m_Bits: 1
-    minDepth: 0
-    maxDepth: 0
-    minNormalAngle: 0
-    maxNormalAngle: 0
-  moveSpeed: 4
-  reach: {fileID: 6830956040653288963}
-  bomb: {fileID: 282796838400133636, guid: ab73ba7f6e864124e9456c311e799106, type: 3}
-  arrow: {fileID: 2507203957755380854, guid: 972789a4723bacd4da34494386cdeb87, type: 3}
-  reachCollider: {fileID: 3735211731236313488}
-  playerStep: {fileID: 8034669004459173642}
-  rotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!50 &1723619687128083433
 Rigidbody2D:
   serializedVersion: 4
@@ -279,7 +244,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -361,7 +326,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2512925914612833097
+--- !u!114 &8202051964002852030
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -370,11 +335,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6140373099134245732}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31075d50098394db8838bd77e9c01b24, type: 3}
+  m_Script: {fileID: 11500000, guid: fd41d0dbeb0c9fd44829b2560943aff1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementJoystick: {fileID: 0}
-  moveSpeed: 4
   collisionOffset: 0.1
   movementFilter:
     useTriggers: 0
@@ -385,13 +348,19 @@ MonoBehaviour:
     useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
-      m_Bits: 1
+      m_Bits: 0
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
+  moveSpeed: 4
   reach: {fileID: 6830956040653288963}
+  bomb: {fileID: 282796838400133636, guid: ab73ba7f6e864124e9456c311e799106, type: 3}
+  arrow: {fileID: 2507203957755380854, guid: 972789a4723bacd4da34494386cdeb87, type: 3}
+  hook: {fileID: 1442773341557066484, guid: 475b33d7ba980544eb3a6bf9a7b273bb, type: 3}
+  magic: {fileID: 5693183286396863492, guid: f97a335199c5906409b1e1cee88aa076, type: 3}
   reachCollider: {fileID: 3735211731236313488}
+  playerStep: {fileID: 8034669004459173642}
   rotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &6830956040653288963
 GameObject:

@@ -21,6 +21,7 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
                 animator.SetBool("isAlive", false);
                 disableSimulation = true;
                 Targetable = false;
+                gameObject.BroadcastMessage("Dead");
             }
         }
         get{

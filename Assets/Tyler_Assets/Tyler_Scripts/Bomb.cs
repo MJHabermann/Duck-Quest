@@ -8,9 +8,11 @@ public class Bomb : MonoBehaviour
     public float knockbackForce = 1000f;
     public float timeToLive = 7f;
     public float timeBeforeDetonation = 5f;
+    public AudioSource bombSound;
     private float timeSinceSpawned = 0f;
     private Rigidbody2D rb;
     private Animator animator;
+    private bool playedSound = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +28,13 @@ public class Bomb : MonoBehaviour
         timeSinceSpawned += Time.deltaTime;
         if(timeSinceSpawned > timeBeforeDetonation){
             rb.simulated = true;
+            if(!playedSound){
+                playSound();
+            }
             animator.SetTrigger("Explosion");
+        }
+        if(timeSinceSpawned > timeBeforeDetonation + 1){
+            rb.simulated = false;
         }
         if(timeSinceSpawned > timeToLive){
             Destroy(gameObject);
@@ -48,5 +56,10 @@ public class Bomb : MonoBehaviour
                 player.OnHit(bombDamage, transform.right * knockbackForce);
             }
         }
+    }
+    
+    void playSound(){
+        bombSound.Play();
+        playedSound = true;
     }
 }

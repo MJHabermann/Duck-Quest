@@ -18,5 +18,9 @@ public class SwordMagic : Sword
 
     override public void Attack(){
         Debug.Log("Magic Sword");
+        if(GameObject.Find("Player") != null){
+            GameObject gameObject = GameObject.Find("Player");
+            gameObject.BroadcastMessage("MagicSword");
+        }
     }
 }

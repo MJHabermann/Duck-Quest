@@ -44142,6 +44142,10 @@ PrefabInstance:
       propertyPath: movementJoystick
       value: 
       objectReference: {fileID: 2982192305295662149}
+    - target: {fileID: 678273913331332497, guid: 54e5ff90eabc51f48ac70159e4df61e8, type: 3}
+      propertyPath: joystickGameObject
+      value: 
+      objectReference: {fileID: 1906602106136421263}
     - target: {fileID: 6140373099134245732, guid: 54e5ff90eabc51f48ac70159e4df61e8, type: 3}
       propertyPath: m_Name
       value: Player
@@ -61578,6 +61582,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f2fefee615fc4fae8fc4c20872ee103, type: 3}
+--- !u!1 &1906602106136421263 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5631719064836805269, guid: 4f2fefee615fc4fae8fc4c20872ee103, type: 3}
+  m_PrefabInstance: {fileID: 1906602106136421262}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2982192305295662149 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2019637796475475121, guid: 4f2fefee615fc4fae8fc4c20872ee103, type: 3}

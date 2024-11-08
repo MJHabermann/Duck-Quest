@@ -4,21 +4,21 @@ public class NPCEngageState : INPCState
     public void EnterState(NPC npc)
     {
         npc.StartDialogue();
-        Debug.Log("NPC is engaging in dialogue.");
+        Debug.Log("NPC is engaging in dialogue."); //when engage state is activated start the dialogue
     }
 
     public void UpdateState(NPC npc)
     {
-        // Any ongoing behavior while engaging
+        //do nothing
     }
 
     public void OnPlayerEnter(NPC npc)
     {
-        // Already engaging, so no action needed
+       //do nothing
     }
 
     public void OnPlayerExit(NPC npc)
     {
-        npc.TransitionToState(new NPCExitState());
+        npc.TransitionToState(new NPCExitState()); // when player exits transistion to new state
     }
 }

@@ -343,6 +343,17 @@
                 },
                 {
                     "name": "",
+                    "id": "a1add479-7c49-4902-964c-6df7c0fa8808",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Touch",
+                    "action": "Bomb",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "b27f21f0-9d88-4a0e-9a84-260744333e5c",
                     "path": "<Keyboard>/space",
                     "interactions": "",

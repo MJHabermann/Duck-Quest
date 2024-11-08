@@ -260,9 +260,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 235473418}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 208482ec75b304647b870089f277d320, type: 3}
+  m_Script: {fileID: 11500000, guid: 8dde27498ddd04fe399ccf71ec76708d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  click: {fileID: 235473419}
 --- !u!1001 &277143890
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -274,6 +275,10 @@ PrefabInstance:
     - target: {fileID: 4461934200579838332, guid: bfcb45c0c590ac64bafc85f0794944cc, type: 3}
       propertyPath: m_Name
       value: SceneManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4461934200579838332, guid: bfcb45c0c590ac64bafc85f0794944cc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5738431850807633808, guid: bfcb45c0c590ac64bafc85f0794944cc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1275,9 +1280,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 981711416}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 208482ec75b304647b870089f277d320, type: 3}
+  m_Script: {fileID: 11500000, guid: 46794450ca07f4e01a9dd3636a4b4af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  whoosh: {fileID: 981711417}
 --- !u!1 &1137146328
 GameObject:
   m_ObjectHideFlags: 0

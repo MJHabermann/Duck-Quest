@@ -132,6 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 235473420}
   - component: {fileID: 235473419}
+  - component: {fileID: 235473421}
   m_Layer: 0
   m_Name: Audio Source Button
   m_TagString: Untagged
@@ -250,6 +251,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &235473421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235473418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 208482ec75b304647b870089f277d320, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &277143890
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -851,8 +864,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5725fdea914244eca8706c6bd13a684d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  click: {fileID: 235473419}
-  whoosh: {fileID: 981711417}
+  whooshSoundEffect: {fileID: 981711419}
+  clickSoundEffect: {fileID: 235473421}
 --- !u!1 &780758559
 GameObject:
   m_ObjectHideFlags: 0
@@ -1134,6 +1147,7 @@ GameObject:
   m_Component:
   - component: {fileID: 981711418}
   - component: {fileID: 981711417}
+  - component: {fileID: 981711419}
   m_Layer: 0
   m_Name: Scene Change SFX
   m_TagString: Untagged
@@ -1252,6 +1266,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &981711419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981711416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 208482ec75b304647b870089f277d320, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1137146328
 GameObject:
   m_ObjectHideFlags: 0
@@ -1768,8 +1794,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5725fdea914244eca8706c6bd13a684d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  click: {fileID: 235473419}
-  whoosh: {fileID: 235473419}
+  whooshSoundEffect: {fileID: 0}
+  clickSoundEffect: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

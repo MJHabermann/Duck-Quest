@@ -6,6 +6,7 @@ public class WhooshSound : SoundEffect
 {
     public AudioSource whoosh;
 
+    //public void Play()
     public override void Play()
     {
         if(whoosh != null)

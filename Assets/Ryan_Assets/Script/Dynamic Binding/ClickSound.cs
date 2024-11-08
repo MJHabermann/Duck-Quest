@@ -6,6 +6,7 @@ public class ClickSound : SoundEffect
 {
     public AudioSource click;
 
+    //public void Play()
     public override void Play()
     {
         if(click != null)

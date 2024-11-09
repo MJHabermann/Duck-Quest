@@ -8,7 +8,6 @@ public class NormalDoor : Door
     public Transform[] enemySpawnPoints;
     public GameObject rewardPrefab;
     public Transform rewardSpawnPoint;
-    public bool dropRewardOnClear;
     private bool inRoom = false;
     private static List<GameObject> spawnedEnemies = new List<GameObject>();
     private static bool isRoomCleared = false;
@@ -59,12 +58,11 @@ public class NormalDoor : Door
         {
             //UpdateDoorSprite();
             //dropRewardOnClear = true;
-            if (dropRewardOnClear && rewardPrefab != null && rewardSpawnPoint != null)
+            if (rewardPrefab != null && rewardSpawnPoint != null)
             {
                 Debug.Log("dropping reward");
                 Instantiate(rewardPrefab, rewardSpawnPoint.position, Quaternion.identity);
             }
-            dropRewardOnClear = false;
             isRoomCleared = true;
             isOpened = true;
         }

@@ -6,7 +6,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private GameObject projectilePrefab; // Reference to the projectile prefab
     public float speed = 3f;
     public float damage = 1f;
-    public float lifetime = 2f;
+    public float lifetime = 5f;
 
     private Rigidbody2D rb;
     private Collider2D col;
@@ -35,6 +35,12 @@ public class Projectile : MonoBehaviour
         yield return null;
         yield return null;
         yield return null;
+        yield return null;
+        yield return null;
+        yield return null;
+        yield return null;
+        yield return null;
+        yield return null;
 
         // Disable the trigger mode after one frame
         if (col != null)
@@ -58,10 +64,10 @@ public class Projectile : MonoBehaviour
             }
             Destroy(gameObject); // Destroy the projectile after hitting the player
         }
-        else
-        {
-            Destroy(gameObject); // Destroy if it hits something else
-        }
+        // else
+        // {
+        //     Destroy(gameObject); // Destroy if it hits something else
+        // }
     }
 
     // Method to spawn the projectile

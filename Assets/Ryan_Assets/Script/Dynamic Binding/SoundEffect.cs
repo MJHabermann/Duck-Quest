@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SoundEffect : MonoBehaviour
 {
+    //public void Play()
     public virtual void Play() // Dynamically bound method
     {
         Debug.Log("Playing sound effect.");

@@ -151,14 +151,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   enemyName: Slime
+  damage: 0
+  knockbackForce: 5
+  target: {fileID: 8861219098749721023, guid: 54e5ff90eabc51f48ac70159e4df61e8, type: 3}
   animator: {fileID: 0}
   speed: 1.5
-  target: {fileID: 0}
   chaseRadius: 4
   attackRadius: 1
   homePosition: {fileID: 0}
-  attackDamage: 1
-  knockbackForce: 5
   attackCooldown: 2
 --- !u!58 &1221766951944297554
 CircleCollider2D:

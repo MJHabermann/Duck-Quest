@@ -50,17 +50,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 5
   enemyName: Goblin
+  damage: 0
+  knockbackForce: 5
+  target: {fileID: 8861219098749721023, guid: 54e5ff90eabc51f48ac70159e4df61e8, type: 3}
   animator: {fileID: 0}
   speed: 1.5
   waypoints:
   - {fileID: 0}
   detectionRange: 5
-  target: {fileID: 0}
   chaseSpeed: 3.5
   attackRange: 1
   attackCooldown: 2
-  attackDamage: 1
-  knockbackForce: 5
   knockbackDuration: 0.2
 --- !u!212 &2064450169585538944
 SpriteRenderer:

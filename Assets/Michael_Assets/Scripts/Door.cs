@@ -8,28 +8,34 @@ public class Door : MonoBehaviour
     public PanDirection direction;
     public float panSpeed = 2.0f;
     public float panDistance = 13.0f;
-    public SpriteRenderer doorSpriteRenderer;
+    
     public Sprite closedDoorSprite;
     public Sprite openDoorSprite;
-    public bool isRoomCleared = false;
     public float playerDistance = 8.0f;
 
-    private Camera mainCamera;
-    private Vector3 startPosition;
-    private bool isPanning = false;
-    private Vector3 targetPosition;
-    private GameObject player;
-    private Vector3 playerTargetPosition;
-
-    void Start()
+    protected SpriteRenderer doorSpriteRenderer;
+    protected Camera mainCamera;
+    protected Vector3 startPosition;
+    protected bool isPanning = false;
+    protected Vector3 targetPosition;
+    protected GameObject player;
+    protected Vector3 playerTargetPosition;
+    protected static bool isTransitioning = false;
+    protected SpriteRenderer playerSpriteRenderer;
+    protected Vector3 offset = Vector3.zero;
+    protected static bool isOpened = true;
+    protected static List<NormalDoor> allNormalDoors = new List<NormalDoor>();
+    public virtual void Start()
     {
+        doorSpriteRenderer = GetComponent<SpriteRenderer>();
         mainCamera = Camera.main;
         startPosition = mainCamera.transform.position;
         player = GameObject.FindGameObjectWithTag("Player");
+        playerSpriteRenderer = player.GetComponent<SpriteRenderer>();
         UpdateDoorSprite();
     }
 
-    void Update()
+    public virtual void Update()
     {
         if (isPanning)
         {
@@ -41,28 +47,27 @@ public class Door : MonoBehaviour
                 mainCamera.transform.position = targetPosition;
                 player.transform.position = playerTargetPosition;
                 isPanning = false;
-                UpdateDoorSprite();
+                isTransitioning = false;
+                playerSpriteRenderer.enabled = true;
             }
         }
-
-        UpdateDoorSprite();
     }
 
-    public void StartPanning()
+    public virtual void StartPanning()
     {
-        if (!isPanning)
+        if (!isPanning && !isTransitioning)
         {
             isPanning = true;
+            isTransitioning = true;
             startPosition = mainCamera.transform.position;
             targetPosition = GetTargetPosition();
             playerTargetPosition = GetPlayerTargetPosition();
+            playerSpriteRenderer.enabled = false;
         }
     }
 
-    private Vector3 GetTargetPosition()
+    protected Vector3 GetTargetPosition()
     {
-        Vector3 offset = Vector3.zero;
-
         switch (direction)
         {
             case PanDirection.Up:
@@ -82,10 +87,8 @@ public class Door : MonoBehaviour
         return startPosition + offset;
     }
 
-    private Vector3 GetPlayerTargetPosition()
+    protected Vector3 GetPlayerTargetPosition()
     {
-        Vector3 offset = Vector3.zero;
-
         switch (direction)
         {
             case PanDirection.Up:
@@ -105,9 +108,9 @@ public class Door : MonoBehaviour
         return player.transform.position + offset;
     }
 
-    private void UpdateDoorSprite()
+    protected virtual void UpdateDoorSprite()
     {
-        if (isRoomCleared)
+        if (isOpened)
         {
             doorSpriteRenderer.sprite = openDoorSprite;
             doorSpriteRenderer.gameObject.GetComponent<Collider2D>().isTrigger = true;
@@ -135,12 +138,12 @@ public class Door : MonoBehaviour
                 break;
         }
     }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && isRoomCleared)
+        if (other.CompareTag("Player") && !isTransitioning && isOpened)
         {
             StartPanning();
         }
     }
 }
+

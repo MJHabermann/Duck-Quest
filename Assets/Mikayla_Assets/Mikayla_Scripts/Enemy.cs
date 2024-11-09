@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private float health;       // Use private access with SerializeField to keep it visible in the Inspector
     [SerializeField] private string enemyName;
-     [SerializeField] private float damage;
+    [SerializeField] private float damage;
     protected Rigidbody2D playerRb;
     public float knockbackForce = 5f;   
      public Transform target;
@@ -46,7 +46,7 @@ public class Enemy : MonoBehaviour
         public float Damage
     {
         get { return damage; }
-        set { speed = Mathf.Max(0, value); }   // Ensure speed is non-negative
+        set { speed = Mathf.Max(0, value); }   // Ensure damage is non-negative
     }
 
     public bool IsFacingRight

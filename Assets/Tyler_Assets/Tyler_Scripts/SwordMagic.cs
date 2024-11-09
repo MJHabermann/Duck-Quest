@@ -16,7 +16,8 @@ public class SwordMagic : Sword
         
     }
 
-    override public void Attack(){
+    // public void Attack(){   //Static bound method for attack. Refers to parent, Sword
+    override public void Attack(){ //Dynamic bound method for attack. Overwrites Attack from parent, Sword
         Debug.Log("Magic Sword");
         if(GameObject.Find("Player") != null){
             GameObject gameObject = GameObject.Find("Player");

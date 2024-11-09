@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
     public GameObject arrow;
     public GameObject hook;
     public GameObject magic;
+    public GameObject memento;
+    public GameObject hud;
     public Collider2D reachCollider;
     public AudioSource playerStep;
     public Quaternion rotation;
@@ -24,20 +26,27 @@ public class Player : MonoBehaviour
     private Vector2 moveInput;
     private Rigidbody2D rb;
     private Animator animator;
-    private Sword sword = new Sword();
+    private Sword sword = new Sword(); //Static method
+    // private SwordMagic sword = new SwordMagic(); //Static method;comment out portion of OnRun if used
+    [SerializeField]
     private int bombCount;
+    [SerializeField]
     private int arrowCount;
     private Vector3 playerDirection;
     private bool isDead = false;
     private bool isOccupied = false;
+    // private PlayerMemento memento;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         reachCollider = reach.GetComponent<Collider2D>();
-        bombCount = 10;
-        arrowCount = 10;
+        // bombCount = 5;
+        // arrowCount = 10;
+        hud = GameObject.Find("PlayerHUD");
+        hud.BroadcastMessage("Load");
+        memento = Instantiate(memento, new Vector3(0, 0, 0), Quaternion.identity);
         playerDirection = new Vector3(0, 0, 0);
     }
 
@@ -100,6 +109,8 @@ public class Player : MonoBehaviour
                 if(bombCount > 0){
                 Instantiate(bomb, transform.position, transform.rotation);
                 bombCount--;
+                GameObject gameObject = GameObject.Find("PlayerHUD");
+                gameObject.BroadcastMessage("Save");
                 Debug.Log("Bombs left: " + bombCount);
             }else{
                 Debug.Log("No bombs");
@@ -120,6 +131,8 @@ public class Player : MonoBehaviour
                 //spawn arrow, at player location, in same direction as player
                 Instantiate(arrow, transform.position, rotation);
                 arrowCount--;
+                GameObject gameObject = GameObject.Find("PlayerHUD");
+                gameObject.BroadcastMessage("Save");
                 Debug.Log("Arrows left: " + arrowCount);
             }else{
                 Debug.Log("No arrows");
@@ -156,6 +169,8 @@ public class Player : MonoBehaviour
         if(!isDead && !isOccupied){
             Debug.Log("switched to magic sword");
             sword = new SwordMagic();
+            bombCount += 10;
+            arrowCount += 10;
         }
     }
 
@@ -232,5 +247,30 @@ public class Player : MonoBehaviour
     */
     void IsOccupied(bool value){
         isOccupied = value;
+    }
+    int getBombCount(){
+        return bombCount;
+    }
+    int getArrowCount(){
+        return arrowCount;
+    }
+    public void setBombCount(int b){
+        bombCount = b;
+    }
+    public void setArrowCount(int a){
+        arrowCount = a;
+    }
+    public PlayerMemento createMemento(){
+        // DestroyImmediate(memento, true);
+        GameObject newMemento = Instantiate(memento, new Vector3(0, 0, 0), Quaternion.identity);
+        GameObject oldMemento = memento;
+        memento = newMemento;
+        Destroy(oldMemento);
+        memento.name = "PlayerMomento";
+        // memento = FindObjectOfType<PlayerMemento>();
+        // memento.transform.parent = hud.transform;
+        PlayerMemento playerMemento = FindObjectOfType<PlayerMemento>();
+        playerMemento.Init(bombCount, arrowCount);
+        return playerMemento;
     }
 }

@@ -1,0 +1,24 @@
+# Arrow Prefab
+
+## Author: Tyler LaFleur
+
+## Version: 1.0
+
+## Description: This asset allows you to add an arrow into your game
+
+When spawned, this arrow travels in a straight line until it collides with something, applying damage if applicable and despawns.
+
+## Components
+1. Sprite Renderer (Shows the arrow sprite)
+2. Rigidbody 2D (Allows for physics capabilities)
+3. Arrow (Script)
+4. Box Collider (Tracks size of collider)
+
+## Requirements
+1. Unity 2022.3.42f1 or later
+2. arrow.png, or custom sprite
+3. Arrow.cs
+
+## Setup Instructions
+Modify/Add necessary tag functionality under the OnTriggerEnter2D function in Arrow.cs to increase functionality.
+Modify variables in script/unity inspector as necessary to adjust to game, such as the speed, damage, and lifespan of the arrow.

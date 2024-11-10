@@ -33,7 +33,6 @@ public class NormalDoor : Door
         {
             CheckEnemiesCleared();
         }
-        //UpdateDoorSprite();
     }
     public override void StartPanning()
     {
@@ -62,8 +61,6 @@ public class NormalDoor : Door
         spawnedEnemies.RemoveAll(enemy => enemy == null);
         if (spawnedEnemies.Count == 0 && !isRoomCleared)
         {
-            //UpdateDoorSprite();
-            //dropRewardOnClear = true;
             if (rewardPrefab != null && rewardSpawnPoint != null)
             {
                 Debug.Log("dropping reward");

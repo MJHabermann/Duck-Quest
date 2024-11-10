@@ -27,8 +27,6 @@ public class BombableDoor : Door
             doorSpriteRenderer.sprite = closedDoorSprite;
             doorSpriteRenderer.gameObject.GetComponent<Collider2D>().isTrigger = false;
         }
-
-        // Rotate door to match direction
         switch (direction)
         {
             case PanDirection.Up:

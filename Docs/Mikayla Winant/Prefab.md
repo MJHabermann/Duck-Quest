@@ -1,6 +1,5 @@
 # Slime Prefab
 This prefab represents a basic Slime enemy in Unity. It includes essential components for movement, animation, and collision detection.
-
 ## Components
 1. Slime Script
 Controls the Slime's behavior, including movement and interactions with other objects.
@@ -27,3 +26,8 @@ Ensure the Slime script is configured with appropriate settings for movement and
 Assign an Animator Controller with relevant animations to the Animator component.
 Adjust the Circle Collider 2D to ensure accurate collision detection with other game objects.
 Test the Slime in play mode to confirm behavior and animations.
+## Requirements
+Unity 2022.3.42f1 or later
+### Author 
+Mikayla Winant
+

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,8 @@ public class Door : MonoBehaviour
     public PanDirection direction;
     public float panSpeed = 2.0f;
     public float panDistance = 13.0f;
-    
+
+
     public Sprite closedDoorSprite;
     public Sprite openDoorSprite;
     public float playerDistance = 8.0f;
@@ -23,8 +25,7 @@ public class Door : MonoBehaviour
     protected static bool isTransitioning = false;
     protected SpriteRenderer playerSpriteRenderer;
     protected Vector3 offset = Vector3.zero;
-    protected static bool isOpened = true;
-    protected static List<NormalDoor> allNormalDoors = new List<NormalDoor>();
+    protected bool isOpened = true;
     public virtual void Start()
     {
         doorSpriteRenderer = GetComponent<SpriteRenderer>();
@@ -120,8 +121,6 @@ public class Door : MonoBehaviour
             doorSpriteRenderer.sprite = closedDoorSprite;
             doorSpriteRenderer.gameObject.GetComponent<Collider2D>().isTrigger = false;
         }
-
-        // Rotate door to match direction
         switch (direction)
         {
             case PanDirection.Up:
@@ -145,5 +144,6 @@ public class Door : MonoBehaviour
             StartPanning();
         }
     }
+
 }
 

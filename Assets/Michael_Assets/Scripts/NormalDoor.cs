@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,10 +9,15 @@ public class NormalDoor : Door
     public Transform[] enemySpawnPoints;
     public GameObject rewardPrefab;
     public Transform rewardSpawnPoint;
+
+    public event Action<NormalDoor> DoorOpened;
+    public event Action<NormalDoor> DoorClosed;
+
     private bool inRoom = false;
-    private static List<GameObject> spawnedEnemies = new List<GameObject>();
-    private static bool isRoomCleared = false;
+    private List<GameObject> spawnedEnemies = new List<GameObject>();
+    private bool isRoomCleared = false;
     private bool roomExplored = false;
+
     public override void Start()
     {
         base.Start();
@@ -27,7 +33,7 @@ public class NormalDoor : Door
         {
             CheckEnemiesCleared();
         }
-        UpdateDoorSprite();
+        //UpdateDoorSprite();
     }
     public override void StartPanning()
     {
@@ -47,7 +53,7 @@ public class NormalDoor : Door
             spawnedEnemies.Add(enemy);
         }
         isRoomCleared = false;
-        isOpened = false;
+        Close();
         UpdateDoorSprite();
     }
 
@@ -64,9 +70,25 @@ public class NormalDoor : Door
                 Instantiate(rewardPrefab, rewardSpawnPoint.position, Quaternion.identity);
             }
             isRoomCleared = true;
-            isOpened = true;
+            Open();
         }
     }
-
-
+    public void Open()
+    {
+        if (!isOpened)
+        {
+            isOpened = true;
+            UpdateDoorSprite();
+            DoorOpened?.Invoke(this);
+        }
+    }
+    public void Close()
+    {
+        if (isOpened)
+        {
+            isOpened = false;
+            UpdateDoorSprite();
+            DoorClosed?.Invoke(this);
+        }
+    }
 }

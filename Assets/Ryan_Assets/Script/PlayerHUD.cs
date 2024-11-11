@@ -2,6 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerHUD : MonoBehaviour
 {
@@ -117,4 +118,12 @@ public class PlayerHUD : MonoBehaviour
     {
         return playerMoney;
     }
+
+    
+    private void Dead()
+    {
+        Debug.Log("Dead message recieved");
+        SceneManager.LoadScene("GameOver");
+    }
+    
 }

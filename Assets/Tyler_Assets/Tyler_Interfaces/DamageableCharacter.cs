@@ -9,6 +9,7 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
     Rigidbody2D rb;
     Collider2D physicsCollider;
     bool isAlive = true;
+    public GameObject hud;
     public float Health{
         set{
             if(value < _health){
@@ -21,7 +22,9 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
                 animator.SetBool("isAlive", false);
                 disableSimulation = true;
                 Targetable = false;
-                gameObject.BroadcastMessage("Dead");
+                hud = GameObject.Find("PlayerHUD");
+                hud.BroadcastMessage("Dead");
+                
             }
         }
         get{

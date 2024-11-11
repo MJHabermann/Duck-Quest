@@ -26,5 +26,8 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Mikayla_Assets/Mikayla's Scenes/Testing Scene Town.unity
     guid: 07848873c1da1486a9b618e1873d44ad
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 82a9118f0290a41649e4a4f6057944e7
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 8b4d7997499ed4846b3326024c21be74, type: 2}

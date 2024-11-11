@@ -1,13 +1,13 @@
 {
-    "name": "TylerPlayMode",
+    "name": "TylerScripts",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "TylerScripts",
-        "IDamageable",
         "Unity.InputSystem",
-        "Unity.InputSystem.TestFramework"
+        "Unity.VisualScripting.Core",
+        "IDamageable",
+        "Slime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

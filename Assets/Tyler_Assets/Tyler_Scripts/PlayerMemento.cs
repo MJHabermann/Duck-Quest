@@ -13,8 +13,11 @@ public class PlayerMemento : MonoBehaviour
         arrowCount = a;
     }
     public void restore(Player player){
-        player.setBombCount(bombCount);
-        player.setArrowCount(arrowCount);
+        if(player != null){
+            player.setBombCount(bombCount);
+            player.setArrowCount(arrowCount);
+        }
+
     }
     public int getBombCount(){
         return bombCount;
@@ -22,10 +25,4 @@ public class PlayerMemento : MonoBehaviour
     public int getArrowCount(){
         return arrowCount;
     }
-    // private void setBombCount(int b){
-    //     bombCount = b;
-    // }
-    // private void setArrowCount(int a){
-    //     arrowCount = a;
-    // }
 }

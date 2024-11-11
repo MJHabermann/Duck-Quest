@@ -22,9 +22,9 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
                 animator.SetBool("isAlive", false);
                 disableSimulation = true;
                 Targetable = false;
+                gameObject.BroadcastMessage("Dead");
                 hud = GameObject.Find("PlayerHUD");
                 hud.BroadcastMessage("Dead");
-                
             }
         }
         get{
@@ -64,9 +64,6 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
 
     public void OnHit(float damage){
         Health -= damage;
-        Debug.Log(damage);
-        hud = GameObject.Find("PlayerHUD");
-        hud.BroadcastMessage("Hit");
     }
 
     public void OnObjectDestroyed(){

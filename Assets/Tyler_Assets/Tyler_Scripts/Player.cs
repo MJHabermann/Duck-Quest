@@ -20,21 +20,31 @@ public class Player : MonoBehaviour
     public Collider2D reachCollider;
     public AudioSource playerStep;
     public Quaternion rotation;
+    public bool isDead = false;
+    public bool isOccupied = false;
     // public float actionCooldown = .5f;
     // private float actionCooldownStart = 0f;
     private List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
     private Vector2 moveInput;
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     private Animator animator;
-    private Sword sword = new Sword(); //Static method
-    // private SwordMagic sword = new SwordMagic(); //Static method;comment out portion of OnRun if used
+    /*Static binding. If this is used, then when sword variable is assigned 
+    to new SwordMagic, the SwordMagic Attack() function will be called if it
+    has the override prefix
+    */
+    private Sword sword = new Sword();
+
+    /*Static binding. *Comment out portion of OnJump if used* If this is used,
+    then it will always use the SwordMagic Attack() function regardless of whether
+    override prefix is used or not.
+    */
+    // private SwordMagic sword = new SwordMagic(); 
     [SerializeField]
     private int bombCount;
     [SerializeField]
     private int arrowCount;
     private Vector3 playerDirection;
-    private bool isDead = false;
-    private bool isOccupied = false;
+    private bool MS = false;
     // private PlayerMemento memento;
 
     private void Start()
@@ -42,8 +52,6 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         reachCollider = reach.GetComponent<Collider2D>();
-        // bombCount = 5;
-        // arrowCount = 10;
         hud = GameObject.Find("PlayerHUD");
         hud.BroadcastMessage("Load");
         memento = Instantiate(memento, new Vector3(0, 0, 0), Quaternion.identity);
@@ -101,7 +109,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    void OnBomb(){
+    public void OnBomb(){
         if(!isDead && !isOccupied){
             //check if there is already a bomb in play
             if(GameObject.Find("Bomb(Clone)") == null){
@@ -122,7 +130,7 @@ public class Player : MonoBehaviour
         
     }
 
-    void OnBow(){
+    public void OnBow(){
         if(!isDead && !isOccupied){
             if(arrowCount > 0){
                 //set player direction
@@ -140,7 +148,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    void OnHook(){
+    public void OnHook(){
         if(!isDead && !isOccupied){
             if(hook != null){
                 //set player direction
@@ -156,7 +164,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    void OnInteract(){
+    public void OnInteract(){
         if(!isDead && !isOccupied){
             //tell the ReachHitbox to interact
             gameObject.BroadcastMessage("Interact");
@@ -165,16 +173,21 @@ public class Player : MonoBehaviour
         }
     }
 
-    void OnJump(){
+    public void OnJump(){
         if(!isDead && !isOccupied){
-            Debug.Log("switched to magic sword");
-            sword = new SwordMagic();
-            bombCount += 10;
-            arrowCount += 10;
+            if(!MS){
+                Debug.Log("Switched to magic sword");
+                sword = new SwordMagic();
+                MS = true;
+            }else{
+                Debug.Log("Switched to sword");
+                sword = new Sword();
+                MS = false;
+            }
         }
     }
 
-    void OnMove(InputValue value){
+    public void OnMove(InputValue value){
         if(!isDead && !isOccupied)
         {
             moveInput = value.Get<Vector2>();
@@ -201,18 +214,19 @@ public class Player : MonoBehaviour
         }
     }
 
-    void OnRun(){
+    public void OnRun(){
         if(!isDead && !isOccupied){
-            Debug.Log("switched to basic sword");
-            sword = new SwordBasic();
+            bombCount += 10;
+            arrowCount += 10;
+            // Debug.Log("switched to basic sword");
+            // sword = new SwordBasic();
         }
     }
     
-    void OnSword(){
+    public void OnSword(){
         if(!isDead && !isOccupied){
             //tell the ReachHitbox that a sword attack is happening
             gameObject.BroadcastMessage("swordAttack", true);
-
             //tell the animator that a sword attack is happening
             animator.SetTrigger("swordAttack");
             sword.Attack();
@@ -220,12 +234,12 @@ public class Player : MonoBehaviour
     }
 
     //this function listens for the dead message from IDamageable
-    void Dead(){
+    public void Dead(){
         isDead = true;
         isOccupied = true;
     }
 
-    void MagicSword(){
+    public void MagicSword(){
         //set player direction
         rotation = Quaternion.Euler(playerDirection);
 
@@ -233,7 +247,7 @@ public class Player : MonoBehaviour
         Instantiate(magic, transform.position, rotation);
     }
 
-    void HookReturn(){
+    public void HookReturn(){
         // Debug.Log("Hook returned");
         isOccupied = false;
     }
@@ -245,13 +259,13 @@ public class Player : MonoBehaviour
             gameObject.BroadcastMessage("IsOccupied");
         }
     */
-    void IsOccupied(bool value){
+    public void IsOccupied(bool value){
         isOccupied = value;
     }
-    int getBombCount(){
+    public int getBombCount(){
         return bombCount;
     }
-    int getArrowCount(){
+    public int getArrowCount(){
         return arrowCount;
     }
     public void setBombCount(int b){
@@ -261,14 +275,14 @@ public class Player : MonoBehaviour
         arrowCount = a;
     }
     public PlayerMemento createMemento(){
-        // DestroyImmediate(memento, true);
+        //create a new memento and delete the old one
         GameObject newMemento = Instantiate(memento, new Vector3(0, 0, 0), Quaternion.identity);
         GameObject oldMemento = memento;
         memento = newMemento;
         Destroy(oldMemento);
         memento.name = "PlayerMomento";
-        // memento = FindObjectOfType<PlayerMemento>();
-        // memento.transform.parent = hud.transform;
+
+        //find the newly made memento and return it to the caretaker
         PlayerMemento playerMemento = FindObjectOfType<PlayerMemento>();
         playerMemento.Init(bombCount, arrowCount);
         return playerMemento;

@@ -17,24 +17,21 @@ public class PlayerCaretaker : MonoBehaviour
             Instantiate(playerMemento, new Vector3(0, 0, 0), Quaternion.identity);
             playerMemento = FindObjectOfType<PlayerMemento>();
         }
+        //restore player to memento status
         playerMemento.restore(player);
     }
 
     void FixedUpdate(){
-        
+        //if no player, find a player and restore status
         if(player == null){
             player = FindObjectOfType<Player>();
             playerMemento.restore(player);
         }
+        //if no memento, create one
         if(playerMemento == null){
             playerMemento = player.createMemento();
         }
     }
-    // //when asked for memento, retrieve one from the player
-    // PlayerMemento GetMemento(Player player, PlayerMemento memento){
-        
-    //     return player.createMemento(memento);
-    // }
 
     //when asked to set memento, save the memento for future use
     void requestMemento(){

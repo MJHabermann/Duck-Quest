@@ -9,6 +9,8 @@ public class PlayerHUD : MonoBehaviour
     public TMP_Text moneyText;  // Assign in Inspector
     public Image[] heartImages;  // Assign in Inspector
 
+    public GameObject death;
+
     private int playerMoney;
     private int maxHealth;
     private int currentPlayerHealth;
@@ -38,42 +40,6 @@ public class PlayerHUD : MonoBehaviour
         // Update the UI at the start
         UpdateHealthUI();
         UpdateMoneyUI();
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if(other.CompareTag("Enemy") && !isInvincible)
-        {
-            TakeDamage();
-        }
-    }
-    public void TakeDamage()
-    {
-        if (currentPlayerHealth > 0)
-        {
-            currentPlayerHealth--;
-            UpdateHealthUI();
-            StartCoroutine(BecomeInvincible());
-        }
-        else if(currentPlayerHealth <= 0)
-        {
-            StopAllCoroutines();
-            PlayerDies();
-        }
-    }
-    
-    IEnumerator BecomeInvincible()
-    {
-        isInvincible = true;
-        Debug.Log("Player currently invincible");
-        yield return new WaitForSeconds(invincibilityDuration);
-        isInvincible = false;
-        Debug.Log("Player is no longer invincible.");
-    }
-
-    void PlayerDies()
-    {
-        Debug.Log("Player is dead.");
     }
     public void UpdateHealthUI()
     {
@@ -120,10 +86,18 @@ public class PlayerHUD : MonoBehaviour
     }
 
     
-    private void Dead()
+    private IEnumerator Dead()
     {
         Debug.Log("Dead message recieved");
+        death.SetActive(true);
+        yield return new WaitForSeconds(2f);
         SceneManager.LoadScene("GameOver");
+    }
+
+    private void Hit()
+    {
+        currentPlayerHealth--;
+        UpdateHealthUI();
     }
     
 }

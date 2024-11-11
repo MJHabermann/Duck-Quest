@@ -64,6 +64,9 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
 
     public void OnHit(float damage){
         Health -= damage;
+        Debug.Log(damage);
+        hud = GameObject.Find("PlayerHUD");
+        hud.BroadcastMessage("Hit");
     }
 
     public void OnObjectDestroyed(){

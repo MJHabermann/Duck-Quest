@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class DestroyableObject : MonoBehaviour
 {
-    // Start is called before the first frame update
+    //This is my static binding
     public virtual void DestroyObject()
     {
         Destroy(gameObject);
         Debug.Log("Destroyed Some Object");
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Sword"))
+        {
+            DestroyObject();
+        }
     }
 }

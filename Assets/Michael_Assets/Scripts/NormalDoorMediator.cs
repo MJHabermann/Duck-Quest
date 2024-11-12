@@ -13,7 +13,7 @@ public class NormalDoorMediator : MonoBehaviour
         foreach (NormalDoor door in doorsInRoom)
         {
             door.DoorOpened += TrackOpenDoors;
-            door.DoorClosed+= TrackClosedDoors;
+            door.DoorClosed += TrackClosedDoors;
         }
     }
     public void TrackOpenDoors(NormalDoor door)

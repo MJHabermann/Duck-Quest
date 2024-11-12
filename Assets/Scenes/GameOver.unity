@@ -885,6 +885,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bce6637df69742d1b56e053e8993248, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  quitAction: {fileID: -1596409128773852450, guid: 78059e1df8cbdb641b206cc720d332c2, type: 3}
+  restartAction: {fileID: -1596409128773852450, guid: 78059e1df8cbdb641b206cc720d332c2, type: 3}
 --- !u!1 &1831433853
 GameObject:
   m_ObjectHideFlags: 0

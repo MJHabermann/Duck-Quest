@@ -1,28 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    private Duck_Quest gameControls;
+    [SerializeField] private InputActionReference quitAction;  // Set this in Inspector
+    [SerializeField] private InputActionReference restartAction;  // Set this in Inspector
 
-    private void Awake()
+    private void OnEnable()
     {
-        gameControls = new Duck_Quest();
+        quitAction.action.performed += OnQuitAction;
+        restartAction.action.performed += OnRestartAction;
+
+        quitAction.action.Enable();
+        restartAction.action.Enable();
     }
 
-    public void OnClick(string action)
+    private void OnDisable()
     {
-        if (action == "Quit")
-        {
-            QuitGame();
-        }
-        else if (action == "Restart")
-        {
-            RestartGame();
-        }
+        quitAction.action.performed -= OnQuitAction;
+        restartAction.action.performed -= OnRestartAction;
+
+        quitAction.action.Disable();
+        restartAction.action.Disable();
+    }
+
+    private void OnQuitAction(InputAction.CallbackContext context)
+    {
+        QuitGame();
+    }
+
+    private void OnRestartAction(InputAction.CallbackContext context)
+    {
+        RestartGame();
     }
 
     private void QuitGame()

@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHUD : MonoBehaviour
 {
-    public TMP_Text moneyText;  // Assign in Inspector
-    public Image[] heartImages;  // Assign in Inspector
+    public TMP_Text moneyText;
+    public Image[] heartImages;
 
     public GameObject death;
 

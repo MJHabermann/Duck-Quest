@@ -30,4 +30,6 @@ Test the Slime in play mode to confirm behavior and animations.
 Unity 2022.3.42f1 or later
 ### Author 
 Mikayla Winant
+## Spritesheet author
+https://chiecola.itch.io/momo-mama-slime 
 

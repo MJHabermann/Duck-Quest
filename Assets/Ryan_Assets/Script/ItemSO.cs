@@ -14,19 +14,30 @@ public class ItemSO : ScriptableObject
 
     public bool UseItem()
     {
-        if(statToChange == StatToChange.health)
+        
+        if (statToChange == StatToChange.health)
         {
-            //PlayerHealth playerHealth = // GameObject.Find(" // GameObjectHealthmanager").GetComponent< // scriptPlayerHealth>().ChangeHealth(intAmountToChangeStat);
-            //if playerHealth.health == playerHealth.maxHealth)
-            //return false
-            //else
-           //playerHealth.RestoreHealth(amountToChangeStat);
-           //return true
+            PlayerHUD playerHealth = GameObject.FindObjectOfType<PlayerHUD>();
+            if (playerHealth == null)
+            {
+                Debug.LogError("PlayerHUD script not found in the scene.");
+                return false;
+            }
 
-           //return false;
+            if (playerHealth.currentPlayerHealth == playerHealth.maxHealth)
+            {
+                Debug.Log("Player already at max health.");
+                return false; // Item not used
+            }
+
+            playerHealth.Heal(); // Call the Heal method
+            Debug.Log($"{itemName} used to heal the player.");
+            return true; // Item successfully used
         }
-        return true;
 
+        return false; // Item not used
+        
+        
     }
     
 

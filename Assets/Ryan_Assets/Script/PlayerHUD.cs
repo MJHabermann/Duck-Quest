@@ -12,12 +12,10 @@ public class PlayerHUD : MonoBehaviour
     public GameObject death;
 
     private int playerMoney;
-    private int maxHealth;
-    private int currentPlayerHealth;
+    public int maxHealth;
+    public int currentPlayerHealth;
 
     public float invincibilityDuration;
-
-    private bool isInvincible = false;
 
     void Start()
     {
@@ -96,6 +94,7 @@ public class PlayerHUD : MonoBehaviour
 
     private void Hit()
     {
+        Debug.Log("Hit message recieved");
         currentPlayerHealth--;
         UpdateHealthUI();
     }

@@ -7,6 +7,9 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    //if on mobile use joystick for movement
+    public GameObject joystick;
+    public Joystick movementJoystick;
     public float collisionOffset = 1f;
     public ContactFilter2D movementFilter;
     public float moveSpeed = 4f;
@@ -59,6 +62,11 @@ public class Player : MonoBehaviour
     }
 
     void FixedUpdate(){
+
+        if(IsMobilePlatform())
+        {
+            moveInput = movementJoystick.Direction;
+        }
         //if there is movement...
         if(moveInput != Vector2.zero){
             //try to move player in input direction
@@ -286,5 +294,12 @@ public class Player : MonoBehaviour
         PlayerMemento playerMemento = FindObjectOfType<PlayerMemento>();
         playerMemento.Init(bombCount, arrowCount);
         return playerMemento;
+    }
+
+    private bool IsMobilePlatform()
+    {
+        return Application.platform == RuntimePlatform.Android ||
+               Application.platform == RuntimePlatform.IPhonePlayer; //||
+               //Application.isEditor; // Include Editor for testing with Unity Remote
     }
 }

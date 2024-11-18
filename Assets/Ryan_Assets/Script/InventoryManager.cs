@@ -14,10 +14,17 @@ public class InventoryManager : MonoBehaviour
     private int totalItemCount;
     private bool isActive;
 
+    public InputActionAsset inputActions; // Reference to the Input Action Asset
+    private InputActionMap playerActionMap;
+    private InputActionMap uiActionMap;
     private InputAction toggleInventoryAction; // Standalone action for Escape key
 
     private void Awake()
     {
+        // Get references to action maps
+        playerActionMap = inputActions.FindActionMap("Player");
+        uiActionMap = inputActions.FindActionMap("UI");
+
         // Initialize the Escape key input action
         toggleInventoryAction = new InputAction(type: InputActionType.Button, binding: "<Keyboard>/escape");
         toggleInventoryAction.performed += ToggleInventory;
@@ -41,6 +48,16 @@ public class InventoryManager : MonoBehaviour
         menuActivated = !menuActivated;
         inventoryMenu.SetActive(menuActivated);
         Time.timeScale = menuActivated ? 0 : 1; // Pause/unpause the game
+        if (menuActivated)
+        {
+            EnableUIActions();
+            DisablePlayerActions();
+        }
+        else
+        {
+            DisableUIActions();
+            EnablePlayerActions();
+        }
         Debug.Log(menuActivated ? "Inventory opened" : "Inventory closed");
     }
 
@@ -103,4 +120,25 @@ public class InventoryManager : MonoBehaviour
         Debug.Log("Total item count: " + totalItemCount);
         return totalItemCount;
     }
+
+    private void EnableUIActions()
+    {
+        uiActionMap.Enable();
+    }
+
+    private void DisableUIActions()
+    {
+        uiActionMap.Disable();
+    }
+
+    private void EnablePlayerActions()
+    {
+        playerActionMap.Enable();
+    }
+
+    private void DisablePlayerActions()
+    {
+        playerActionMap.Disable();
+    }
 }
+

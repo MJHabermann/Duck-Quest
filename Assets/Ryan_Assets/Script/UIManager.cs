@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private InputActionReference quitAction;  // Set this in Inspector
     [SerializeField] private InputActionReference restartAction;  // Set this in Inspector
 
+  
     private void OnEnable()
     {
         quitAction.action.performed += OnQuitAction;

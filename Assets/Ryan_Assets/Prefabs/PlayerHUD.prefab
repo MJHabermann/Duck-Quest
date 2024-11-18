@@ -373,8 +373,7 @@ GameObject:
   - component: {fileID: 1630528826769660687}
   - component: {fileID: 8154586292567325700}
   - component: {fileID: 3090626488286499226}
-  - component: {fileID: 8756254091546271851}
-  - component: {fileID: 2071640555233324386}
+  - component: {fileID: 3023561912232659562}
   m_Layer: 5
   m_Name: PlayerHUD
   m_TagString: Untagged
@@ -405,7 +404,7 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &8644561124072264866
 Canvas:
   m_ObjectHideFlags: 0
@@ -487,21 +486,10 @@ MonoBehaviour:
   - {fileID: 8775677591296859477}
   - {fileID: 1055176683967236733}
   death: {fileID: 801901766378512937}
+  maxHealth: 0
+  currentPlayerHealth: 0
   invincibilityDuration: 0
---- !u!114 &8756254091546271851
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5110460055139725599}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 399b9008e22224ff6bf464f33bd8139b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectIndex: 2
---- !u!114 &2071640555233324386
+--- !u!114 &3023561912232659562
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -514,7 +502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  playerMemento: {fileID: 226852674805791907, guid: 9e8027fb3aabc8b49bfc52afe902d00f, type: 3}
+  playerMemento: {fileID: 0}
 --- !u!1 &6324951792354846685
 GameObject:
   m_ObjectHideFlags: 0

@@ -42,7 +42,7 @@ public class InventoryManager : MonoBehaviour
         toggleInventoryAction.Disable();
     }
 
-    private void ToggleInventory(InputAction.CallbackContext context)
+    public void ToggleInventory(InputAction.CallbackContext context)
     {
         // Toggle the inventory menu
         menuActivated = !menuActivated;

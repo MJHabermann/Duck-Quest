@@ -44116,10 +44116,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1980204432}
     m_Modifications:
-    - target: {fileID: 2071640555233324386, guid: 1d995f1cd182b400aaf48cade9154d8c, type: 3}
+    - target: {fileID: 3023561912232659562, guid: 1d995f1cd182b400aaf48cade9154d8c, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1679091577}
+    - target: {fileID: 3023561912232659562, guid: 1d995f1cd182b400aaf48cade9154d8c, type: 3}
+      propertyPath: playerMemento
+      value: 
+      objectReference: {fileID: 1980204434}
     - target: {fileID: 5110460055139725599, guid: 1d995f1cd182b400aaf48cade9154d8c, type: 3}
       propertyPath: m_Name
       value: PlayerHUD
@@ -44649,6 +44653,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1980204432}
+  - component: {fileID: 1980204433}
+  - component: {fileID: 1980204434}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -44675,6 +44681,33 @@ Transform:
   - {fileID: 1961208040}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1980204433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980204431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 399b9008e22224ff6bf464f33bd8139b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectIndex: 1
+--- !u!114 &1980204434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980204431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bf5b807b51fdc449b24b270e50aa088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bombCount: 0
+  arrowCount: 0
 --- !u!1 &1992122460
 GameObject:
   m_ObjectHideFlags: 0
@@ -62058,6 +62091,10 @@ PrefabInstance:
     - target: {fileID: 7149625070642314047, guid: 95f1f62f0026b44b490316a348d0e4d5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8149931039925962362, guid: 95f1f62f0026b44b490316a348d0e4d5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9013529804005169710, guid: 95f1f62f0026b44b490316a348d0e4d5, type: 3}
       propertyPath: m_Name

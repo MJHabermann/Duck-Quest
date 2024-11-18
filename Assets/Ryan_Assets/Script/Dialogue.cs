@@ -15,6 +15,10 @@ public class Dialogue : MonoBehaviour
 
     private InputAction clickAction; // InputAction for UI click
 
+    public InputActionAsset inputActions;
+    
+    
+
     private void Awake()
     {
         // Initialize the InputAction to detect a click
@@ -26,12 +30,17 @@ public class Dialogue : MonoBehaviour
     {
         // Enable the action when the script is active
         clickAction.Enable();
+
+        inputActions.FindActionMap("Player")?.Disable();
+        inputActions.FindActionMap("UI")?.Enable();
     }
 
     private void OnDisable()
     {
         // Disable the action when the script is not active
         clickAction.Disable();
+        inputActions.FindActionMap("Player")?.Enable();
+        inputActions.FindActionMap("UI")?.Disable();
     }
 
     private void OnAdvanceDialogue(InputAction.CallbackContext context)
@@ -58,6 +67,10 @@ public class Dialogue : MonoBehaviour
 
     private void ShowLine()
     {
+        if (!gameObject.activeInHierarchy)
+        {
+            gameObject.SetActive(true);
+        }
         textComponent.text = string.Empty;
 
         if (typingCoroutine != null)
@@ -67,6 +80,7 @@ public class Dialogue : MonoBehaviour
 
         typingCoroutine = StartCoroutine(TypeLine());
     }
+
 
     private IEnumerator TypeLine()
     {
@@ -111,6 +125,9 @@ public class Dialogue : MonoBehaviour
 
     private void EndDialogue()
     {
-        gameObject.SetActive(false); // Close the dialogue UI
+        //gameObject.SetActive(false); // Close the dialogue UI
+        textComponent.text = string.Empty;
+        textComponent.transform.parent.gameObject.SetActive(false); // Assumes TextMeshPro is a child of the dialogue box
     }
+
 }

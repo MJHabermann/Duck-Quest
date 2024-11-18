@@ -230,6 +230,7 @@ MonoBehaviour:
     hand should clear it up."'
   - '"Quack"'
   textSpeed: 0.01
+  inputActions: {fileID: -944628639613478452, guid: 78059e1df8cbdb641b206cc720d332c2, type: 3}
 --- !u!1 &9013529804005169710
 GameObject:
   m_ObjectHideFlags: 0

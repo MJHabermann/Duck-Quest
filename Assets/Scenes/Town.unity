@@ -43877,25 +43877,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0472e98e2392d9a458612d03fcc6566e, type: 3}
---- !u!1 &1047445789 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5631719064836805269, guid: 4f2fefee615fc4fae8fc4c20872ee103, type: 3}
-  m_PrefabInstance: {fileID: 1906602106136421262}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1047445793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1047445789}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f93d510914f74f56b3c8dcdc5fdc65f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  joystickUI: {fileID: 1913124396}
-  otherInputUI: {fileID: 0}
 --- !u!1 &1179521188 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5110460055139725599, guid: 1d995f1cd182b400aaf48cade9154d8c, type: 3}
@@ -44396,10 +44377,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 167389141}
     - target: {fileID: 8202051964002852030, guid: 54e5ff90eabc51f48ac70159e4df61e8, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8202051964002852030, guid: 54e5ff90eabc51f48ac70159e4df61e8, type: 3}
       propertyPath: movementJoystick
       value: 
       objectReference: {fileID: 167389143}
@@ -44644,11 +44621,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0472e98e2392d9a458612d03fcc6566e, type: 3}
---- !u!1 &1913124396 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2147026950067690464, guid: 4f2fefee615fc4fae8fc4c20872ee103, type: 3}
-  m_PrefabInstance: {fileID: 1906602106136421262}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1916306824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62184,33 +62156,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2147026950067690464, guid: 4f2fefee615fc4fae8fc4c20872ee103, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5631719064836805269, guid: 4f2fefee615fc4fae8fc4c20872ee103, type: 3}
       propertyPath: m_Name
       value: Joystick
-      objectReference: {fileID: 0}
-    - target: {fileID: 5631719064836805269, guid: 4f2fefee615fc4fae8fc4c20872ee103, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6041535226311561342, guid: 4f2fefee615fc4fae8fc4c20872ee103, type: 3}
       propertyPath: m_UIInputModule
       value: 
       objectReference: {fileID: 700176744}
-    - target: {fileID: 9015935732877487799, guid: 4f2fefee615fc4fae8fc4c20872ee103, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5631719064836805269, guid: 4f2fefee615fc4fae8fc4c20872ee103, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1047445793}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f2fefee615fc4fae8fc4c20872ee103, type: 3}
 --- !u!1001 &6182061774480155105
 PrefabInstance:

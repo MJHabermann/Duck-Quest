@@ -228,6 +228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableSimulation: 0
+  hud: {fileID: 0}
   _health: 3
   _targetable: 1
 --- !u!82 &8034669004459173642
@@ -338,6 +339,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd41d0dbeb0c9fd44829b2560943aff1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  joystick: {fileID: 0}
+  movementJoystick: {fileID: 0}
   collisionOffset: 0.1
   movementFilter:
     useTriggers: 0
@@ -364,6 +367,9 @@ MonoBehaviour:
   reachCollider: {fileID: 3735211731236313488}
   playerStep: {fileID: 8034669004459173642}
   rotation: {x: 0, y: 0, z: 0, w: 0}
+  isDead: 0
+  isOccupied: 0
+  rb: {fileID: 0}
   bombCount: 0
   arrowCount: 0
 --- !u!1 &6830956040653288963

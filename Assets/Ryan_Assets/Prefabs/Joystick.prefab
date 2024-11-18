@@ -188,7 +188,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3957758073074076145
 Transform:
   m_ObjectHideFlags: 0
@@ -218,6 +218,7 @@ GameObject:
   - component: {fileID: 5072933121361211304}
   - component: {fileID: 5249320399387996356}
   - component: {fileID: 2792310167575600402}
+  - component: {fileID: 6335944504763093819}
   m_Layer: 5
   m_Name: Joystick
   m_TagString: Untagged
@@ -308,6 +309,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &6335944504763093819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5631719064836805269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f93d510914f74f56b3c8dcdc5fdc65f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  joystickUI: {fileID: 2147026950067690464}
+  otherInputUI: {fileID: 0}
 --- !u!1 &7177396683156482771
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,19 +578,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8353731042474348396}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ReachHitbox, Player
-        m_MethodName: swordAttack
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &6041535226311561342
 MonoBehaviour:
   m_ObjectHideFlags: 0

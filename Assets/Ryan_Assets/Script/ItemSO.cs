@@ -8,8 +8,6 @@ public class ItemSO : ScriptableObject
     public string itemName;
     public int intAmountToChangeStat;
     public StatToChange statToChange = new StatToChange();
-    public AttributesToChange attributesToChange = new AttributesToChange();
-    public int intAmountToChangeAttribute;
 
 
     public bool UseItem()

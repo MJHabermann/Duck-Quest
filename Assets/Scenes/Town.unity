@@ -148,6 +148,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5367159622359420281, guid: 2c279786a1067495a990727d865555f2, type: 3}
+      propertyPath: itemSOs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367159622359420281, guid: 2c279786a1067495a990727d865555f2, type: 3}
+      propertyPath: itemSOs.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 950141ee6ba7d4f608f9d1468add4707, type: 2}
     - target: {fileID: 8894150743557462493, guid: 2c279786a1067495a990727d865555f2, type: 3}
       propertyPath: m_Pivot.x
       value: 0

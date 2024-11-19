@@ -62152,14 +62152,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Key
       objectReference: {fileID: 0}
-    - target: {fileID: 1759215040780773904, guid: 6bfc66da62ca64f55a689802e9ab0e0e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4087148941960634610, guid: 6bfc66da62ca64f55a689802e9ab0e0e, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4087148941960634610, guid: 6bfc66da62ca64f55a689802e9ab0e0e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.820063

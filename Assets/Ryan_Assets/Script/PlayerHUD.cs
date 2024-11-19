@@ -67,7 +67,7 @@ public class PlayerHUD : MonoBehaviour
         UpdateMoneyUI();
     }
 
-    private void UpdateMoneyUI()
+    public void UpdateMoneyUI()
     {
         if (moneyText != null)
         {

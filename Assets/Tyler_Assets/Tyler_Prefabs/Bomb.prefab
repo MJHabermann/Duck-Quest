@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8675612824289375965}
   - component: {fileID: 715626580825260503}
   - component: {fileID: 2745615150292945737}
+  - component: {fileID: 7235068135058851124}
   m_Layer: 0
   m_Name: Bomb
   m_TagString: Untagged
@@ -285,3 +286,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7235068135058851124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282796838400133636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d772e07d6100444fc8e0a1654ddf5aa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: Bomb
+  quantity: 1
+  sprite: {fileID: -61095959, guid: 970066b69506d8749ac3c4d48c995772, type: 3}
+  itemDescription: Blow things up

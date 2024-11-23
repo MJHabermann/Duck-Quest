@@ -31,16 +31,23 @@ public class Dialogue : MonoBehaviour
         // Enable the action when the script is active
         clickAction.Enable();
 
-        inputActions.FindActionMap("Player")?.Disable();
-        inputActions.FindActionMap("UI")?.Enable();
+        if(!IsMobilePlatform())
+        {
+            inputActions.FindActionMap("Player")?.Disable();
+            inputActions.FindActionMap("UI")?.Enable();
+        }
+        
     }
 
     private void OnDisable()
     {
         // Disable the action when the script is not active
         clickAction.Disable();
-        inputActions.FindActionMap("Player")?.Enable();
-        inputActions.FindActionMap("UI")?.Disable();
+        if(!IsMobilePlatform())
+        {
+            inputActions.FindActionMap("Player")?.Enable();
+            inputActions.FindActionMap("UI")?.Disable();
+        }
     }
 
     private void OnAdvanceDialogue(InputAction.CallbackContext context)
@@ -128,6 +135,13 @@ public class Dialogue : MonoBehaviour
         //gameObject.SetActive(false); // Close the dialogue UI
         textComponent.text = string.Empty;
         textComponent.transform.parent.gameObject.SetActive(false); // Assumes TextMeshPro is a child of the dialogue box
+    }
+
+    private bool IsMobilePlatform()
+    {
+        return Application.platform == RuntimePlatform.Android ||
+               Application.platform == RuntimePlatform.IPhonePlayer;// ||
+               //Application.isEditor; // Include Editor for testing with Unity Remote
     }
 
 }

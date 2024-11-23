@@ -1,10 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using System.Linq;
 
 public class InventoryManager : MonoBehaviour
 {
     public GameObject inventoryMenu;
+
+    public GameObject joystick;
+
+    public GameObject hud;
     public bool menuActivated;
     [SerializeField] private Slider musicSlider;
 
@@ -44,18 +49,21 @@ public class InventoryManager : MonoBehaviour
 
     public void ToggleInventory(InputAction.CallbackContext context)
     {
+        Debug.Log("Toggle inventory called");
         // Toggle the inventory menu
         menuActivated = !menuActivated;
         inventoryMenu.SetActive(menuActivated);
+        joystick.SetActive(!menuActivated);
+        hud.SetActive(!menuActivated);
         Time.timeScale = menuActivated ? 0 : 1; // Pause/unpause the game
         if (menuActivated)
         {
-            EnableUIActions();
+            Debug.Log("Player actions disabled");
             DisablePlayerActions();
         }
         else
         {
-            DisableUIActions();
+            Debug.Log("Player Actions Enabled");
             EnablePlayerActions();
         }
         Debug.Log(menuActivated ? "Inventory opened" : "Inventory closed");
@@ -119,16 +127,6 @@ public class InventoryManager : MonoBehaviour
     {
         Debug.Log("Total item count: " + totalItemCount);
         return totalItemCount;
-    }
-
-    private void EnableUIActions()
-    {
-        uiActionMap.Enable();
-    }
-
-    private void DisableUIActions()
-    {
-        uiActionMap.Disable();
     }
 
     private void EnablePlayerActions()

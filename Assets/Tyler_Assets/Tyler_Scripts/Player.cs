@@ -300,6 +300,6 @@ public class Player : MonoBehaviour
     {
         return Application.platform == RuntimePlatform.Android ||
                Application.platform == RuntimePlatform.IPhonePlayer; //||
-               //Application.isEditor; // Include Editor for testing with Unity Remote
+                //Application.isEditor; // Include Editor for testing with Unity Remote
     }
 }

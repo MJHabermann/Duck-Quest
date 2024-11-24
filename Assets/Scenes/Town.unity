@@ -42733,8 +42733,8 @@ GameObject:
   - component: {fileID: 402649959}
   - component: {fileID: 402649958}
   - component: {fileID: 402649957}
-  - component: {fileID: 402649961}
   - component: {fileID: 402649962}
+  - component: {fileID: 402649963}
   m_Layer: 0
   m_Name: Waddles
   m_TagString: Untagged
@@ -42866,20 +42866,6 @@ RectTransform:
   m_AnchoredPosition: {x: 6.69, y: -5.96}
   m_SizeDelta: {x: 700, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &402649961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 402649955}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8a75f4f80dfa41e58c6884a62285368, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogue: {fileID: 1414457531}
-  dialogueActive: 0
 --- !u!61 &402649962
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -42925,6 +42911,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &402649963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 402649955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4b106a3c9b1b401fb7c947e39deb086, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue: {fileID: 507426081}
 --- !u!1001 &454764061
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43047,6 +43046,32 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0472e98e2392d9a458612d03fcc6566e, type: 3}
+--- !u!1 &507426076 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9013529804005169710, guid: 95f1f62f0026b44b490316a348d0e4d5, type: 3}
+  m_PrefabInstance: {fileID: 218288216554352225}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &507426081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507426076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68b0fc7d5fcd140b28900d1dd0b333ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textComponent: {fileID: 1021759588}
+  lines:
+  - 'Waddles: "Ah, a brave one, are you? The path to the dungeon is... well, overgrown,
+    you might say. Those bushes stand in the way, but a sharp blade and a steady
+    hand should clear it up."'
+  - '"Quack"'
+  textSpeed: 0.01
+  inputActions: {fileID: -944628639613478452, guid: 78059e1df8cbdb641b206cc720d332c2, type: 3}
+  dialogBox: {fileID: 1014257408}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -43833,6 +43858,22 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b21fb5b02e857d4e8f711240011054d, type: 3}
+--- !u!1 &1014257408 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7675238543310422642, guid: 95f1f62f0026b44b490316a348d0e4d5, type: 3}
+  m_PrefabInstance: {fileID: 218288216554352225}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1021759588 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6139365807407163698, guid: 95f1f62f0026b44b490316a348d0e4d5, type: 3}
+  m_PrefabInstance: {fileID: 218288216554352225}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1027422240
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44233,17 +44274,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d995f1cd182b400aaf48cade9154d8c, type: 3}
---- !u!114 &1414457531 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8149931039925962362, guid: 95f1f62f0026b44b490316a348d0e4d5, type: 3}
-  m_PrefabInstance: {fileID: 218288216554352225}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c93931345e0fa4f9ea76504d579e6152, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1418713653 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3845383678456616311, guid: 0472e98e2392d9a458612d03fcc6566e, type: 3}
@@ -61871,6 +61901,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6550756726147418449, guid: 95f1f62f0026b44b490316a348d0e4d5, type: 3}
+      propertyPath: m_VertexColorAlwaysGammaSpace
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6550756726147418449, guid: 95f1f62f0026b44b490316a348d0e4d5, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7149625070642314047, guid: 95f1f62f0026b44b490316a348d0e4d5, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -61957,16 +61995,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8149931039925962362, guid: 95f1f62f0026b44b490316a348d0e4d5, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9013529804005169710, guid: 95f1f62f0026b44b490316a348d0e4d5, type: 3}
       propertyPath: m_Name
       value: Dialogue
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8149931039925962362, guid: 95f1f62f0026b44b490316a348d0e4d5, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9013529804005169710, guid: 95f1f62f0026b44b490316a348d0e4d5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 507426081}
   m_SourcePrefab: {fileID: 100100000, guid: 95f1f62f0026b44b490316a348d0e4d5, type: 3}
 --- !u!1001 &1906602106136421262
 PrefabInstance:

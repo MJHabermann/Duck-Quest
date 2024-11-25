@@ -44413,6 +44413,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3733519083659684662, guid: 54e5ff90eabc51f48ac70159e4df61e8, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3733519083659684662, guid: 54e5ff90eabc51f48ac70159e4df61e8, type: 3}
+      propertyPath: m_UIInputModule
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6140373099134245732, guid: 54e5ff90eabc51f48ac70159e4df61e8, type: 3}
       propertyPath: m_Name
       value: Player

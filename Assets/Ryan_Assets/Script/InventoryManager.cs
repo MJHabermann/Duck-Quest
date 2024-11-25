@@ -36,6 +36,8 @@ public class InventoryManager : MonoBehaviour
     {
         Debug.Log("HUD successfully reassigned.");
     }
+
+    EnablePlayerActions();
 }
     private void Awake()
     {

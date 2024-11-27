@@ -4,16 +4,9 @@ using UnityEngine;
 
 public class Item: MonoBehaviour
 {
-    [SerializeField]
     public string itemName;
-
-    [SerializeField]
     public int quantity;
-    [SerializeField]
     public Sprite sprite;
-
-    [TextArea]
-    [SerializeField]
     public string itemDescription;
 
     private InventoryManager inventoryManager;

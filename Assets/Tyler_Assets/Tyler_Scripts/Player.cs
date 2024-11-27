@@ -7,6 +7,9 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    //if on mobile use joystick for movement
+    public GameObject joystick;
+    public Joystick movementJoystick;
     public float collisionOffset = 1f;
     public ContactFilter2D movementFilter;
     public float moveSpeed = 4f;
@@ -15,33 +18,55 @@ public class Player : MonoBehaviour
     public GameObject arrow;
     public GameObject hook;
     public GameObject magic;
+    public GameObject memento;
+    public GameObject hud;
     public Collider2D reachCollider;
     public AudioSource playerStep;
     public Quaternion rotation;
+    public bool isDead = false;
+    public bool isOccupied = false;
     // public float actionCooldown = .5f;
     // private float actionCooldownStart = 0f;
     private List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
     private Vector2 moveInput;
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     private Animator animator;
+    /*Static binding. If this is used, then when sword variable is assigned 
+    to new SwordMagic, the SwordMagic Attack() function will be called if it
+    has the override prefix
+    */
     private Sword sword = new Sword();
+
+    /*Static binding. *Comment out portion of OnJump if used* If this is used,
+    then it will always use the SwordMagic Attack() function regardless of whether
+    override prefix is used or not.
+    */
+    // private SwordMagic sword = new SwordMagic(); 
+    [SerializeField]
     private int bombCount;
+    [SerializeField]
     private int arrowCount;
     private Vector3 playerDirection;
-    private bool isDead = false;
-    private bool isOccupied = false;
+    private bool MS = false;
+    // private PlayerMemento memento;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         reachCollider = reach.GetComponent<Collider2D>();
-        bombCount = 10;
-        arrowCount = 10;
+        hud = GameObject.Find("PlayerHUD");
+        hud.BroadcastMessage("Load");
+        memento = Instantiate(memento, new Vector3(0, 0, 0), Quaternion.identity);
         playerDirection = new Vector3(0, 0, 0);
     }
 
     void FixedUpdate(){
+
+        if(IsMobilePlatform())
+        {
+            moveInput = movementJoystick.Direction;
+        }
         //if there is movement...
         if(moveInput != Vector2.zero){
             //try to move player in input direction
@@ -92,7 +117,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    void OnBomb(){
+    public void OnBomb(){
         if(!isDead && !isOccupied){
             //check if there is already a bomb in play
             if(GameObject.Find("Bomb(Clone)") == null){
@@ -100,6 +125,8 @@ public class Player : MonoBehaviour
                 if(bombCount > 0){
                 Instantiate(bomb, transform.position, transform.rotation);
                 bombCount--;
+                GameObject gameObject = GameObject.Find("PlayerHUD");
+                gameObject.BroadcastMessage("Save");
                 Debug.Log("Bombs left: " + bombCount);
             }else{
                 Debug.Log("No bombs");
@@ -111,7 +138,7 @@ public class Player : MonoBehaviour
         
     }
 
-    void OnBow(){
+    public void OnBow(){
         if(!isDead && !isOccupied){
             if(arrowCount > 0){
                 //set player direction
@@ -120,6 +147,8 @@ public class Player : MonoBehaviour
                 //spawn arrow, at player location, in same direction as player
                 Instantiate(arrow, transform.position, rotation);
                 arrowCount--;
+                GameObject gameObject = GameObject.Find("PlayerHUD");
+                gameObject.BroadcastMessage("Save");
                 Debug.Log("Arrows left: " + arrowCount);
             }else{
                 Debug.Log("No arrows");
@@ -127,7 +156,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    void OnHook(){
+    public void OnHook(){
         if(!isDead && !isOccupied){
             if(hook != null){
                 //set player direction
@@ -143,7 +172,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    void OnInteract(){
+    public void OnInteract(){
         if(!isDead && !isOccupied){
             //tell the ReachHitbox to interact
             gameObject.BroadcastMessage("Interact");
@@ -152,14 +181,21 @@ public class Player : MonoBehaviour
         }
     }
 
-    void OnJump(){
+    public void OnJump(){
         if(!isDead && !isOccupied){
-            Debug.Log("switched to magic sword");
-            sword = new SwordMagic();
+            if(!MS){
+                Debug.Log("Switched to magic sword");
+                sword = new SwordMagic();
+                MS = true;
+            }else{
+                Debug.Log("Switched to sword");
+                sword = new Sword();
+                MS = false;
+            }
         }
     }
 
-    void OnMove(InputValue value){
+    public void OnMove(InputValue value){
         if(!isDead && !isOccupied)
         {
             moveInput = value.Get<Vector2>();
@@ -186,18 +222,19 @@ public class Player : MonoBehaviour
         }
     }
 
-    void OnRun(){
+    public void OnRun(){
         if(!isDead && !isOccupied){
-            Debug.Log("switched to basic sword");
-            sword = new SwordBasic();
+            bombCount += 10;
+            arrowCount += 10;
+            // Debug.Log("switched to basic sword");
+            // sword = new SwordBasic();
         }
     }
     
-    void OnSword(){
+    public void OnSword(){
         if(!isDead && !isOccupied){
             //tell the ReachHitbox that a sword attack is happening
             gameObject.BroadcastMessage("swordAttack", true);
-
             //tell the animator that a sword attack is happening
             animator.SetTrigger("swordAttack");
             sword.Attack();
@@ -205,12 +242,12 @@ public class Player : MonoBehaviour
     }
 
     //this function listens for the dead message from IDamageable
-    void Dead(){
+    public void Dead(){
         isDead = true;
         isOccupied = true;
     }
 
-    void MagicSword(){
+    public void MagicSword(){
         //set player direction
         rotation = Quaternion.Euler(playerDirection);
 
@@ -218,7 +255,7 @@ public class Player : MonoBehaviour
         Instantiate(magic, transform.position, rotation);
     }
 
-    void HookReturn(){
+    public void HookReturn(){
         // Debug.Log("Hook returned");
         isOccupied = false;
     }
@@ -230,7 +267,39 @@ public class Player : MonoBehaviour
             gameObject.BroadcastMessage("IsOccupied");
         }
     */
-    void IsOccupied(bool value){
+    public void IsOccupied(bool value){
         isOccupied = value;
+    }
+    public int getBombCount(){
+        return bombCount;
+    }
+    public int getArrowCount(){
+        return arrowCount;
+    }
+    public void setBombCount(int b){
+        bombCount = b;
+    }
+    public void setArrowCount(int a){
+        arrowCount = a;
+    }
+    public PlayerMemento createMemento(){
+        //create a new memento and delete the old one
+        GameObject newMemento = Instantiate(memento, new Vector3(0, 0, 0), Quaternion.identity);
+        GameObject oldMemento = memento;
+        memento = newMemento;
+        Destroy(oldMemento);
+        memento.name = "PlayerMomento";
+
+        //find the newly made memento and return it to the caretaker
+        PlayerMemento playerMemento = FindObjectOfType<PlayerMemento>();
+        playerMemento.Init(bombCount, arrowCount);
+        return playerMemento;
+    }
+
+    private bool IsMobilePlatform()
+    {
+        return Application.platform == RuntimePlatform.Android ||
+               Application.platform == RuntimePlatform.IPhonePlayer; //||
+                //Application.isEditor; // Include Editor for testing with Unity Remote
     }
 }

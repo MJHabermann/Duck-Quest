@@ -1,44 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class DestroyableObject: MonoBehaviour
-{
-    // Start is called before the first frame update
-  public virtual void DestroyObject()
-    {
-        Destroy(gameObject);
-        Debug.Log("Destroyed Some Object");
-    }
-}
-
-
 public class Grass : DestroyableObject
 {
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Sword"))
-        {
-            DestroyObject();
-        }
-    }
     public GameObject drops;
+    //This will be my Dynamic binding
     public override void DestroyObject()
     {
         
         Debug.Log("Destroyed Grass Block");
-        Vector3 grassPosition = transform.position;
+        Vector3 grassPosition = transform.position;//Finds the grasses position
         Debug.Log(grassPosition.x + " " + grassPosition.y + " " + grassPosition.z);
-        if (drops != null) 
+        //This is how we know it will drop something
+        if (drops != null)
         {
-            Instantiate(drops, grassPosition, Quaternion.identity);
+            Instantiate(drops, grassPosition, Quaternion.identity); // Spawns drop
             Debug.Log("Item Dropped");
         }
         else
         {
             Debug.LogWarning("Item is not assigned to object");
         }
-        Destroy(gameObject);
+        Destroy(gameObject);//Destroys the grass
     }
 
 }

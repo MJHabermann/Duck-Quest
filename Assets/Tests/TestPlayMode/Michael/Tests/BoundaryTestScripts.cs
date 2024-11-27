@@ -7,8 +7,6 @@ using UnityEngine.TestTools;
 
 public class BoundaryTestScripts
 {
-    // A Test behaves as an ordinary method
-    //private bool sceneLoaded = false;
     [OneTimeSetUp]
     public void LoadedLevel()
     {
@@ -56,5 +54,4 @@ public class BoundaryTestScripts
             yield return new WaitForSeconds(1f);
         }
     }
-
 }

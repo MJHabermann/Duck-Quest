@@ -4,10 +4,10 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "Player",
+        "TylerScripts",
+        "IDamageable",
         "Unity.InputSystem",
-        "Unity.InputSystem.TestFramework",
-        "Unity.InputSystem.IntegrationTests"
+        "Unity.InputSystem.TestFramework"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

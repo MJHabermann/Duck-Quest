@@ -2,19 +2,20 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerHUD : MonoBehaviour
 {
-    public TMP_Text moneyText;  // Assign in Inspector
-    public Image[] heartImages;  // Assign in Inspector
+    public TMP_Text moneyText;
+    public Image[] heartImages;
+
+    public GameObject death;
 
     private int playerMoney;
-    private int maxHealth;
-    private int currentPlayerHealth;
+    public int maxHealth;
+    public int currentPlayerHealth;
 
     public float invincibilityDuration;
-
-    private bool isInvincible = false;
 
     void Start()
     {
@@ -37,42 +38,6 @@ public class PlayerHUD : MonoBehaviour
         // Update the UI at the start
         UpdateHealthUI();
         UpdateMoneyUI();
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if(other.CompareTag("Enemy") && !isInvincible)
-        {
-            TakeDamage();
-        }
-    }
-    public void TakeDamage()
-    {
-        if (currentPlayerHealth > 0)
-        {
-            currentPlayerHealth--;
-            UpdateHealthUI();
-            StartCoroutine(BecomeInvincible());
-        }
-        else if(currentPlayerHealth <= 0)
-        {
-            StopAllCoroutines();
-            PlayerDies();
-        }
-    }
-    
-    IEnumerator BecomeInvincible()
-    {
-        isInvincible = true;
-        Debug.Log("Player currently invincible");
-        yield return new WaitForSeconds(invincibilityDuration);
-        isInvincible = false;
-        Debug.Log("Player is no longer invincible.");
-    }
-
-    void PlayerDies()
-    {
-        Debug.Log("Player is dead.");
     }
     public void UpdateHealthUI()
     {
@@ -102,7 +67,7 @@ public class PlayerHUD : MonoBehaviour
         UpdateMoneyUI();
     }
 
-    private void UpdateMoneyUI()
+    public void UpdateMoneyUI()
     {
         if (moneyText != null)
         {
@@ -117,4 +82,21 @@ public class PlayerHUD : MonoBehaviour
     {
         return playerMoney;
     }
+
+    
+    private IEnumerator Dead()
+    {
+        Debug.Log("Dead message recieved");
+        death.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene("GameOver");
+    }
+
+    private void Hit()
+    {
+        Debug.Log("Hit message recieved");
+        currentPlayerHealth--;
+        UpdateHealthUI();
+    }
+    
 }

@@ -32,6 +32,7 @@ public class Bomb : MonoBehaviour
                 playSound();
             }
             animator.SetTrigger("Explosion");
+            this.tag = "ExplodingBomb";
         }
         if(timeSinceSpawned > timeBeforeDetonation + 1){
             rb.simulated = false;

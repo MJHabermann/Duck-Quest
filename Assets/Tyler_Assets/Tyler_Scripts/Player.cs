@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour
 {
@@ -232,7 +233,12 @@ public class Player : MonoBehaviour
     }
     
     public void OnSword(){
-        if(!isDead && !isOccupied){
+        if(!isDead && !isOccupied)
+        {
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return; // Block the sword swing if clicking on UI element
+            }
             //tell the ReachHitbox that a sword attack is happening
             gameObject.BroadcastMessage("swordAttack", true);
             //tell the animator that a sword attack is happening

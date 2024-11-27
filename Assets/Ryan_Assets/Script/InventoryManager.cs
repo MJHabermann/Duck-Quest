@@ -25,20 +25,13 @@ public class InventoryManager : MonoBehaviour
     private InputAction toggleInventoryAction; // Standalone action for Escape key
 
     private void Start()
-{
-    // Dynamically find HUD in case it's lost during scene transitions
-    hud = GameObject.Find("UI/PlayerHUD");
-    if (hud == null)
     {
-        Debug.LogError("HUD not found in the current scene.");
-    }
-    else
-    {
-        Debug.Log("HUD successfully reassigned.");
+        inputActions.FindActionMap("UI").Disable();
+        inputActions.FindActionMap("Player").Enable();
     }
 
-    EnablePlayerActions();
-}
+    //EnablePlayerActions();
+    
     private void Awake()
     {
         // Get references to action maps
@@ -64,6 +57,8 @@ public class InventoryManager : MonoBehaviour
 
     public void ToggleInventory(InputAction.CallbackContext context)
     {
+        uiActionMap.Enable();
+
         Debug.Log("Toggle inventory called");
         // Toggle the inventory menu
         menuActivated = !menuActivated;

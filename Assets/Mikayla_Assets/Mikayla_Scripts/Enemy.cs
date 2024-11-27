@@ -103,7 +103,6 @@ public class Enemy : MonoBehaviour
 
     }
 
-    //public void Attack()
     public virtual void Attack()
         {
         // Check if the player implements IDamageable

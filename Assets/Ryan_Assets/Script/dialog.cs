@@ -19,10 +19,19 @@ public class Dialog : MonoBehaviour
 
     public GameObject dialogBox;
     
+    // Yes/No choice elements
+    public GameObject choiceBox;          // Panel for Yes/No buttons
+    public TextMeshProUGUI choiceText;    // Text above the buttons
+    public GameObject yesButton;          // Yes button
+    public GameObject noButton;           // No button
+
+    private System.Action onYes;          // Action for Yes
+    private System.Action onNo;           // Action for No
     
     void Start()
     {
         textComponent.text = string.Empty;
+        if (choiceBox != null) choiceBox.SetActive(false);
     }
 
     void AdvanceDialogue()
@@ -110,5 +119,37 @@ public class Dialog : MonoBehaviour
 
         inputActions.FindActionMap("Player")?.Enable();
     }
+
+    public void ShowChoice(string message, System.Action yesAction, System.Action noAction)
+    {
+        dialogBox.SetActive(true);
+        choiceBox.SetActive(true);
+
+        choiceText.text = message;
+        onYes = yesAction;
+        onNo = noAction;
+
+        // Add listeners to Yes and No buttons
+        yesButton.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
+        yesButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() =>
+        {
+            onYes?.Invoke();
+            CloseChoice();
+        });
+
+        noButton.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
+        noButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() =>
+        {
+            onNo?.Invoke();
+            CloseChoice();
+        });
+    }
+
+    private void CloseChoice()
+    {
+        choiceBox.SetActive(false);
+        EndDialogue();
+    }
+
 
 }

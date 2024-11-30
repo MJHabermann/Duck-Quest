@@ -48,16 +48,55 @@ public class NormalDoor : Door
         inRoom = !inRoom;
     }
     //Spawns all of the enemies
+    // private void SpawnEnemies()
+    // {
+    //     //Spawns all of the enemies at the specific spawn points
+    //     foreach (Transform spawnPoint in enemySpawnPoints)
+    //     {
+    //         GameObject enemy = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
+    //     }
+    //     isRoomCleared = false;//room is not cleared because we initially spawn the enemies
+    //     Close();//Closes door
+    // }
     private void SpawnEnemies()
     {
-        //Spawns all of the enemies at the specific spawn points
+        // Spawns all of the enemies at the specific spawn points
         foreach (Transform spawnPoint in enemySpawnPoints)
         {
             GameObject enemy = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
+            Enemy enemyComponent = enemy.GetComponent<Enemy>();
+            if (enemy == null)
+            {
+                Debug.LogError($"Failed to instantiate enemyPrefab at position {spawnPoint.position}");
+                continue;
+            }
+
+            if (enemyComponent == null)
+            {
+                Debug.LogError($"The instantiated prefab does not have an Enemy component. Prefab: {enemyPrefab.name}");
+                continue;
+            }
+            if (enemyComponent.EnemyName == "Goblin")
+            {
+                // Assign waypoints if the enemy is a Goblin
+                Goblin goblin = enemy.GetComponent<Goblin>();
+                if (goblin != null)
+                {
+                    // Create two waypoints within 2f of the spawn position
+                    Transform waypoint1 = CreateWaypointNear(spawnPoint.position);
+                    Transform waypoint2 = CreateWaypointNear(spawnPoint.position);
+
+                    // Assign the waypoints to the Goblin
+                    Transform[] waypointsForGoblin = new Transform[] { waypoint1, waypoint2 };
+                    goblin.SetWaypoints(waypointsForGoblin);
+                }
+            }
+
             spawnedEnemies.Add(enemy);
         }
-        isRoomCleared = false;//room is not cleared because we initially spawn the enemies
-        Close();//Closes door
+
+        isRoomCleared = false; // Room is not cleared because we initially spawn the enemies
+        Close(); // Closes door
     }
     //This checks if the enemies are cleared in the room
     private void CheckEnemiesCleared()
@@ -97,5 +136,19 @@ public class NormalDoor : Door
             UpdateDoorSprite();
             DoorClosed?.Invoke(this);
         }
+    }
+
+    // Method to create a waypoint near a given position
+    private Transform CreateWaypointNear(Vector3 origin)
+    {
+        Vector3 offset = new Vector3(UnityEngine.Random.Range(-2f, 2f), UnityEngine.Random.Range(-3f, 3f), 0f);
+        Vector3 waypointPosition = origin + offset;
+
+        // Create a new GameObject to serve as the waypoint
+        GameObject waypoint = new GameObject("Waypoint");
+        Transform waypointTransform = waypoint.transform;
+        waypointTransform.position = waypointPosition;
+
+        return waypointTransform;
     }
 }

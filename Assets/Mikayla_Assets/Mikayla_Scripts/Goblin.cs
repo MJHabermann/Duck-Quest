@@ -28,6 +28,11 @@ public class Goblin : Enemy
         playerRb = target.GetComponent<Rigidbody2D>(); 
         rb = GetComponent<Rigidbody2D>();
         targetPosition = waypoints[currentWaypointIndex].position;
+        animator = GetComponent<Animator>();
+        if (animator == null)
+        {
+            Debug.LogError("Animator component is missing on the Goblin prefab!");
+        }
     }
 
 
@@ -95,6 +100,11 @@ public class Goblin : Enemy
             lastAttackTime = Time.time;  // Reset the attack cooldown
             Attack();
         }
+    }
+
+    public void SetWaypoints(Transform[] newWaypoints)
+    {
+        waypoints = newWaypoints;
     }
 }
 

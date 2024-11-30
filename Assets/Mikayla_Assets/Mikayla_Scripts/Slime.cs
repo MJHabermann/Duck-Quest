@@ -19,6 +19,12 @@ public class Slime : Enemy
         Speed = 1.5f;                 // Set slime's movement speed
         Damage = 1f;
 
+        animator = GetComponent<Animator>();
+        if (animator == null)
+        {
+            Debug.LogError("Animator component is missing on the Goblin prefab!");
+        }
+
         animator.SetFloat("Speed", 0);
         rb = GetComponent<Rigidbody2D>();
         playerRb = target.GetComponent<Rigidbody2D>(); 

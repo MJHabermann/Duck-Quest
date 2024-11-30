@@ -15,6 +15,7 @@ TagManager:
   - Inventory
   - PlayerItem
   - ExplodingBomb
+  - Priestess
   layers:
   - Default
   - TransparentFX

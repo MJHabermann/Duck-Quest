@@ -27,6 +27,8 @@ public class Dialog : MonoBehaviour
 
     private System.Action onYes;          // Action for Yes
     private System.Action onNo;           // Action for No
+
+    private bool dialogueFinished = false;        // Flag for BC Mode script
     
     void Start()
     {
@@ -72,7 +74,14 @@ public class Dialog : MonoBehaviour
     public void StartDialogue()
     {
         dialogBox.SetActive(true);
+        if (textComponent.gameObject != null)
+        {
+            textComponent.gameObject.SetActive(true);
+            textComponent.text = string.Empty;
+        }
+        if (choiceBox != null) choiceBox.SetActive(false);
         index = 0;
+        dialogueFinished = false;
         textComponent.text = string.Empty;
         StartCoroutine(TypeLine());
 
@@ -85,6 +94,7 @@ public class Dialog : MonoBehaviour
         foreach (char c in lines[index])
         {
             textComponent.text += c;
+            textComponent.ForceMeshUpdate();
             yield return new WaitForSeconds(textSpeed);
         }
     }
@@ -117,12 +127,15 @@ public class Dialog : MonoBehaviour
     {
         dialogBox.SetActive(false);
 
+        dialogueFinished = true;
+
         inputActions.FindActionMap("Player")?.Enable();
     }
 
     public void ShowChoice(string message, System.Action yesAction, System.Action noAction)
     {
-        dialogBox.SetActive(true);
+        inputActions.FindActionMap("Player")?.Disable();
+
         choiceBox.SetActive(true);
 
         choiceText.text = message;
@@ -134,6 +147,7 @@ public class Dialog : MonoBehaviour
         yesButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() =>
         {
             onYes?.Invoke();
+            Debug.Log("Player chose Yes");
             CloseChoice();
         });
 
@@ -141,6 +155,7 @@ public class Dialog : MonoBehaviour
         noButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() =>
         {
             onNo?.Invoke();
+            Debug.Log("Player chose no");
             CloseChoice();
         });
     }
@@ -148,7 +163,15 @@ public class Dialog : MonoBehaviour
     private void CloseChoice()
     {
         choiceBox.SetActive(false);
-        EndDialogue();
+        inputActions.FindActionMap("Player")?.Enable();
+    }
+
+    public IEnumerator WaitForDialogueToEndThenShowChoice()
+    {
+        // Wait until the dialogue is finished
+        yield return new WaitUntil(() => dialogueFinished);
+
+        
     }
 
 

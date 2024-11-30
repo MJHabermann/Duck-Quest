@@ -11,13 +11,28 @@ public class BCMode : MonoBehaviour
         // Check if the colliding object is the player
         if (other.gameObject.CompareTag("Player"))
         {
+            // Coroutine to make sure dialog and choice run one after the other
+            StartCoroutine(HandleOrder());   
+        }
+    }
+
+    private IEnumerator HandleOrder()
+    {
+        // Start dialogue
+        dialogue.StartDialogue();
+
+        // Make choice box inactive to begin with
+        dialogue.choiceBox.SetActive(false);
+        
+        // Wait for normal dialogue to end then start the choice
+        yield return dialogue.WaitForDialogueToEndThenShowChoice();
+            
             // Trigger the ShowChoice dialog
             dialogue.ShowChoice(
                 "Do you seek the blessing of the Priestess?",
                 () => AcceptBlessing(),   // Action for Yes
                 () => DeclineBlessing()  // Action for No
             );
-        }
     }
 
     private void AcceptBlessing()

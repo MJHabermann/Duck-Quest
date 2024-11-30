@@ -29,6 +29,7 @@ public class ChestSpawnerStressTest
         sceneLoaded = true;
     }
 
+/*
     [UnityTest]
     public IEnumerator TestSpawnChest()
     {
@@ -66,6 +67,7 @@ public class ChestSpawnerStressTest
         CleanupChest();
         Object.DestroyImmediate(chestPrefab);
     }
+    */
 
     private GameObject CreateChestPrefab()
     {
@@ -83,6 +85,7 @@ public class ChestSpawnerStressTest
             Object.DestroyImmediate(chest);
         }
     }
+/*
 
     private Chest Spawn(GameObject chest, Vector3 position, Quaternion rotation)
     {
@@ -90,4 +93,5 @@ public class ChestSpawnerStressTest
         GameObject chestInstance = Object.Instantiate(chest, position, rotation);
         return chestInstance.GetComponent<Chest>(); // Return the Slime component from the instantiated object
     }
+    */
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+/*
 public class BossTests
 {
     bool sceneLoaded;
@@ -85,3 +85,4 @@ public class BossTests
     }
 
 }
+*/

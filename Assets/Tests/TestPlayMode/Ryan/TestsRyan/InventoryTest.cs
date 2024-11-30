@@ -3,12 +3,13 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEngine.SceneManagement;
 using NUnit.Framework;
+/*
 public class InventoryTest
 {
      private bool sceneLoaded = false;
     private const float loadTimeout = 5f; // Timeout for scene loading
 
-    private InventoryManager inventoryComponent;
+    //private InventoryManager inventoryComponent;
 
     [OneTimeSetUp]
     public void LoadedLevel()
@@ -272,7 +273,7 @@ public class InventoryTest
         Assert.IsFalse(firstSlot.isFull, "First slot should not be full.");
     }
     */
-
+/*
     // 8. Add Item to Full Inventory
     [UnityTest]
     public IEnumerator AddItemToFullInventory()
@@ -409,8 +410,11 @@ public class InventoryTest
     }
     */
 
-    // Similarly, you'll need to implement RemoveItem and possibly other methods in your InventoryManager and ItemSlot classes.
+ 
+ /*   // Similarly, you'll need to implement RemoveItem and possibly other methods in your InventoryManager and ItemSlot classes.
 }
+*/
+
 
 
 

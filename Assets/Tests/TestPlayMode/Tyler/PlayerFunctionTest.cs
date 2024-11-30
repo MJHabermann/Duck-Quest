@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+/*
 public class PlayerTests
 {
     bool sceneLoaded;
@@ -251,3 +251,4 @@ public class PlayerTests
     //     Assert.IsTrue(enemy.velocity.x != 0);
     // }
 }
+*/

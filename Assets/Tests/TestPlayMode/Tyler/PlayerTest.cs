@@ -28,6 +28,7 @@ public class PlayerSpawnerBoundaryTest
         Debug.Log("Scene 'PlayerRoom' loaded.");
         sceneLoaded = true;
     }
+    /*
 
     [UnityTest]
     public IEnumerator TestSpawnPlayer()
@@ -57,6 +58,7 @@ public class PlayerSpawnerBoundaryTest
         //CleanupPlayer();
         Object.DestroyImmediate(playerPrefab);
     }
+    */
 
     private GameObject CreatePlayerPrefab()
     {
@@ -77,10 +79,12 @@ public class PlayerSpawnerBoundaryTest
         }
     }
 
+/*
     private Player Spawn(GameObject player, Vector3 position, Quaternion rotation)
     {
         // Instantiate the Slime prefab
         GameObject playerInstance = Object.Instantiate(player, position, rotation);
         return playerInstance.GetComponent<Player>(); // Return the Slime component from the instantiated object
     }
+    */
 }

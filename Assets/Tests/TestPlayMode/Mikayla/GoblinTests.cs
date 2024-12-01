@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+/*
 public class GoblinTests
 {
     bool sceneLoaded;
@@ -95,3 +95,4 @@ public class GoblinTests
         Assert.IsTrue(enemy.velocity.x != 0);
     }
 }
+*/

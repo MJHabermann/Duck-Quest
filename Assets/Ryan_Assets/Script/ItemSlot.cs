@@ -129,6 +129,15 @@ public class ItemSlot: MonoBehaviour, IPointerClickHandler
 
     public void EmptySlot()
     {
+        Debug.Log("EmptySlot called for item: " + itemName);
+
+        // Clear item data
+        itemName = "";
+        itemDescription = "";
+        itemSprite = emptySprite;
+        quantity = 0;
+        isFull = false;
+
         quantityText.enabled = false;
         itemImage.sprite = emptySprite;
         itemDescriptionNameText.text = "";
@@ -139,7 +148,7 @@ public class ItemSlot: MonoBehaviour, IPointerClickHandler
 
     public void OnRightClick()
     {
-        /*
+        
         //Create a new item
         GameObject itemToDrop = new GameObject(itemName);
         Item newItem = itemToDrop.AddComponent<Item>();
@@ -148,6 +157,7 @@ public class ItemSlot: MonoBehaviour, IPointerClickHandler
         newItem.sprite = itemSprite;
         newItem.itemDescription = itemDescription;
 
+        
         //Create and modify the SR
         SpriteRenderer sr = itemToDrop.AddComponent<SpriteRenderer>();
         sr.sprite = itemSprite;
@@ -155,14 +165,14 @@ public class ItemSlot: MonoBehaviour, IPointerClickHandler
         sr.sortingLayerName = "Ground";
 
         //Add a collider
-        itemToDrop.AddComponent<BoxCollider2D>();
+        var collider = itemToDrop.AddComponent<BoxCollider2D>();
+        collider.isTrigger = true;
 
         //set the location
-        itemToDrop.transform.position = GameObject.FindWithTag("Player").transform.position + new Vector3(.5f, 0, 0);
-        itemToDrop.transform.localScale = new Vector3(.5f, .5f, .5f);
-
-        */
-
+        itemToDrop.transform.position = GameObject.FindWithTag("Player").transform.position + new Vector3(2f, 0, 0);
+        itemToDrop.transform.localScale = itemImage.transform.localScale;
+        
+        
         //subtract item
         this.quantity -= 1;
         isFull = false;

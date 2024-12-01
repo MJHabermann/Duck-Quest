@@ -1,10 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using System.Linq;
 
 public class InventoryManager : MonoBehaviour
 {
     public GameObject inventoryMenu;
+
+    public GameObject joystick;
+
+    public GameObject hud;
     public bool menuActivated;
     [SerializeField] private Slider musicSlider;
 
@@ -19,6 +24,14 @@ public class InventoryManager : MonoBehaviour
     private InputActionMap uiActionMap;
     private InputAction toggleInventoryAction; // Standalone action for Escape key
 
+    private void Start()
+    {
+        inputActions.FindActionMap("UI").Disable();
+        inputActions.FindActionMap("Player").Enable();
+    }
+
+    //EnablePlayerActions();
+    
     private void Awake()
     {
         // Get references to action maps
@@ -44,18 +57,23 @@ public class InventoryManager : MonoBehaviour
 
     public void ToggleInventory(InputAction.CallbackContext context)
     {
+        uiActionMap.Enable();
+
+        Debug.Log("Toggle inventory called");
         // Toggle the inventory menu
         menuActivated = !menuActivated;
         inventoryMenu.SetActive(menuActivated);
+        joystick.SetActive(!menuActivated);
+        hud.SetActive(!menuActivated);
         Time.timeScale = menuActivated ? 0 : 1; // Pause/unpause the game
         if (menuActivated)
         {
-            EnableUIActions();
+            Debug.Log("Player actions disabled");
             DisablePlayerActions();
         }
         else
         {
-            DisableUIActions();
+            Debug.Log("Player Actions Enabled");
             EnablePlayerActions();
         }
         Debug.Log(menuActivated ? "Inventory opened" : "Inventory closed");
@@ -119,16 +137,6 @@ public class InventoryManager : MonoBehaviour
     {
         Debug.Log("Total item count: " + totalItemCount);
         return totalItemCount;
-    }
-
-    private void EnableUIActions()
-    {
-        uiActionMap.Enable();
-    }
-
-    private void DisableUIActions()
-    {
-        uiActionMap.Disable();
     }
 
     private void EnablePlayerActions()

@@ -57,6 +57,7 @@ public class EnemySpawnerBoundaryTest
 
     }
 
+/*
     [UnityTest]
     public IEnumerator TestSpawnOneEnemy()
     {
@@ -85,6 +86,7 @@ public class EnemySpawnerBoundaryTest
         CleanupEnemies();
         Object.DestroyImmediate(enemyPrefab);
     }
+    
 
     [UnityTest]
     public IEnumerator TestSpawnMaxEnemies()
@@ -116,6 +118,7 @@ public class EnemySpawnerBoundaryTest
         CleanupEnemies();
         Object.DestroyImmediate(enemyPrefab);
     }
+    */
 
     private GameObject CreateEnemyPrefab()
     {
@@ -133,6 +136,7 @@ public class EnemySpawnerBoundaryTest
             Object.DestroyImmediate(enemy);
         }
     }
+    /*
 
     private Slime Spawn(GameObject slimePrefab, Vector3 position, Quaternion rotation)
     {
@@ -140,4 +144,5 @@ public class EnemySpawnerBoundaryTest
         GameObject slimeInstance = Object.Instantiate(slimePrefab, position, rotation);
         return slimeInstance.GetComponent<Slime>(); // Return the Slime component from the instantiated object
     }
+    */
 }

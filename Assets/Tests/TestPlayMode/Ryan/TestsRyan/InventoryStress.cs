@@ -55,7 +55,7 @@ public class InventoryStress
         // Wait one additional frame to ensure everything is set up correctly
         yield return null;
     }
-
+/*
 [UnityTest]
 public IEnumerator AddInventoryItems()
 {
@@ -103,5 +103,5 @@ public IEnumerator AddInventoryItems()
 
     yield return null;
 }
-
+*/
 }

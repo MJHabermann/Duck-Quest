@@ -19,6 +19,12 @@ public class Slime : Enemy
         Speed = 1.5f;                 // Set slime's movement speed
         Damage = 1f;
 
+        animator = GetComponent<Animator>();
+        if (animator == null)
+        {
+            Debug.LogError("Animator component is missing on the Goblin prefab!");
+        }
+
         animator.SetFloat("Speed", 0);
         rb = GetComponent<Rigidbody2D>();
         playerRb = target.GetComponent<Rigidbody2D>(); 
@@ -85,3 +91,31 @@ public class Slime : Enemy
         }
     }
 }
+
+// Copyright argument
+// The four factors judges consider in fair use are:
+// Purpose and character of your use (nonprofit/educational vs. commercial) (transformative)
+// Nature of the copyrighted work (factual vs. creative)
+// Amount and substantiality of the portion taken.
+// Effect of the use upon the potential market
+
+// Transformative: In the video game, the enemy slime sprite is integrated into a larger 
+// interactive experience that involves unique gameplay, story, sound, and additional visual assets.
+// This integration changes the context of the original slime sprite, making it a component 
+//of a broader work rather than a standalone asset. Transforming the sprite’s function within 
+//the game and placing it in a new, creative environment aligns with fair use principles.
+
+// Different Market and Purpose: When a purchased sprite is modified and integrated into a 
+//larger game, the market for the game is generally distinct from the market for the original 
+//sprite. The sprite, as sold, is intended for other developers to use in their own projects,
+// not for end users to experience directly. By contrast, the market for the game appeals to 
+//players seeking interactive entertainment, rather than developers seeking reusable assets. 
+// This difference in audience and purpose helps support a fair use argument because the 
+// commercial game does not directly compete with or replace the need for the original sprite asset.
+
+// No Harm to Original Sprite Sales: If the original sprite is modified and only used within 
+//the context of a larger game, this generally doesn’t reduce the demand for the original sprite. 
+//Other developers can still purchase and use the original asset in their own projects, 
+//meaning the market for the sprite itself remains intact. As long as the game doesn’t sell the 
+//sprite in isolation or offer it in a way that competes with the original, there is minimal 
+//impact on the market for the asset.

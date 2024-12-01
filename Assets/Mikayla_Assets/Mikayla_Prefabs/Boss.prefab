@@ -77,15 +77,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 20
   enemyName: Boss
+  damage: 0
+  knockbackForce: 5
+  target: {fileID: 8861219098749721023, guid: 54e5ff90eabc51f48ac70159e4df61e8, type: 3}
   animator: {fileID: 0}
   speed: 0
-  projectilePrefab: {fileID: 8522138926694928871, guid: 099831c921ff04f40be263e17bb36237, type: 3}
+  projectilePrefab: {fileID: 6406247570101366658, guid: f5858ce65ae484ab996086789019c892, type: 3}
   chaseRadius: 10
   firePoint: {fileID: 0}
   bossAttackCooldown: 1.5
   chaseSpeed: 4
   bossAttackRange: 5
-  target: {fileID: 8861219098749721023, guid: 54e5ff90eabc51f48ac70159e4df61e8, type: 3}
 --- !u!212 &3550990624939562140
 SpriteRenderer:
   m_ObjectHideFlags: 0

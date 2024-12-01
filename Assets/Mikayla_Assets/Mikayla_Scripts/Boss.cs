@@ -118,3 +118,13 @@ public class Boss : Enemy
         } 
     }
 }
+
+// Choose a dynamically bound method. What method gets called now? 
+// (In Start function)
+// Enemy enemy = new Boss(); // Upcasting Slime to Enemy 
+// enemy.Attack(); // Dynamic binding: calls Boss's Attack method at runtime 
+
+// Pick a statically bound method. Which one would be called in each of the two previous cases?
+// Enemy enemy = new Enemy(); enemy.Attack(); // Static binding: calls Enemy's Attack method 
+//Boss boss = new Boss(); boss.Attack(); // Static binding: calls Boss's overridden Attack method
+

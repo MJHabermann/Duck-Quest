@@ -30,8 +30,28 @@ public class NormalDoor : Door
     //Checks if we are in the room yet
     public override void Update()
     {
-        base.Update();
-        if(inRoom)
+        //If the camera is panning because the player collided with the door
+        if (isPanning)
+        {
+            //Start moving the camera and player position
+            mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, targetPosition, panSpeed * Time.deltaTime);
+            player.transform.position = Vector3.Lerp(player.transform.position, playerTargetPosition, panSpeed * Time.deltaTime);
+            //This is what happens when the camera has moved up enough, signfying we have stopped moving
+            if (Vector3.Distance(mainCamera.transform.position, targetPosition) < 0.01f && Vector3.Distance(player.transform.position, playerTargetPosition) < 0.01f)
+            {
+                mainCamera.transform.position = targetPosition;
+                player.transform.position = playerTargetPosition;
+                isPanning = false;
+                isTransitioning = false;
+                playerSpriteRenderer.enabled = true;
+                if (!roomExplored)
+                {
+                    SpawnEnemies();
+                    roomExplored = true;
+                }
+            }
+        }
+        if (inRoom)
         {
             CheckEnemiesCleared();
         }
@@ -40,11 +60,7 @@ public class NormalDoor : Door
     public override void StartPanning()
     {
         base.StartPanning();
-        if(!roomExplored)
-        {
-            SpawnEnemies();
-            roomExplored = true;
-        }
+
         inRoom = !inRoom;
     }
     //Spawns all of the enemies

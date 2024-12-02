@@ -9,7 +9,6 @@ using UnityEngine.EventSystems;
 public class Player : MonoBehaviour
 {
     //if on mobile use joystick for movement
-    public GameObject joystick;
     public Joystick movementJoystick;
     public float collisionOffset = 1f;
     public ContactFilter2D movementFilter;

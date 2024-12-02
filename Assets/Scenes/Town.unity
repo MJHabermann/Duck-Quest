@@ -43391,6 +43391,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue: {fileID: 507426081}
+--- !u!1 &451665737 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2147026950067690464, guid: 4f2fefee615fc4fae8fc4c20872ee103, type: 3}
+  m_PrefabInstance: {fileID: 1906602106136421262}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &454764061
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46997,7 +47002,7 @@ PrefabInstance:
     - target: {fileID: 3733519083659684662, guid: 54e5ff90eabc51f48ac70159e4df61e8, type: 3}
       propertyPath: m_UIInputModule
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 700176744}
     - target: {fileID: 6140373099134245732, guid: 54e5ff90eabc51f48ac70159e4df61e8, type: 3}
       propertyPath: m_Name
       value: Player
@@ -47009,7 +47014,7 @@ PrefabInstance:
     - target: {fileID: 8202051964002852030, guid: 54e5ff90eabc51f48ac70159e4df61e8, type: 3}
       propertyPath: joystick
       value: 
-      objectReference: {fileID: 167389141}
+      objectReference: {fileID: 451665737}
     - target: {fileID: 8202051964002852030, guid: 54e5ff90eabc51f48ac70159e4df61e8, type: 3}
       propertyPath: movementJoystick
       value: 
@@ -65412,13 +65417,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2147026950067690464, guid: 4f2fefee615fc4fae8fc4c20872ee103, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5631719064836805269, guid: 4f2fefee615fc4fae8fc4c20872ee103, type: 3}
       propertyPath: m_Name
       value: Joystick
       objectReference: {fileID: 0}
     - target: {fileID: 5631719064836805269, guid: 4f2fefee615fc4fae8fc4c20872ee103, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -15,8 +15,6 @@ public class PlayerHUD : MonoBehaviour
     public int maxHealth;
     public int currentPlayerHealth;
 
-    public float invincibilityDuration;
-
     void Start()
     {
         // Debugging for missing assignments

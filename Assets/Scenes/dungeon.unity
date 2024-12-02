@@ -36440,7 +36440,7 @@ PrefabInstance:
     - target: {fileID: 5367159622359420281, guid: 2c279786a1067495a990727d865555f2, type: 3}
       propertyPath: hud
       value: 
-      objectReference: {fileID: 7129988332809632008}
+      objectReference: {fileID: 7129988332809632010}
     - target: {fileID: 5367159622359420281, guid: 2c279786a1067495a990727d865555f2, type: 3}
       propertyPath: joystick
       value: 
@@ -51638,6 +51638,11 @@ GameObject:
 --- !u!224 &7129988332809632009 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8439633003121967653, guid: 1d995f1cd182b400aaf48cade9154d8c, type: 3}
+  m_PrefabInstance: {fileID: 7129988332809632007}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7129988332809632010 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4434191181443007544, guid: 1d995f1cd182b400aaf48cade9154d8c, type: 3}
   m_PrefabInstance: {fileID: 7129988332809632007}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &7129988332809632016

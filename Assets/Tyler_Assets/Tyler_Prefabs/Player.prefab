@@ -339,7 +339,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd41d0dbeb0c9fd44829b2560943aff1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joystick: {fileID: 0}
   movementJoystick: {fileID: 0}
   collisionOffset: 0.1
   movementFilter:

@@ -6,6 +6,8 @@ public class BCMode : MonoBehaviour
 {
     public Dialog dialogue; // Reference to your Dialog script
 
+    private PlayerHUD hud;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         // Check if the colliding object is the player
@@ -38,12 +40,14 @@ public class BCMode : MonoBehaviour
     private void AcceptBlessing()
     {
         Debug.Log("The player has accepted the blessing.");
-        // Add logic for accepting the blessing (e.g., boost stats, heal, etc.)
+        hud.currentPlayerHealth = 10000;
+        dialogue.choiceBox.SetActive(false);
     }
 
     private void DeclineBlessing()
     {
         Debug.Log("The player has declined the blessing.");
         // Add logic for declining (e.g., neutral response, dialogue continues, etc.)
+        dialogue.choiceBox.SetActive(false);
     }
 }

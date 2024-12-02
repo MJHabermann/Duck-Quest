@@ -646,23 +646,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2088bd9b81d21403db3623db337bfe83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHUD: {fileID: 215030367}
+  playerHUD: {fileID: 0}
   playerInventory: {fileID: 1321770277}
   moneyAmount: 1000
   isPlayerNearby: 0
   isLocked: 1
   chestHasBeenOpened: 0
---- !u!114 &215030367 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3090626488286499226, guid: 1d995f1cd182b400aaf48cade9154d8c, type: 3}
-  m_PrefabInstance: {fileID: 7129988332809632007}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7129988332809632008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9e587c71e480419bbecc447645a6e7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &224022269
 GameObject:
   m_ObjectHideFlags: 0
@@ -5066,7 +5055,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 1d995f1cd182b400aaf48cade9154d8c, type: 3}
 --- !u!1 &7129988332809632008 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 5110460055139725599, guid: 1d995f1cd182b400aaf48cade9154d8c, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4434191181443007544, guid: 1d995f1cd182b400aaf48cade9154d8c, type: 3}
   m_PrefabInstance: {fileID: 7129988332809632007}
   m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807

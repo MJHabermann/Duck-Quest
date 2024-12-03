@@ -57,21 +57,25 @@ public class Dialog : MonoBehaviour
     private void Awake()
     {
         // Initialize the InputAction to detect a click
-        clickAction = new InputAction(type: InputActionType.Button, binding: "<Pointer>/press");
+        clickAction = inputActions.FindActionMap("UI").FindAction("Click");
+        if(clickAction == null)
+        {
+            Debug.Log("click action is null");
+        }
         clickAction.performed += ctx => AdvanceDialogue();
     }
 
     private void OnEnable()
     {
         // Enable the action when the script is active
-        clickAction.Enable();
+        clickAction?.Enable();
         
     }
 
     private void OnDisable()
     {
         // Disable the action when the script is not active
-        clickAction.Disable();
+        clickAction?.Disable();
     }
 
     public void StartDialogue()

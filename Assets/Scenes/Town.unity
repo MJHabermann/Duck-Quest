@@ -43625,6 +43625,7 @@ MonoBehaviour:
   choiceText: {fileID: 0}
   yesButton: {fileID: 0}
   noButton: {fileID: 0}
+  hud: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

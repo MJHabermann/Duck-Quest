@@ -30,7 +30,7 @@ public class Dialog : MonoBehaviour
 
     private bool dialogueFinished = false;        // Flag for BC Mode script
 
-    public PlayerHUD hud;
+    private static Dialog instance;
     
     void Start()
     {
@@ -41,6 +41,12 @@ public class Dialog : MonoBehaviour
 
     void AdvanceDialogue()
     {
+        if (this == null || !gameObject.activeInHierarchy) 
+        {
+            //Debug.Log("advance is null");
+            return;
+        }
+        
         if(clickAction.triggered)
         {
             if(textComponent.text == lines[index])
@@ -74,8 +80,15 @@ public class Dialog : MonoBehaviour
 
     private void OnDisable()
     {
+        clickAction.performed -= ctx => AdvanceDialogue();
         // Disable the action when the script is not active
         clickAction?.Disable();
+    }
+
+    private void OnDestroy()
+    {
+        // Cleanup the event subscription to prevent memory leaks
+        clickAction.performed -= ctx => AdvanceDialogue();
     }
 
     public void StartDialogue()
@@ -101,7 +114,6 @@ public class Dialog : MonoBehaviour
         foreach (char c in lines[index])
         {
             textComponent.text += c;
-            textComponent.ForceMeshUpdate();
             yield return new WaitForSeconds(textSpeed);
         }
     }

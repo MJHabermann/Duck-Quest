@@ -14,17 +14,21 @@ public class PopupTile : MonoBehaviour
     {
         animator.SetBool("isBlue", isBlue);
         //set default status to up 
-        if(isBlue){
+        if (isBlue)
+        {
             isUp = true;
             animator.SetBool("isUp", isUp);
-        }else{
+        }
+        else
+        {
             isUp = false;
             animator.SetBool("isUp", isUp);
         }
         // tileCollider.enabled = isUp;
     }
 
-    void switchWasHit(){
+    void switchWasHit()
+    {
         Debug.Log("tile told by parent");
         isUp = !isUp;
         animator.SetBool("isUp", isUp);

@@ -49,6 +49,8 @@ public class Player : MonoBehaviour
     private Vector3 playerDirection;
     private bool MS = false;
     // private PlayerMemento memento;
+    private bool isPointerOverUI = false;
+
 
     private void Start()
     {
@@ -62,7 +64,7 @@ public class Player : MonoBehaviour
     }
 
     void FixedUpdate(){
-
+        isPointerOverUI = EventSystem.current.IsPointerOverGameObject();
         if(IsMobilePlatform())
         {
             moveInput = movementJoystick.Direction;
@@ -234,7 +236,7 @@ public class Player : MonoBehaviour
     public void OnSword(){
         if(!isDead && !isOccupied)
         {
-            if (EventSystem.current.IsPointerOverGameObject())
+            if (!isPointerOverUI)
             {
                 return; // Block the sword swing if clicking on UI element
             }

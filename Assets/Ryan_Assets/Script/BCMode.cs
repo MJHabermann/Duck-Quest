@@ -37,17 +37,16 @@ public class BCMode : MonoBehaviour
             );
     }
 
-    private void AcceptBlessing()
+    public void AcceptBlessing()
     {
         Debug.Log("The player has accepted the blessing.");
         hud.currentPlayerHealth = 10000;
         dialogue.choiceBox.SetActive(false);
     }
 
-    private void DeclineBlessing()
+    public void DeclineBlessing()
     {
         Debug.Log("The player has declined the blessing.");
-        // Add logic for declining (e.g., neutral response, dialogue continues, etc.)
         dialogue.choiceBox.SetActive(false);
     }
 }

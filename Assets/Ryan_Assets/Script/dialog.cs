@@ -134,6 +134,7 @@ public class Dialog : MonoBehaviour
 
     public void ShowChoice(string message, System.Action yesAction, System.Action noAction)
     {
+        Debug.Log("ShowChoice called with message: " + message);
         inputActions.FindActionMap("Player")?.Disable();
 
         choiceBox.SetActive(true);

@@ -836,7 +836,7 @@ public partial class @Duck_Quest: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""4faf7dc9-b979-4210-aa8c-e808e1ef89f5"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Pointer>/press"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",

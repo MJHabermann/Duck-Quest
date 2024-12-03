@@ -26,7 +26,7 @@ public class InventoryManager : MonoBehaviour
 
     private void Start()
     {
-        inputActions.FindActionMap("UI").Disable();
+        inputActions.FindActionMap("UI").Enable();
         inputActions.FindActionMap("Player").Enable();
     }
 

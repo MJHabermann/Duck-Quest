@@ -6,7 +6,7 @@ public class BCMode : MonoBehaviour
 {
     public Dialog dialogue; // Reference to your Dialog script
 
-    private PlayerHUD hud;
+    public PlayerHUD hud;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -39,6 +39,7 @@ public class BCMode : MonoBehaviour
     {
         Debug.Log("The player has accepted the blessing.");
         hud.currentPlayerHealth = 10000;
+        Debug.Log("current player health: 10000");
     }
 
     public void DeclineBlessing()

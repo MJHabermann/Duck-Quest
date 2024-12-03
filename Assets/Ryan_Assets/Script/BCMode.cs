@@ -7,12 +7,14 @@ public class BCMode : MonoBehaviour
     public Dialog dialogue; // Reference to your Dialog script
 
     public PlayerHUD hud;
+    public IDamageable player;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         // Check if the colliding object is the player
         if (other.gameObject.CompareTag("Player"))
         {
+            player = other.GetComponent<IDamageable>();
             // Coroutine to make sure dialog and choice run one after the other
             StartCoroutine(HandleOrder());   
         }
@@ -38,8 +40,9 @@ public class BCMode : MonoBehaviour
     public void AcceptBlessing()
     {
         Debug.Log("The player has accepted the blessing.");
-        hud.currentPlayerHealth = 10000;
-        Debug.Log("current player health: 10000");
+        player.OnHit(-10000);
+        // hud.currentPlayerHealth = 10000;
+        Debug.Log("current player health: " + player.Health);
     }
 
     public void DeclineBlessing()

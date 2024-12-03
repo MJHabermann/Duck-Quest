@@ -29,12 +29,15 @@ public class Dialog : MonoBehaviour
     private System.Action onNo;           // Action for No
 
     private bool dialogueFinished = false;        // Flag for BC Mode script
+
+    public PlayerHUD hud;
     
     void Start()
     {
         textComponent.text = string.Empty;
         if (choiceBox != null) choiceBox.SetActive(false);
     }
+
 
     void AdvanceDialogue()
     {
@@ -128,8 +131,11 @@ public class Dialog : MonoBehaviour
         dialogBox.SetActive(false);
 
         dialogueFinished = true;
-
-        inputActions.FindActionMap("Player")?.Enable();
+        if(choiceBox == null || !choiceBox.activeSelf)
+        {
+            inputActions.FindActionMap("Player")?.Enable();
+        }
+        
     }
 
     public void ShowChoice(string message, System.Action yesAction, System.Action noAction)
@@ -144,15 +150,17 @@ public class Dialog : MonoBehaviour
         onNo = noAction;
 
         // Add listeners to Yes and No buttons
-        yesButton.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
+        //yesButton.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
         yesButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() =>
         {
+            //hud.currentPlayerHealth = 10000;
             onYes?.Invoke();
             Debug.Log("Player chose Yes");
+            
             CloseChoice();
         });
 
-        noButton.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
+        //noButton.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
         noButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() =>
         {
             onNo?.Invoke();
@@ -161,11 +169,13 @@ public class Dialog : MonoBehaviour
         });
     }
 
+    
     private void CloseChoice()
     {
         choiceBox.SetActive(false);
         inputActions.FindActionMap("Player")?.Enable();
     }
+    
 
     public IEnumerator WaitForDialogueToEndThenShowChoice()
     {

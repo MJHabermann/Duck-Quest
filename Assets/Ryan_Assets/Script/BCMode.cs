@@ -22,12 +22,10 @@ public class BCMode : MonoBehaviour
     {
         // Start dialogue
         dialogue.StartDialogue();
-
-        // Make choice box inactive to begin with
-        dialogue.choiceBox.SetActive(false);
         
         // Wait for normal dialogue to end then start the choice
         yield return dialogue.WaitForDialogueToEndThenShowChoice();
+
             
             // Trigger the ShowChoice dialog
             dialogue.ShowChoice(
@@ -41,12 +39,10 @@ public class BCMode : MonoBehaviour
     {
         Debug.Log("The player has accepted the blessing.");
         hud.currentPlayerHealth = 10000;
-        dialogue.choiceBox.SetActive(false);
     }
 
     public void DeclineBlessing()
     {
         Debug.Log("The player has declined the blessing.");
-        dialogue.choiceBox.SetActive(false);
     }
 }

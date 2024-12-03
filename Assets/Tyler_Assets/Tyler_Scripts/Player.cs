@@ -320,4 +320,9 @@ public class Player : MonoBehaviour
                Application.platform == RuntimePlatform.IPhonePlayer; //||
                 //Application.isEditor; // Include Editor for testing with Unity Remote
     }
+
+    void OnDestroy(){
+        GameObject gameObject = GameObject.Find("PlayerHUD");
+        gameObject.BroadcastMessage("Save");
+    }
 }

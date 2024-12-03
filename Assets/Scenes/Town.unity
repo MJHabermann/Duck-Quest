@@ -43240,7 +43240,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.120238304, y: 0.010182977}
+  m_Offset: {x: 0, y: 6}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -43251,7 +43251,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.3492727, y: 4.9528255}
+  m_Size: {x: 10, y: 5}
   m_EdgeRadius: 0
 --- !u!212 &402649958
 SpriteRenderer:
@@ -43321,7 +43321,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 402649955}
   m_LocalRotation: {x: -0, y: -0.1564345, z: -0, w: 0.98768836}
-  m_LocalPosition: {x: 0, y: 0, z: 6.35}
+  m_LocalPosition: {x: 0, y: 0, z: 4.85}
   m_LocalScale: {x: 0.36999995, y: 0.31964496, z: 0.17514792}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -43330,7 +43330,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -18, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6.59, y: -6.66}
+  m_AnchoredPosition: {x: 1.98, y: -17.31}
   m_SizeDelta: {x: 700, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!61 &402649962
@@ -43376,7 +43376,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 17, y: 11.6}
   m_EdgeRadius: 0
 --- !u!114 &402649963
 MonoBehaviour:
@@ -43614,10 +43614,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 1021759588}
   lines:
-  - 'Waddles: "Ah, a brave one, are you? The path to the dungeon is... well, overgrown,
-    you might say. Those bushes stand in the way, but a sharp blade and a steady
-    hand should clear it up."'
-  - '"Quack"'
+  - '"Beach is closed on account of some jerk crashing their ship."'
+  - '"Perhaps your quest has you going somewhere else. Quack."'
   textSpeed: 0.01
   inputActions: {fileID: -944628639613478452, guid: 78059e1df8cbdb641b206cc720d332c2, type: 3}
   dialogBox: {fileID: 1014257408}
@@ -45185,6 +45183,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Priestess of the Duck
       objectReference: {fileID: 0}
+    - target: {fileID: 5387484327716990003, guid: d5cdfec5cd96efe4985667b356c17a50, type: 3}
+      propertyPath: m_TagString
+      value: Priestess
+      objectReference: {fileID: 0}
     - target: {fileID: 5450675637223628773, guid: d5cdfec5cd96efe4985667b356c17a50, type: 3}
       propertyPath: m_SortingOrder
       value: 0
@@ -45795,7 +45797,7 @@ Transform:
   m_GameObject: {fileID: 1357215142}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.960063, y: -5.4796357, z: -0.21959996}
+  m_LocalPosition: {x: -2.18, y: -27.92, z: -0.21959996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

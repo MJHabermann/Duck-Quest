@@ -255,6 +255,10 @@ MonoBehaviour:
   textSpeed: 0.01
   inputActions: {fileID: -944628639613478452, guid: 78059e1df8cbdb641b206cc720d332c2, type: 3}
   dialogBox: {fileID: 4948976506464115753}
+  choiceBox: {fileID: 0}
+  choiceText: {fileID: 0}
+  yesButton: {fileID: 0}
+  noButton: {fileID: 0}
 --- !u!1 &4948976506464115753
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,7 +351,7 @@ GameObject:
   - component: {fileID: 5840385927200468656}
   m_Layer: 0
   m_Name: NPC
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -236,7 +236,7 @@ public class Player : MonoBehaviour
     public void OnSword(){
         if(!isDead && !isOccupied)
         {
-            if (!isPointerOverUI)
+            if (isPointerOverUI)
             {
                 return; // Block the sword swing if clicking on UI element
             }

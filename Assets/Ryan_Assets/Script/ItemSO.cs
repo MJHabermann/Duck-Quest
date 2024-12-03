@@ -33,6 +33,11 @@ public class ItemSO : ScriptableObject
             return true; // Item successfully used
         }
 
+        if(statToChange == StatToChange.key)
+        {
+            //key logic
+        }
+
         return false; // Item not used
         
         
@@ -42,12 +47,9 @@ public class ItemSO : ScriptableObject
     public enum StatToChange
     {
         none,
-        health
+        health,
+
+        key
     };
 
-    public enum AttributesToChange
-    {
-        none,
-        heatlh
-    };
 }

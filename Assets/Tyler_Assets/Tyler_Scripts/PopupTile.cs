@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PopupTile : MonoBehaviour
+public class PopupTile : PopUpParent
 {
     public bool isBlue = true;
     public bool isUp = true;
-    public PopupSwitch popupSwitch;
+    //public PopupSwitch popupSwitch;
     public Collider2D tileCollider;
     public Animator animator;
     // Start is called before the first frame update
@@ -26,11 +26,21 @@ public class PopupTile : MonoBehaviour
         }
         // tileCollider.enabled = isUp;
     }
-
-    void switchWasHit()
+    private void Update()
+    {
+        if (isBlue)
+        {
+            SwitchWasHit(BlueUp);
+        }
+        else
+        {
+            SwitchWasHit(!BlueUp);
+        }
+    }
+    void SwitchWasHit(bool state)
     {
         Debug.Log("tile told by parent");
-        isUp = !isUp;
+        isUp = state;
         animator.SetBool("isUp", isUp);
         // tileCollider.enabled = isUp;
     }

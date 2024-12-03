@@ -300,6 +300,10 @@ public class Player : MonoBehaviour
         arrowCount += a;
     }
 
+    public void increaseHealth(float h){
+        playerHealth.Health += h;
+    }
+
     public PlayerMemento createMemento(){
         //create a new memento and delete the old one
         GameObject newMemento = Instantiate(memento, new Vector3(0, 0, 0), Quaternion.identity);

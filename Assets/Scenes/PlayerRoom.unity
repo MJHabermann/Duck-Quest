@@ -4167,19 +4167,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6415491245601544181, guid: d5cdfec5cd96efe4985667b356c17a50, type: 3}
       propertyPath: lines.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6415491245601544181, guid: d5cdfec5cd96efe4985667b356c17a50, type: 3}
       propertyPath: lines.Array.data[0]
       value: '"You''re finally awake! You crashed your ship during that storm last
-        night. Your wreck should still be on the beach to the south. You might be
-        able to find some of your things there. '
+        night. Our mechanic might be able to make a new one for you, but he got captured
+        by goblins. If you can rescue him, he might be able to help you."'
       objectReference: {fileID: 0}
     - target: {fileID: 6415491245601544181, guid: d5cdfec5cd96efe4985667b356c17a50, type: 3}
       propertyPath: lines.Array.data[1]
       value: '"If you use *W, A, S, and D* you can move around! Or that''s at least
         what the youngsters around town say. Us old folk used our legs back in our
         day!"'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6415491245601544181, guid: d5cdfec5cd96efe4985667b356c17a50, type: 3}
+      propertyPath: lines.Array.data[2]
+      value: '"Also, it''s dangerous to go alone. Here, take this sword."'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

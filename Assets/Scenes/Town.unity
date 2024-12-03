@@ -581,11 +581,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2623662053169802347, guid: d5cdfec5cd96efe4985667b356c17a50, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.31011644
+      value: 0.6402404
       objectReference: {fileID: 0}
     - target: {fileID: 2623662053169802347, guid: d5cdfec5cd96efe4985667b356c17a50, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.5
+      value: 0.64000005
       objectReference: {fileID: 0}
     - target: {fileID: 2949261615284578911, guid: d5cdfec5cd96efe4985667b356c17a50, type: 3}
       propertyPath: m_Sprite
@@ -705,11 +705,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6268796146575822323, guid: d5cdfec5cd96efe4985667b356c17a50, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.31011644
+      value: 0.6402404
       objectReference: {fileID: 0}
     - target: {fileID: 6268796146575822323, guid: d5cdfec5cd96efe4985667b356c17a50, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.5
+      value: 0.64000005
       objectReference: {fileID: 0}
     - target: {fileID: 6415491245601544181, guid: d5cdfec5cd96efe4985667b356c17a50, type: 3}
       propertyPath: lines.Array.data[0]
@@ -43625,7 +43625,6 @@ MonoBehaviour:
   choiceText: {fileID: 0}
   yesButton: {fileID: 0}
   noButton: {fileID: 0}
-  hud: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -45187,6 +45186,10 @@ PrefabInstance:
       value: Priestess of the Duck
       objectReference: {fileID: 0}
     - target: {fileID: 5450675637223628773, guid: d5cdfec5cd96efe4985667b356c17a50, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5450675637223628773, guid: d5cdfec5cd96efe4985667b356c17a50, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
@@ -45524,11 +45527,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2623662053169802347, guid: d5cdfec5cd96efe4985667b356c17a50, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.22008263
+      value: 0.6402404
       objectReference: {fileID: 0}
     - target: {fileID: 2623662053169802347, guid: d5cdfec5cd96efe4985667b356c17a50, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.48000002
+      value: 0.64000005
       objectReference: {fileID: 0}
     - target: {fileID: 2949261615284578911, guid: d5cdfec5cd96efe4985667b356c17a50, type: 3}
       propertyPath: m_Sprite
@@ -45648,11 +45651,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6268796146575822323, guid: d5cdfec5cd96efe4985667b356c17a50, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.22008263
+      value: 0.6402404
       objectReference: {fileID: 0}
     - target: {fileID: 6268796146575822323, guid: d5cdfec5cd96efe4985667b356c17a50, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.48000002
+      value: 0.64000005
       objectReference: {fileID: 0}
     - target: {fileID: 6415491245601544181, guid: d5cdfec5cd96efe4985667b356c17a50, type: 3}
       propertyPath: lines.Array.size
@@ -46926,6 +46929,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue: {fileID: 324702984}
+  hud: {fileID: 1961208041}
 --- !u!1 &1644554894
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,6 +9,8 @@ public class heartItem : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             //add function to increase player health
+            Player player = other.GetComponent<Player>();
+            player.increaseHealth(1);
             Debug.Log("collected heart");
             Destroy(gameObject);
         }

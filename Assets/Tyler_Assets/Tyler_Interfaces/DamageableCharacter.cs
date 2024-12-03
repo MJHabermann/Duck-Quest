@@ -23,7 +23,7 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
                 disableSimulation = true;
                 Targetable = false;
                 gameObject.BroadcastMessage("Dead");
-                hud = GameObject.Find("PlayerHUD");
+                // hud = GameObject.Find("PlayerHUD");
                 hud.BroadcastMessage("Dead");
             }
         }
@@ -54,6 +54,7 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
         animator.SetBool("isAlive", isAlive);
         rb = GetComponent<Rigidbody2D>();
         physicsCollider = GetComponent<Collider2D>();
+        hud = GameObject.Find("PlayerHUD");
     }
 
     public void OnHit(float damage, Vector2 knockback){

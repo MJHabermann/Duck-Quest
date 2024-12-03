@@ -47746,6 +47746,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bombCount: 0
   arrowCount: 0
+  health: 3
 --- !u!1001 &1990803381
 PrefabInstance:
   m_ObjectHideFlags: 0

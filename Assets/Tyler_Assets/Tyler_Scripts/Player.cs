@@ -50,6 +50,7 @@ public class Player : MonoBehaviour
     private bool MS = false;
     // private PlayerMemento memento;
     private bool isPointerOverUI = false;
+    private IDamageable playerHealth;
 
 
     private void Start()
@@ -61,6 +62,7 @@ public class Player : MonoBehaviour
         hud.BroadcastMessage("Load");
         memento = Instantiate(memento, new Vector3(0, 0, 0), Quaternion.identity);
         playerDirection = new Vector3(0, 0, 0);
+        playerHealth = GetComponent<IDamageable>();
     }
 
     void FixedUpdate(){
@@ -286,9 +288,22 @@ public class Player : MonoBehaviour
     public void setBombCount(int b){
         bombCount = b;
     }
+
+    public void increaseBombCount(int b){
+        bombCount += b;
+    }
     public void setArrowCount(int a){
         arrowCount = a;
     }
+
+    public void increaseArrowCount(int a){
+        arrowCount += a;
+    }
+
+    public void increaseHealth(float h){
+        playerHealth.Health += h;
+    }
+
     public PlayerMemento createMemento(){
         //create a new memento and delete the old one
         GameObject newMemento = Instantiate(memento, new Vector3(0, 0, 0), Quaternion.identity);
@@ -299,7 +314,7 @@ public class Player : MonoBehaviour
 
         //find the newly made memento and return it to the caretaker
         PlayerMemento playerMemento = FindObjectOfType<PlayerMemento>();
-        playerMemento.Init(bombCount, arrowCount);
+        playerMemento.Init(bombCount, arrowCount, playerHealth.Health);
         return playerMemento;
     }
 
@@ -308,5 +323,10 @@ public class Player : MonoBehaviour
         return Application.platform == RuntimePlatform.Android ||
                Application.platform == RuntimePlatform.IPhonePlayer; //||
                 //Application.isEditor; // Include Editor for testing with Unity Remote
+    }
+
+    void OnDestroy(){
+        GameObject gameObject = GameObject.Find("PlayerHUD");
+        gameObject.BroadcastMessage("Save");
     }
 }

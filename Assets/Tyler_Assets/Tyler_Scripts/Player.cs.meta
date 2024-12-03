@@ -3,7 +3,19 @@ guid: fd41d0dbeb0c9fd44829b2560943aff1
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - joystick: {instanceID: 0}
+  - movementJoystick: {instanceID: 0}
+  - reach: {instanceID: 0}
+  - bomb: {fileID: 282796838400133636, guid: ab73ba7f6e864124e9456c311e799106, type: 3}
+  - arrow: {fileID: 2507203957755380854, guid: 972789a4723bacd4da34494386cdeb87, type: 3}
+  - hook: {fileID: 1442773341557066484, guid: 475b33d7ba980544eb3a6bf9a7b273bb, type: 3}
+  - magic: {fileID: 5693183286396863492, guid: f97a335199c5906409b1e1cee88aa076, type: 3}
+  - memento: {fileID: 6009888221822368411, guid: 9e8027fb3aabc8b49bfc52afe902d00f, type: 3}
+  - hud: {instanceID: 0}
+  - reachCollider: {instanceID: 0}
+  - playerStep: {instanceID: 0}
+  - rb: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

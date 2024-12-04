@@ -24,21 +24,27 @@ public class Item: MonoBehaviour
 {
     if (other.CompareTag("Player"))
     {
-         Debug.Log("Player collided with " + itemName);
-         int leftOverItems = inventoryManager.AddItem(itemName, quantity, sprite, itemDescription);
-         if (other.CompareTag("Player"))
-         {
-                Player player = other.GetComponent<Player>();
-                player.setKeyCount(1);
-         }
-         if (leftOverItems <= 0)
-         {
-            Destroy(gameObject);
-         }
-         else
-         {
-            quantity = leftOverItems;
-         }
+        Debug.Log("Player collided with " + itemName);
+        int leftOverItems = inventoryManager.AddItem(itemName, quantity, sprite, itemDescription);
+        //  if (other.CompareTag("Player"))
+        //  {
+        Player player = other.GetComponent<Player>();
+        if(itemName == "Key"){
+            player.setKeyCount(1);
+        }else if(itemName == "Arrow"){
+            player.increaseArrowCount(10);
+        }else if(itemName == "Bomb"){
+            player.increaseBombCount(5);
+        }
+        //  }
+        if (leftOverItems <= 0)
+        {
+           Destroy(gameObject);
+        }
+        else
+        {
+           quantity = leftOverItems;
+        }
         Destroy(gameObject);  // Remove the key after pickup
     }
 }

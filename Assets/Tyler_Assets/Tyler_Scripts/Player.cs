@@ -69,6 +69,15 @@ public class Player : MonoBehaviour
     }
 
     void FixedUpdate(){
+        if (movementJoystick == null)
+        {
+            movementJoystick = FindObjectOfType<Joystick>();
+            if (movementJoystick == null)
+            {
+                Debug.LogWarning("Movement Joystick not found in the scene!");
+                return; // Exit if still null
+            }
+        }
         isPointerOverUI = EventSystem.current.IsPointerOverGameObject();
         if(IsMobilePlatform())
         {
@@ -330,7 +339,7 @@ public class Player : MonoBehaviour
     private bool IsMobilePlatform()
     {
         return Application.platform == RuntimePlatform.Android ||
-               Application.platform == RuntimePlatform.IPhonePlayer; //||
+               Application.platform == RuntimePlatform.IPhonePlayer;// ||
                 //Application.isEditor; // Include Editor for testing with Unity Remote
     }
 

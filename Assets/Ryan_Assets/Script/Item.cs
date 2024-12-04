@@ -26,8 +26,7 @@ public class Item: MonoBehaviour
     {
         Debug.Log("Player collided with " + itemName);
         int leftOverItems = inventoryManager.AddItem(itemName, quantity, sprite, itemDescription);
-        //  if (other.CompareTag("Player"))
-        //  {
+        
         Player player = other.GetComponent<Player>();
         if(itemName == "Key"){
             player.setKeyCount(1);
@@ -36,7 +35,7 @@ public class Item: MonoBehaviour
         }else if(itemName == "Bomb"){
             player.increaseBombCount(5);
         }
-        //  }
+
         if (leftOverItems <= 0)
         {
            Destroy(gameObject);

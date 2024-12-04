@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class SmoothCameraYAdjustment : MonoBehaviour
 {
-    public float yOffset = 0f; // Distance the camera's Y position will adjust relative to the player
-    public float smoothSpeed = 0.1f; // Speed of the smooth transition
+    public Vector3 targetCameraPosition; // The exact position to move the camera to
+    public float smoothSpeed =10.0f; // Speed of the smooth transition
     private Camera mainCamera;
-    private bool adjustY = false;
-    private Transform playerTransform;
-    private bool lastPos = false;
+    private bool moveCamera = false;
+
     private void Start()
     {
         // Find the main camera in the scene
@@ -22,36 +21,31 @@ public class SmoothCameraYAdjustment : MonoBehaviour
 
     private void Update()
     {
-        // Smoothly adjust the camera's Y position if the player is on the tile
-        if (adjustY && playerTransform != null)
+        // Smoothly move the camera to the target position if triggered
+        if (moveCamera)
         {
-            Vector3 cameraPosition = mainCamera.transform.position;
-            float targetY = playerTransform.position.y + yOffset;
-            cameraPosition.y = Mathf.Lerp(cameraPosition.y, targetY, smoothSpeed);
-            cameraPosition.y = Mathf.RoundToInt(cameraPosition.y);
-            mainCamera.transform.position = cameraPosition;
+            Vector3 currentCameraPosition = mainCamera.transform.position;
+            mainCamera.transform.position = Vector3.Lerp(currentCameraPosition, targetCameraPosition, smoothSpeed);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Check if the player steps on the tile
-        if (collision.CompareTag("Player") && !lastPos)
+        if (collision.CompareTag("Player"))
         {
-            playerTransform = collision.transform;
-            lastPos = true;
-            adjustY = true;
+            moveCamera = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        // Stop adjusting the camera's Y position when the player leaves the tile
-        if (collision.CompareTag("Player") && lastPos)
+        // Stop moving the camera when the player leaves the tile
+        if (collision.CompareTag("Player"))
         {
-            adjustY = false;
-            lastPos = false;
+            moveCamera = false;
         }
     }
+
 }
 

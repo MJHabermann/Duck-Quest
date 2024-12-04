@@ -47,11 +47,11 @@ public class NormalDoor : Door
                 if (!roomExplored)
                 {
                     SpawnEnemies();
-                    roomExplored = true;
+                    //roomExplored = true;
                 }
             }
         }
-        if (inRoom)
+        else if (inRoom)
         {
             CheckEnemiesCleared();
         }
@@ -123,7 +123,7 @@ public class NormalDoor : Door
         if (spawnedEnemies.Count == 0 && !isRoomCleared)
         {
             //Drop a reward if the user passes one to the object
-            if (rewardPrefab != null && rewardSpawnPoint != null)
+            if (rewardPrefab != null && rewardSpawnPoint != null && !roomExplored)
             {
                 Debug.Log("dropping reward");
                 Instantiate(rewardPrefab, rewardSpawnPoint.position, Quaternion.identity);

@@ -47,7 +47,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int arrowCount;
     [SerializeField]
-    private static int keyCount =0;
+    private int keyCount;
+
     private Vector3 playerDirection;
     private bool MS = false;
     // private PlayerMemento memento;

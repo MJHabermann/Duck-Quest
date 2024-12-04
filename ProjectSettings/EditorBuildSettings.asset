@@ -8,19 +8,19 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/mainmenu.unity
     guid: a5a92267b941c4e20ab3b6e99712b7cf
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/PlayerRoom.unity
     guid: 9d6d91f57c991904989c359cf4df3972
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Town.unity
     guid: 0224c2e622636a14eb0b34cea480ab03
   - enabled: 0
     path: Assets/Mikayla_Assets/Mikayla's Scenes/Test Scene.unity
     guid: 4b738bb97f9b44ff6a5fe9132d5d7a7a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/dungeon.unity
     guid: c1ea9dcf3befba949a04caabfb3a81ee
   - enabled: 0

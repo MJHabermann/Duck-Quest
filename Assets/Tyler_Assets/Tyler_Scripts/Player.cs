@@ -46,6 +46,8 @@ public class Player : MonoBehaviour
     private int bombCount;
     [SerializeField]
     private int arrowCount;
+    [SerializeField]
+    private static int keyCount =0;
     private Vector3 playerDirection;
     private bool MS = false;
     // private PlayerMemento memento;
@@ -288,7 +290,10 @@ public class Player : MonoBehaviour
     public void setBombCount(int b){
         bombCount = b;
     }
-
+    public void setKeyCount(int k)
+    {
+        keyCount += k;
+    }
     public void increaseBombCount(int b){
         bombCount += b;
     }
@@ -303,7 +308,10 @@ public class Player : MonoBehaviour
     public void increaseHealth(float h){
         playerHealth.Health += h;
     }
-
+    public int getKeyAmount()
+    {
+        return keyCount;
+    }
     public PlayerMemento createMemento(){
         //create a new memento and delete the old one
         GameObject newMemento = Instantiate(memento, new Vector3(0, 0, 0), Quaternion.identity);
@@ -314,7 +322,7 @@ public class Player : MonoBehaviour
 
         //find the newly made memento and return it to the caretaker
         PlayerMemento playerMemento = FindObjectOfType<PlayerMemento>();
-        playerMemento.Init(bombCount, arrowCount, playerHealth.Health);
+        playerMemento.Init(bombCount, arrowCount, playerHealth.Health,keyCount);
         return playerMemento;
     }
 

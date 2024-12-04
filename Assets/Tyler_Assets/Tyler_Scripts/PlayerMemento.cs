@@ -10,15 +10,19 @@ public class PlayerMemento : MonoBehaviour
     private int arrowCount;
     [SerializeField]
     private float health;
-    public void Init(int b, int a, float h){
+    [SerializeField]
+    private int keyCount;
+    public void Init(int b, int a, float h,int k){
         bombCount = b;
         arrowCount = a;
         health = h;
+        keyCount = k;
     }
     public void restore(Player player){
         if(player != null){
             player.setBombCount(bombCount);
             player.setArrowCount(arrowCount);
+            player.setKeyCount(keyCount);
             IDamageable playerHealth = player.GetComponent<IDamageable>();
             playerHealth.Health = health;
         }
@@ -33,5 +37,10 @@ public class PlayerMemento : MonoBehaviour
 
     public float getHealth(){
         return health;
+    }
+
+    public int getKeys()
+    {
+        return keyCount;
     }
 }

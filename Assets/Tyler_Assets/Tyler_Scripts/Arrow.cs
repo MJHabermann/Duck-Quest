@@ -33,7 +33,7 @@ public class Arrow : MonoBehaviour
             Vector3 knockback = direction * arrowKnockback;
             enemy.TakeDamage(arrowDamage);
             Destroy(gameObject);
-        }else if(tag != null && tag != "Player" && tag != "Sword" && tag != "PlayerItem" && tag != "NPC"){
+        }else if(tag != null && tag != "Player" && tag != "Sword" && tag != "PlayerItem" && tag != "NPC" && tag != "Ground"){
             // gameObject.BroadcastMessage("ArrowHit");
             Destroy(gameObject);
         }

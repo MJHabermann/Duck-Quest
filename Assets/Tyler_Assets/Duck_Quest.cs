@@ -398,6 +398,17 @@ public partial class @Duck_Quest: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""b44d221b-ffbe-4f8f-aa94-a0872af2e418"",
+                    ""path"": ""<Touchscreen>/touch*/Press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Touch"",
+                    ""action"": ""Bow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""7b1a28c4-9d0b-44f2-8f18-7c56c187ad62"",
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
